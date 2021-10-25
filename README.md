@@ -1,0 +1,3 @@
+## Landing
+
+Laravel + Vue + Sanctum
