@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+/* Resets */
+@import "resets/reset";
+
+/* Helpers */
+@import "helpers/varibles";
+@import "helpers/fonts";
+@import "helpers/mixins";
+@import "helpers/media";
+
+/* Blocks */
+@import "blocks/header";
+@import "blocks/footer";
+@import "blocks/banner";
+@import "blocks/cases";
+@import "blocks/advantages";
+
+h1 {
+    font: normal 35px/43px 'ArtegraSoft-Bold', sans-serif;
+
+    @include mobile {
+        font-size: 28px;
+    }
+
+    @include mobile-max {
+        font-size: 28px;
+    }
+}
+
+h2 {
+    font: 28px/1 'ArtegraSoft-Bold', sans-serif;
+    color: $black;
+
+    @include mobile {
+        font-size: 14px;
+    }
+
+    @include mobile-max {
+        font-size: 14px;
+    }
+}
+
+a {
+    color: $black;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}

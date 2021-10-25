@@ -1,0 +1,35 @@
+<template>
+    <main role="main">
+
+        <!-- Banner -->
+        <Banner id="about"/>
+
+        <!-- Cases -->
+        <div id="cases" class="cases my">
+            <h1>Кейсы</h1>
+        </div>
+
+        <!-- Advantages -->
+        <Advantages id="advantages"/>
+
+        <!-- Advantages -->
+        <Formats/>
+    </main>
+</template>
+
+<script>
+import Button from "./helpers/Button";
+import Advantages from "./blocks/Advantages";
+import Banner from "./blocks/Banner";
+import Footer from "./Footer";
+import Formats from "./blocks/Formats";
+
+export default {
+    name: "Main",
+    components: {Formats, Footer, Banner, Advantages, Button}
+}
+</script>
+
+<style scoped>
+
+</style>
