@@ -1,0 +1,57 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-logo {
+        @include huge-mobile {
+            max-width: 85px;
+        }
+
+        @include mobile-max {
+            max-width: 85px;
+        }
+    }
+
+    &-nav {
+        position: absolute;
+        right: 28.7em;
+        width: 100%;
+        max-width: 442px;
+
+        @include small-desktop {
+            right: 22em;
+        }
+
+        @include tablet {
+            right: 17em;
+        }
+
+        @include menu-screen {
+            display: none;
+        }
+
+        &-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &-list {
+            font: 600 14px/17px 'Inter-SemiBold', sans-serif;
+            letter-spacing: 0;
+
+            a {
+                color: $black;
+                transition: color .2s ease-in-out;
+
+                &:hover {
+                    color: $red;
+                }
+            }
+        }
+    }
+
+    .button {
+        align-self: flex-end;
+    }
+}

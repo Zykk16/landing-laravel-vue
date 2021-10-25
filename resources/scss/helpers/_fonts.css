@@ -1,0 +1,73 @@
+@font-face {
+    font-family: 'ArtegraSoft-Bold';
+    src: url('../../fonts/ArtegraSoft-Bold.eot');
+    src: url('../../fonts/ArtegraSoft-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/ArtegraSoft-Bold.svg#ArtegraSoft-Bold') format('svg'),
+    url('../../fonts/ArtegraSoft-Bold.ttf') format('truetype'),
+    url('../../fonts/ArtegraSoft-Bold.woff') format('woff'),
+    url('../../fonts/ArtegraSoft-Bold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ArtegraSoft-Medium';
+    src: url('../../fonts/ArtegraSoft-Medium.eot');
+    src: url('../../fonts/ArtegraSoft-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/ArtegraSoft-Medium.svg#ArtegraSoft-Medium') format('svg'),
+    url('../../fonts/ArtegraSoft-Medium.ttf') format('truetype'),
+    url('../../fonts/ArtegraSoft-Medium.woff') format('woff'),
+    url('../../fonts/ArtegraSoft-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ArtegraSoft-Regular';
+    src: url('../../fonts/ArtegraSoft-Regular.eot');
+    src: url('../../fonts/ArtegraSoft-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/ArtegraSoft-Regular.svg#ArtegraSoft-Regular') format('svg'),
+    url('../../fonts/ArtegraSoft-Regular.ttf') format('truetype'),
+    url('../../fonts/ArtegraSoft-Regular.woff') format('woff'),
+    url('../../fonts/ArtegraSoft-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ArtegraSoft-Light';
+    src: url('../../fonts/ArtegraSoft-Light.eot');
+    src: url('../../fonts/ArtegraSoft-Light.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/ArtegraSoft-Light.svg#ArtegraSoft-Light') format('svg'),
+    url('../../fonts/ArtegraSoft-Light.ttf') format('truetype'),
+    url('../../fonts/ArtegraSoft-Light.woff') format('woff'),
+    url('../../fonts/ArtegraSoft-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter-SemiBold';
+    src: url('../../fonts/Inter-SemiBold.eot');
+    src: url('../../fonts/Inter-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Inter-SemiBold.svg#Inter-SemiBold') format('svg'),
+    url('../../fonts/Inter-SemiBold.ttf') format('truetype'),
+    url('../../fonts/Inter-SemiBold.woff') format('woff'),
+    url('../../fonts/Inter-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter-Regular';
+    src: url('../../fonts/Inter-Regular.eot');
+    src: url('../../fonts/Inter-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Inter-Regular.svg#Inter-Regular') format('svg'),
+    url('../../fonts/Inter-Regular.ttf') format('truetype'),
+    url('../../fonts/Inter-Regular.woff') format('woff'),
+    url('../../fonts/Inter-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+

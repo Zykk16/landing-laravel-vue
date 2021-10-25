@@ -1,0 +1,42 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "axios": "^0.21",
+        "browser-sync": "^2.26.14",
+        "browser-sync-webpack-plugin": "^2.2.2",
+        "cross-env": "^5.1",
+        "escape-string-regexp": "^2.0.0",
+        "js-cookie": "^3.0.1",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "mustache": "^4.2.0",
+        "popper.js": "^1.16.1",
+        "postcss": "^8.1.14",
+        "postcss-loader": "^5.2.0",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.32.13",
+        "sass-loader": "^11.1.1",
+        "url-loader": "^4.1.1",
+        "vue": "^2.6.12",
+        "vue-awesome-swiper": "^4.1.1",
+        "vue-loader": "^15.9.7",
+        "vue-router": "^3.1.3",
+        "vue-template-compiler": "^2.6.10",
+        "vuex": "^3.1.2",
+        "vuex-persistedstate": "^4.1.0",
+        "webpack": "^5.37.0",
+        "webpack-cli": "^4.7.0"
+    },
+    "dependencies": {
+        "vue-scrollto": "^2.20.0"
+    }
+}

@@ -1,0 +1,89 @@
+.advantages {
+
+    @include mobile {
+        height: 450px;
+    }
+
+    @include mobile-max {
+        height: 450px;
+    }
+
+    h1 {
+        margin-bottom: 2.6em;
+        text-align: center;
+        font-size: 35px;
+        color: $black;
+
+        @include tablet {
+            margin-bottom: 2.6em;
+        }
+
+        @include mobile {
+            margin-bottom: 0;
+        }
+
+        @include mobile-max {
+            margin-bottom: 0;
+            font-size: 30px;
+        }
+    }
+
+    &-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-bottom: 1.25em;
+        padding: 2.5em 1.25em;
+        border-radius: 46px;
+        border: 1px solid #EEEEEE;
+        box-sizing: border-box;
+        flex: 0 0 23.9%;
+
+        @include tablet {
+            padding: 1.875em 1.25em;
+            flex: 0 0 32%;
+        }
+
+        @include mobile {
+            padding: 1.875em 1.25em;
+            flex: 0 0 280px;
+        }
+
+        @include mobile-max {
+            padding: 1.875em 1.25em;
+            flex: 0 0 280px;
+        }
+
+        &-icon {
+            width: 66px;
+            height: 66px;
+            margin-bottom: 2.5em;
+        }
+
+        &-title {
+            margin-bottom: 1.25em;
+            font: normal 18px/23px 'ArtegraSoft-Bold', sans-serif;
+            color: $red;
+        }
+
+        &-description {
+            font: 400 14px/20px "Inter-Regular", sans-serif;
+            color: $black;
+        }
+
+        @include tablet {
+
+            &:last-child {
+                flex-basis: 32%;
+                margin-right: 34%;
+            }
+        }
+    }
+}

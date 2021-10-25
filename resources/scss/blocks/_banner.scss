@@ -1,0 +1,440 @@
+.banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: radial-gradient(111.39% 600.87% at 104.83% 2.18%, #E7CFCF 0%,
+        rgba(227, 227, 227, 0.53) 0.01%,
+        rgba(230, 217, 217, 0) 100%);
+
+    @include sphere-table-screen {
+        overflow-x: hidden;
+    }
+
+    @include mobile {
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        flex-direction: column;
+    }
+
+    @include mobile-max {
+        padding-bottom: 2.5em;
+        flex-direction: column;
+    }
+
+    &-offer {
+        margin: 15.625em 0;
+
+        @include small-desktop {
+            margin: 8.188em 0;
+        }
+
+        @include tablet {
+            margin: 5.813em 0;
+        }
+
+        @include mobile {
+            width: 100%;
+            margin: 0;
+        }
+
+        @include mobile-max {
+            width: 100%;
+            margin: 0;
+        }
+
+        h1 {
+            margin-top: .4em;
+            margin-bottom: .8em;
+
+            @include tablet {
+                margin-bottom: 2.3em;
+            }
+
+            @include mobile {
+                margin-bottom: .5em;
+            }
+
+            @include mobile-max {
+                margin-bottom: .5em;
+            }
+        }
+
+        p {
+            width: 100%;
+            max-width: 475px;
+            margin: 3.7em 0 2.5em;
+            font: 400 14px/20px "Inter-Regular", sans-serif;
+            color: $black;
+            box-sizing: border-box;
+
+            @include small-desktop {
+                max-width: 357px;
+            }
+
+            @include tablet {
+                max-width: 256px;
+                margin-top: 2.3em;
+            }
+
+            @include mobile {
+                max-width: none;
+                width: 100%;
+                margin-top: 1.875em;
+                margin-bottom: 3.75em;
+            }
+
+            @include mobile-max {
+                max-width: none;
+                width: 100%;
+                margin-top: 1.875em;
+                margin-bottom: 3.75em;
+            }
+        }
+
+        @include mobile{
+            .button-container {
+                .button {
+                    width: auto !important;
+                }
+            }
+        }
+
+        @include mobile-max{
+            .button-container {
+                .button {
+                    width: auto !important;
+                }
+            }
+        }
+    }
+
+    &-sphere {
+        position: relative;
+        width: 535px;
+        height: 535px;
+        margin-right: 15.5em;
+        align-self: center;
+        background: url("../../img/svg/sphere.svg") no-repeat center;
+        background-size: contain;
+
+        @include sphere-screen {
+            margin-right: 5em;
+        }
+
+        @include small-desktop {
+            width: 404px;
+            height: 404px;
+            margin-top: 2.5em;
+            margin-right: calc(30% - 250px);
+        }
+
+        @include tablet {
+            width: 404px;
+            height: 404px;
+            margin-top: 2.5em;
+            margin-right: 6em;
+        }
+
+        @include sphere-table-screen {
+            width: 550px;
+            height: 550px;
+            margin-right: -250px;
+            margin-top: 0;
+        }
+
+        @include mobile {
+            visibility: hidden;
+            width: 100%;
+            height: auto;
+            align-self: flex-start;
+            margin-top: 5rem;
+            margin-right: 0;
+        }
+
+        @include mobile-max {
+            visibility: hidden;
+            width: 100%;
+            height: auto;
+            align-self: flex-start;
+            margin-top: 5rem;
+            margin-right: 0;
+        }
+
+        &-advantages {
+            position: absolute;
+            padding: 1.43em 2.9em;
+            font: 14px/18px 'ArtegraSoft-Bold', sans-serif;
+            color: $black;
+            border: 1px solid $whiteGray;
+            border-radius: 37px;
+
+            @include tablet {
+                width: inherit;
+            }
+
+            @include mobile {
+                width: 100%;
+                height: auto;
+                font-size: 12px;
+                margin-right: 0;
+                visibility: visible;
+                border: none;
+                padding: 1.43em 0;
+            }
+
+            @include mobile-max {
+                width: 100%;
+                height: auto;
+                font-size: 12px;
+                margin-right: 0;
+                visibility: visible;
+                border: none;
+                padding: 1.43em 0;
+            }
+
+            &.item-1 {
+                top: -10px;
+                left: 160px;
+                max-width: 290px;
+                animation: fade-in .8s ease-in-out 0s 1 normal forwards;
+                opacity: 0;
+
+                @include small-desktop {
+                    top: -30px;
+                    left: 50px;
+                    max-width: 290px;
+                }
+
+                @include tablet {
+                    top: -30px;
+                    left: 50px;
+                    max-width: 290px;
+                }
+
+                @include sphere-table-screen {
+                    top: 20px;
+                    left: 0;
+                    animation: fade-in .8s ease-in-out 0s 1 normal forwards;
+                }
+
+                @include mobile {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+
+                @include mobile-max {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+            }
+
+            &.item-2 {
+                top: 185px;
+                right: -75px;
+                max-width: 150px;
+                opacity: 0;
+                animation: fade-in .8s ease-in-out .3s 1 normal forwards;
+
+                @include small-desktop {
+                    top: 100px;
+                    right: -105px;
+                }
+
+                @include tablet {
+                    top: 100px;
+                    right: -105px;
+                }
+
+                @include sphere-table-screen {
+                    top: 230px;
+                    left: -90px;
+                    right: auto;
+                    animation: fade-in .8s ease-in-out .6s 1 normal forwards;
+                }
+
+                @include mobile {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+
+                @include mobile-max {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+            }
+
+            &.item-3 {
+                bottom: 75px;
+                right: -95px;
+                max-width: 225px;
+                animation: fade-in .8s ease-in-out .6s 1 normal forwards;
+                opacity: 0;
+
+                @include small-desktop {
+                    bottom: 30px;
+                    right: -110px;
+                }
+
+                @include tablet {
+                    bottom: 30px;
+                    right: -110px;
+                }
+
+                @include sphere-table-screen {
+                    bottom: 130px;
+                    left: -40px;
+                    right: auto;
+                    animation: fade-in .8s ease-in-out .9s 1 normal forwards;
+                }
+
+                @include mobile {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+
+                @include mobile-max {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+            }
+
+            &.item-4 {
+                bottom: 80px;
+                left: -85px;
+                max-width: 250px;
+                animation: fade-in .8s ease-in-out .9s 1 normal forwards;
+                opacity: 0;
+
+                @include small-desktop {
+                    bottom: 30px;
+                    left: -100px;
+                }
+
+                @include tablet {
+                    bottom: 30px;
+                    left: -100px;
+                }
+
+                @include sphere-table-screen {
+                    bottom: 20px;
+                    left: 40px;
+                    animation: fade-in .8s ease-in-out 1.2s 1 normal forwards;
+                }
+
+                @include mobile {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+
+                @include mobile-max {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+            }
+
+            &.item-5 {
+                top: 180px;
+                left: -135px;
+                max-width: 250px;
+                opacity: 0;
+                animation: fade-in .8s ease-in-out 1.2s 1 normal forwards;
+
+                @include small-desktop {
+                    top: 110px;
+                    left: -155px;
+                }
+
+                @include tablet {
+                    top: 110px;
+                    left: -155px;
+                }
+
+                @include sphere-table-screen {
+                    top: 130px;
+                    left: -40px;
+                    animation: fade-in .8s ease-in-out .3s 1 normal forwards;
+                }
+
+                @include mobile {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    padding-bottom: 1.25em;
+                    background: transparent;
+                }
+
+                @include mobile-max {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    padding-bottom: 1.25em;
+                    max-width: none;
+                    opacity: 1;
+                    animation: none;
+                    background: transparent;
+                }
+            }
+        }
+    }
+}

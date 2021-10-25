@@ -1,0 +1,72 @@
+@import "media";
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blur {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.32);
+    box-sizing: border-box;
+}
+
+.my {
+    margin: 2.125em 7.5em 1.875em 7.5em;
+
+    @include tablet {
+        margin: 2.125em 2.313em 1.875em 2.313em;
+    }
+
+    @include mobile {
+        margin: 2.125em 2.313em 1.875em 2.313em;
+    }
+
+    @include huge-mobile {
+        margin: 1.25em;
+    }
+
+    @include mobile-max {
+        margin: 1.25em;
+    }
+}
+
+.py {
+    padding: 0 7.5em 0 7.5em;
+
+    @include tablet {
+        padding: 0 2.313em 0 2.313em;
+    }
+
+    @include mobile {
+        padding: 0 2.313em 0 2.313em;
+    }
+
+    @include huge-mobile {
+        padding: 1.25em;
+    }
+
+    @include mobile-max {
+        padding: 1.25em;
+    }
+}
+
+.gradient-h1 {
+    width: max-content;
+    background-color: red;
+    background-image: linear-gradient(90deg, #CE302D 0%, #EB6D00 100%);;
+    background-size: 100%;
+    background-repeat: repeat;
+
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
