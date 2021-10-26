@@ -1,59 +1,59 @@
 <template>
-    <div class="flex flex-wrap w-full justify-center items-center pt-56">
-        <div class="flex flex-wrap max-w-xl">
-            <div class="p-2 text-2xl text-gray-800 font-semibold"><h1>Register an account</h1></div>
-            <div class="p-2 w-full">
-                <label class="w-full" for="name">Name</label>
-                <span class="w-full text-red-500" v-if="errors.name">{{errors.name[0]}}</span>
-                <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name" >
+    <div class="login-container registr my blur">
+        <form action="javascript:void(0)" class="login-form" method="post">
+            <h1>Регистрация</h1>
+            <div class="form-group">
+                <input type="text" v-model="user.name" class="form-control blur" placeholder="Логин">
             </div>
-            <div class="p-2 w-full">
-                <label for="email">Your e-mail</label>
-                <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Email" type="email" v-model="form.email">
+            <div class="form-group">
+                <input type="email" v-model="user.email" class="form-control blur" placeholder="Email">
             </div>
-            <div class="p-2 w-full">
-                <label for="password">Password</label>
-                <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
+            <div class="form-group">
+                <input type="password" v-model="user.password" class="form-control blur" placeholder="Пароль">
             </div>
-            <div class="p-2 w-full">
-                <label for="confirm_password">Confirm Password</label>
-                <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Confirm Password" type="password" v-model="form.password_confirmation" name="password_confirmation">
+            <div class="form-group">
+                <input type="password_confirmation" v-model="user.password_confirmation"
+                       class="form-control blur" placeholder="Подтверждение пароля">
             </div>
-            <div class="p-2 w-full mt-4">
-                <button @click.prevent="saveForm" type="submit" class="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Register</button>
-            </div>
-        </div>
+            <Checkbox options="Ознакомлен и согласен с правилами работы в системе otClick"/>
+            <Button :text="loading ? 'Загрузка...' : 'Зарегистрироваться'" width="120px" @click.native="register"/>
+        </form>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import {mapActions} from 'vuex'
+import Checkbox from "../../../components/helpers/Checkbox";
+import Button from "../../../components/helpers/Button";
 
 export default {
-    name: "Register",
-    data(){
-        return{
-            form:{
-                name: '',
-                email: '',
-                password:'',
-                password_confirmation:''
+    name: 'Register',
+    components: {Button, Checkbox},
+    data() {
+        return {
+            user: {
+                name: "",
+                email: "",
+                password: "",
+                password_confirmation: ""
             },
-            errors:[]
+            loading: false
         }
     },
-    methods:{
-        saveForm(){
-            axios.post('/api/register', this.form).then(() =>{
-                console.log('saved');
-            }).catch((error) =>{
-                this.errors = error.response.data.errors;
+    methods: {
+        ...mapActions({
+            signIn: 'auth/login'
+        }),
+        async register() {
+            this.loading = true
+            await axios.post('/register', this.user).then(response => {
+                this.signIn()
+            }).catch(({response: {data}}) => {
+                alert(data.message)
+            }).finally(() => {
+                this.loading = false
             })
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

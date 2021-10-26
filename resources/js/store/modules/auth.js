@@ -1,48 +1,38 @@
 import axios from 'axios'
-import router from "../../router";
+import router from '../../router'
 
-export default {
-    namespaced: true,
+const state = {
+    authenticated: false,
+    user: null
+};
 
-    state: {
-        authenticated: false,
-        user: null
+const getters = {
+    authenticated: state => state.authenticated,
+    user: state => state.user
+};
+
+const actions = {
+    login({commit}) {
+        return axios.get('/api/user').then(({data}) => {
+            commit('setUser', data)
+            commit('setAuthenticated', true)
+            router.push({name: 'admin'})
+        }).catch(() => {
+            commit('setUser', {})
+            commit('setAuthenticated', false)
+        })
     },
 
-    getters: {
-        authenticated(state) {
-            return state.authenticated
-        },
-
-        user(state) {
-            return state.user
-        },
-    },
-
-    mutations: {
-        SET_AUTHENTICATED(state, value) {
-            state.authenticated = value
-        },
-
-        SET_USER(state, value) {
-            state.user = value
-        }
-    },
-
-    actions: {
-        login({commit}) {
-            return axios.get('/api/user').then(data => {
-                commit('SET_USER', data)
-                commit('SET_AUTHENTICATED', true)
-                router.push({name: 'admin'})
-            }).catch(response => {
-                commit('SET_USER', {})
-                commit('SET_AUTHENTICATED', false)
-            })
-        },
-        logout({commit}) {
-            commit('SET_USER', {})
-            commit('SET_AUTHENTICATED', false)
-        }
+    logout({commit}) {
+        commit('setUser', {})
+        commit('setAuthenticated', false)
     }
 }
+
+const mutations = {
+    setAuthenticated: (state, value) => state.authenticated = value,
+    setUser: (state, data) => state.user = data
+};
+
+export default {namespaced: true, state, getters, actions, mutations};
+

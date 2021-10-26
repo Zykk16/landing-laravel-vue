@@ -1,0 +1,104 @@
+.login-container {
+    padding-bottom: 5em;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid #EEEEEE;
+    box-sizing: border-box;
+    border-radius: 46px;
+
+    @include mobile {
+        padding-bottom: 3.75em;
+    }
+
+    @include mobile-max {
+        padding-bottom: 2.5em;
+    }
+
+    h1 {
+        margin-top: 2.3em;
+        margin-bottom: 1.15em;
+        text-align: center;
+
+        @include mobile {
+            margin-top: 2.2em;
+        }
+
+        @include mobile-max {
+            margin-top: 1.4em;
+            width: auto;
+        }
+    }
+
+    .login-form {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+
+        @include mobile {
+            padding: 0 1.25em;
+            width: auto;
+        }
+
+        @include mobile-max {
+            padding: 0 1.25em;
+            width: auto;
+        }
+    }
+
+    .remind {
+        width: max-content;
+        margin: 2.5em auto;
+        font: bold 14px/18px 'ArtegraSoft-Medium', sans-serif;
+        border-bottom: 1px solid $gray-input;
+        color: $gray-input;
+        cursor: pointer;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &.registr {
+        .button-container{
+            margin-top: 2.5em;
+        }
+    }
+}
+
+.form-control {
+    width: 100%;
+    padding: 1.25em 0;
+    margin-bottom: 1.25em;
+    background: #F9F9F9;
+    font: bold 14px/18px 'ArtegraSoft-Medium', sans-serif;
+    border: 1px solid #EEEEEE;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 46px;
+    color: $gray-input;
+    outline: none;
+}
+
+.remind-password {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+
+    @include mobile {
+        padding: 0 1.25em;
+        width: auto;
+    }
+
+    @include mobile-max {
+        padding: 0 1.25em;
+        width: auto;
+    }
+
+    p {
+        font: 14px/20px 'Inter-Regular', sans-serif;
+        color: $black;
+        margin-bottom: 2.5em;
+    }
+}
