@@ -1,53 +1,60 @@
 <template>
-    <form action="#" @submit.prevent="login">
-        <div>
-            <label for="email">Email address</label>
-            <input type="text" name="email" id="email" v-model="form.email">
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="text" name="password" id="password" v-model="form.password">
-        </div>
-        <div>
-            <button type="submit">
-                Sign in
-            </button>
-        </div>
-    </form>
+    <div class="login-container my blur">
+        <form v-if="!remindPassword" action="javascript:void(0)" class="login-form" method="post">
+            <h1>Авторизация</h1>
+            <div class="form-group">
+                <input type="text" v-model="auth.email" class="form-control blur" placeholder="Логин">
+            </div>
+            <div class="form-group">
+                <input type="password" v-model="auth.password" class="form-control blur" placeholder="Пароль">
+            </div>
+            <Checkbox options="Запомнить меня"/>
+            <div class="remind" @click="remindPassword = !remindPassword">Напомнить пароль</div>
+            <Button :text="loading ? 'Загрузка...' : 'Авторизоваться'" width="160" @click.native="login"/>
+        </form>
+        <RemindPassword v-else @sendRemind="remindPassword = false"/>
+    </div>
 </template>
 
 <script>
 import {mapActions} from 'vuex'
-import axios from "axios"
+import Checkbox from "../../../components/helpers/Checkbox";
+import RemindPassword from "./RemindPassword";
+import Button from "../../../components/helpers/Button";
 
 export default {
-    name: 'Login',
-
+    name: "Login",
+    components: {Button, RemindPassword, Checkbox},
     data() {
         return {
-            form: {
+            auth: {
                 email: '',
                 password: ''
+            },
+            loading: false,
+            remindPassword: false,
+            errors: {
+                email: '',
+                password: '',
             }
         }
     },
-
     methods: {
         ...mapActions({
             signIn: 'auth/login'
         }),
-
         async login() {
-            this.processing = true
+            this.loading = true
             await axios.get('/sanctum/csrf-cookie')
-            await axios.post('/login', this.form).then(() => {
+            await axios.post('/login', this.auth).then(() => {
                 this.signIn()
-            }).catch(data => {
+            }).catch(({response: {data}}) => {
                 alert(data.message)
             }).finally(() => {
-                this.processing = false
+                this.auth = []
+                this.loading = false
             })
-        },
+        }
     }
 }
 </script>

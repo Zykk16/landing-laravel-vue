@@ -10,7 +10,7 @@ import store from '../store'
 Vue.use(VueRouter)
 
 const routes = [
-    {path: '/', component: Main, name: 'Main', meta: {title: 'Главная', meta: {middleware: 'guest'}}},
+    {path: '/', component: Main, name: 'Main', meta: {title: 'Главная', middleware: 'guest'}},
     {path: '/admin', component: Admin, name: 'admin', meta: {title: 'Админ', middleware: 'auth'}},
     {path: '/login', component: Login, name: 'login', meta: {title: 'Авторизация', middleware: 'guest'}},
     {path: '/register', component: Register, name: 'register', meta: {title: 'Регистрация', middleware: 'guest'}},
@@ -21,20 +21,19 @@ const router = new VueRouter({
     routes
 })
 
-// router.beforeEach((to, from, next) => {
-//     if (to.meta.middleware === "guest") {
-//         if (store.state.auth.authenticated) {
-//             console.log(store.state.auth.authenticated)
-//             next({name: "admin"})
-//         }
-//         next()
-//     } else {
-//         if (store.state.auth.authenticated) {
-//             next()
-//         } else {
-//             next({name: "login"})
-//         }
-//     }
-// })
+router.beforeEach((to, from, next) => {
+    if (to.meta.middleware === "guest") {
+        if (store.state.auth.authenticated) {
+            next({name: "admin"})
+        }
+        next()
+    } else {
+        if (store.state.auth.authenticated) {
+            next()
+        } else {
+            next({name: "login"})
+        }
+    }
+})
 
 export default router

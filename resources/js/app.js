@@ -1,7 +1,6 @@
-import axios from "axios";
-axios.defaults.withCredentials = true;
+require('./bootstrap')
 
-import Vue from "vue"
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
 import store from './store'
