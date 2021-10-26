@@ -8,7 +8,7 @@
             <router-link to="/admin" class="account">Личный кабинет</router-link>
         </div>
         <div class="footer-bottom-wrapper">
-            <div class="copyright">&copy; 2011 - {{ new Date().getFullYear() }}</div>
+            <div class="copyright">&copy; 2011 - {{ new Date().getFullYear() }} {{getHostname}}</div>
             <router-link class="privat-policy" to="/policy">Политика конфиденциальности</router-link>
         </div>
     </footer>
@@ -16,7 +16,12 @@
 
 <script>
 export default {
-    name: "Footer"
+    name: "Footer",
+    computed: {
+        getHostname() {
+            return document.location.hostname
+        }
+    }
 }
 </script>
 

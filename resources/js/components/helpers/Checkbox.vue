@@ -33,6 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../scss/helpers/media";
 @import "../../../scss/helpers/varibles";
 @import "../../../scss/helpers/_fonts.css";
 
@@ -40,6 +41,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 1.25em;
 
     .answers {
         display: flex;
@@ -52,6 +54,14 @@ export default {
         margin-left: 1em;
         font: bold 14px/18px 'ArtegraSoft-Medium', sans-serif;
         color: $gray-input;
+
+        @include mobile {
+            text-align: initial;
+        }
+
+        @include mobile-max {
+            text-align: initial;
+        }
     }
 
     .item {
