@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import auth from '../store/modules/auth'
+import clients from "./modules/clients";
+import applications from "./modules/applications";
 
 Vue.use(Vuex)
 
@@ -10,6 +12,8 @@ export default new Vuex.Store({
         createPersistedState()
     ],
     modules:{
-        auth
+        auth,
+        clients,
+        applications
     }
 })

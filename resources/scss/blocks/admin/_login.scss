@@ -55,14 +55,21 @@
     }
 
     .button-container {
-        display: flex;
-        justify-content: center;
+        width: max-content;
+        margin: 0 auto;
     }
 
     &.registr {
-        .button-container{
+        .button-container {
             margin-top: 2.5em;
         }
+    }
+
+    .error {
+        display: block;
+        margin-bottom: 1.25em;
+        color: $red;
+        font: bold 14px/18px 'ArtegraSoft-Medium', sans-serif;
     }
 }
 
@@ -78,6 +85,10 @@
     border-radius: 46px;
     color: $gray-input;
     outline: none;
+
+    &.error-field{
+        color: $red;
+    }
 }
 
 .remind-password {

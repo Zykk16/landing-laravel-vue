@@ -31,7 +31,7 @@ export default {
                 {name: 'Кейсы', url: '#cases'},
                 {name: 'Преимущества', url: '#advantages'},
                 {name: 'Форматы', url: '#formats'},
-                {name: 'Клиенты', url: '#brands'}
+                {name: 'Клиенты', url: '#clients'}
             ],
             screen: false
         }

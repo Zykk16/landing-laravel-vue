@@ -3,12 +3,14 @@
         <form v-if="!remindPassword" action="javascript:void(0)" class="login-form" method="post">
             <h1>Авторизация</h1>
             <div class="form-group">
-                <input type="text" v-model="auth.email" class="form-control blur" placeholder="Логин">
-                <span v-if="errors.email">{{errors.email[0]}}</span>
+                <input type="text" v-model="auth.email" class="form-control blur" placeholder="Логин"
+                :class="[errors.email ? 'error-field' : '']" @input="errors.email = ''">
+                <span v-if="errors.email" class="error">{{ errors.email }}</span>
             </div>
             <div class="form-group">
-                <input type="password" v-model="auth.password" class="form-control blur" placeholder="Пароль">
-                <span v-if="errors.email">{{errors.email[0]}}</span>
+                <input type="password" v-model="auth.password" class="form-control blur" placeholder="Пароль"
+                       :class="[errors.password ? 'error-field' : '']" @input="errors.password = ''">
+                <span v-if="errors.password" class="error">{{ errors.password }}</span>
             </div>
             <Checkbox options="Запомнить меня"/>
             <div class="remind" @click="remindPassword = !remindPassword">Напомнить пароль</div>
@@ -51,10 +53,9 @@ export default {
             await axios.post('/login', this.auth).then(() => {
                 this.signIn()
             }).catch(({response: {data}}) => {
-                if (data.errors.email) this.errors.email = data.errors.email
-                if (data.errors.password) this.errors.password = data.errors.password
+                this.errors.email = data.errors.email ? data.errors.email[0] : ''
+                this.errors.password = data.errors.password ? data.errors.password[0] : ''
             }).finally(() => {
-                this.auth = []
                 this.loading = false
             })
         }

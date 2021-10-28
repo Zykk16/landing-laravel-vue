@@ -12,10 +12,13 @@
 /* Blocks */
 @import "blocks/header";
 @import "blocks/footer";
+
 @import "blocks/banner";
 @import "blocks/cases";
 @import "blocks/advantages";
+@import "blocks/clients";
 
+/* Admin */
 @import "blocks/admin/login";
 
 h1 {
