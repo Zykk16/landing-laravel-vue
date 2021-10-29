@@ -31,27 +31,24 @@
                 </td>
             </tr>
             <tr>
-                <td class="w-2/12 p-2 pl-0">
-                    <input @input="filterColumn()" type="date"
-                           v-model="filters.created_at"
-                           class="input input-filter border rounded-lg text-xl font-light placeholder-gi-gray-medium border-gi-gray-lightest outline-none p-1">
+                <td class="input-filter">
+                    <input @input="filterColumn()" type="date" v-model="filters.created_at" class="input">
                 </td>
-                <td class="w-8/12 p-2 pl-0">
-                    <input @input="filterColumn()" type="text" v-model="filters.name"
-                           class="input input-filter border rounded-lg text-xl font-light placeholder-gi-gray-medium border-gi-gray-lightest outline-none p-1">
+                <td class="input-filter">
+                    <input @input="filterColumn()" type="text" v-model="filters.name" class="input">
+                </td>
+                <td class="input-filter">
+                    <input @input="filterColumn()" type="text" v-model="filters.phone" class="input">
                 </td>
             </tr>
             </thead>
             <tbody v-if="applications.length > 0">
-            <Application v-for="application in applications" :application="application"
-                         :key="application.id"
-                         @deleted-position="onDeletePosition"/>
+                <Application v-for="application in applications" :application="application" :key="application.id"/>
             </tbody>
             <tbody v-else>
             <tr>
-                <td class="w-2/12 p-2 pl-0"></td>
                 <td class="w-12/12 py-2 text-gi-gray-medium font-light text-xl align-top">
-                    <div class="mt-6 text-center text-2xl font-light text-gi-red-normal">Заявок не найдено</div>
+                    <div class="application-not-found">Заявок не найдено</div>
                 </td>
             </tr>
             </tbody>
@@ -99,14 +96,11 @@ export default {
             }).then(() => {
                 this.getApplications()
             })
-        },
-
-        mounted() {
-            setTimeout(() => {
-                console.log(123)
-                this.getApplications()
-            }, 3000)
         }
+    },
+
+    mounted() {
+        this.getApplications()
     }
 }
 </script>

@@ -1,6 +1,7 @@
 <template>
     <div :class="['button-container', mobile ? 'mobile' : '']">
-        <a :href="url" :class="['button', mobile ? 'mobile' : '']" v-html="text" :style="{width: width}"/>
+        <a :href="url" :class="['button', mobile ? 'mobile' : '']"
+           v-html="text" :style="{width: width}" v-scroll-to="scrollTo"/>
     </div>
 </template>
 
@@ -11,7 +12,8 @@ export default {
         url: String,
         text: String,
         mobile: Boolean,
-        width: String
+        width: String,
+        scrollTo: String
     }
 }
 </script>

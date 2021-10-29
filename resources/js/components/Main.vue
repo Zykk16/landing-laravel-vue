@@ -20,7 +20,7 @@
             <Clients id="clients"/>
 
             <!-- Contact form -->
-            <ContactForm/>
+            <ContactForm id="contactForm"/>
         </main>
         <Footer/>
     </div>

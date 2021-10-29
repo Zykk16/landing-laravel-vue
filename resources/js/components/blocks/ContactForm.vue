@@ -1,40 +1,49 @@
 <template>
-    <div>
+    <div class="contact my blur">
+        <div v-if="!success">
+            <h2>У Вас остались вопросы?</h2>
+            <p>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с нами. <br v-if="screen">
+                Отвечаем оперативно.</p>
+        </div>
         <form v-if="!success" class="contact-form" @submit.prevent="submit">
             <div class="contact-form-group">
-                <input type="text" class="field" name="name" id="name" v-model="fields.name"
-                       placeholder="Имя"/>
-                <div v-if="errors && errors.name" class="error-message">{{ errors.name[0] }}</div>
+                <input type="text" :class="['field', errors && errors.name ? 'field-error' : '']"
+                       name="name" id="name" v-model="fields.name"
+                       placeholder="Имя" @input="errors.name = ''"/>
             </div>
 
             <div class="contact-form-group">
-                <input type="text" class="field" name="phone" id="phone" v-model="fields.phone"
-                       placeholder="Телефон"/>
-                <div v-if="errors && errors.phone" class="error-message">{{ errors.phone[0] }}</div>
+                <input type="text" :class="['field', errors && errors.phone ? 'field-error' : '']"
+                       name="phone" id="phone" v-model="fields.phone"
+                       placeholder="Номер телефона" @input="errors.phone = ''"/>
             </div>
 
             <div class="contact-form-group">
-                <input type="email" class="field" name="email" id="email" v-model="fields.email"
-                       placeholder="Почта"/>
-                <div v-if="errors && errors.email" class="error-message">{{ errors.email[0] }}</div>
+                <input type="email" :class="['field', errors && errors.email ? 'field-error' : '']"
+                       name="email" id="email" v-model="fields.email"
+                       placeholder="Почта" @input="errors.email = ''"/>
             </div>
-
-            <select v-model="fields.category">
-                <option disabled value="">Являюсь представителем: </option>
-                <option>Представитель</option>
-                <option>Предприниматель</option>
-                <option>Программист</option>
-            </select>
 
             <div class="contact-form-group">
-                <textarea class="field" v-model="fields.message" placeholder="Комментарий"></textarea>
-                <div v-if="errors && errors.message" class="error-message">{{ errors.message[0] }}</div>
+                <select v-model="fields.category">
+                    <option disabled value="">Являюсь представителем:</option>
+                    <option>Представитель</option>
+                    <option>Предприниматель</option>
+                    <option>Программист</option>
+                </select>
             </div>
+
+            <div class="contact-form-group group-textarea">
+                <textarea :class="['field', errors && errors.message ? 'field-error' : '']" v-model="fields.message"
+                          placeholder="Комментарий" @input="errors.message = ''"></textarea>
+            </div>
+
+            <p class="personal-data">Отправляя данные, Вы даете согласие на обработку своих персональных данных</p>
 
             <button type="submit" class="button">Отправить заявку</button>
         </form>
         <div v-else class="sent-message">
-            <div>Спасибо, сообщение отправлено</div>
+            <p>Спасибо, заявка отправлена</p>
             <Button width="150px" text="Отправить еще раз" @click.native="success = false"/>
         </div>
     </div>
@@ -52,6 +61,7 @@ export default {
             errors: {},
             success: false,
             loaded: true,
+            screen: false
         }
     },
     methods: {
@@ -72,7 +82,22 @@ export default {
                 })
             }
         },
+        onResize() {
+            this.screen = window.innerWidth >= 1440;
+        }
     },
+
+    created() {
+        window.addEventListener('resize', this.onResize)
+    },
+
+    beforeDestroy() {
+        window.removeEventListener('resize', this.onResize)
+    },
+
+    mounted() {
+        this.onResize()
+    }
 }
 </script>
 

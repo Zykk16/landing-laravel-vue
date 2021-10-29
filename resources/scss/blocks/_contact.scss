@@ -1,0 +1,185 @@
+.contact {
+    position: relative;
+    margin-top: 14em;
+    margin-bottom: 8.125em;
+    padding: 5em 10em;
+    background: rgba(252, 98, 0, 0.06);
+    border-radius: 46px;
+
+    @include small-desktop {
+        padding: 5em 6.25em;
+    }
+
+    @include tablet {
+        margin-top: 12.5em;
+        padding: 3.75em;
+    }
+
+    @include mobile {
+        padding: 3.75em 1.875em;
+    }
+    @include mobile-max {
+        padding: 2.5em 1.875em;
+    }
+
+    h2 {
+        @include mobile {
+            font-size: 28px;
+        }
+        @include mobile-max {
+            font-size: 28px;
+            line-height: 40px;
+            margin-top: 1.25em;
+            text-align: center;
+        }
+    }
+
+    p {
+        margin: 2.5em 0;
+        font: 500 22px/30px "ArtegraSoft-Medium", sans-serif;
+        color: $gray-input;
+
+        @include tablet {
+            margin: 1.875em 0;
+            width: 550px;
+        }
+
+        @include mobile {
+            margin: 1.875em 0;
+            width: auto;
+        }
+        @include mobile-max {
+            margin-top: 1.25em;
+            margin-bottom: 2.5em;
+            width: auto;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+    }
+
+    .contact-form {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .contact-form-group {
+            flex: 0 0 49%;
+
+            @include mobile-max {
+                flex: 0 0 100%;
+
+            }
+
+            .field, select {
+                width: 100%;
+                margin-bottom: 1.25em;
+                padding: 1.25em 2.5em;
+                background: rgba(255, 255, 255, 0.88);
+                border: 1px solid #EEEEEE;
+                box-sizing: border-box;
+                border-radius: 46px;
+                font: 14px/20px "Inter-Regular", sans-serif;
+                outline: none;
+
+                &.field-error {
+                    border-color: $red;
+                }
+            }
+
+            .error-message {
+                margin-bottom: 1.25em;
+                font: 12px/20px "Inter-Regular", sans-serif;
+                color: $red;
+            }
+
+            textarea {
+                resize: none;
+
+                @include mobile-max {
+                    height: 150px;
+                }
+            }
+
+            &.group-textarea {
+                flex: 0 0 100%;
+            }
+        }
+
+        .personal-data {
+            margin-top: 1.25em;
+            font: 400 14px/18px "ArtegraSoft-Bold", sans-serif;
+            color: $gray-input;
+            flex: 0 0 100%;
+
+            @include mobile-max {
+                margin-bottom: 0;
+            }
+        }
+
+        .button {
+            position: relative;
+            display: block;
+            width: 170px;
+            height: 45px;
+            margin-top: 4em;
+            padding: 1.8em 3em 1.4em 3em;
+            font: normal 10px/1 'ArtegraSoft-Medium', sans-serif;
+            background-color: $red;
+            text-transform: uppercase;
+            border-radius: 112px;
+            opacity: 0.95;
+            color: #fff;
+            text-align: center;
+            letter-spacing: .2px;
+            cursor: pointer;
+            border: none;
+
+            @include mobile-max {
+                width: 100%;
+            }
+        }
+    }
+
+    .sent-message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        p {
+            font: 500 22px/30px "ArtegraSoft-Medium", sans-serif;
+            margin-bottom: 1.25em;
+        }
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        right: 100px;
+        background: url("../../img/icon-form.png") center no-repeat;
+        width: 185px;
+        height: 185px;
+        z-index: 9;
+        background-size: cover;
+
+        @include tablet {
+            right: 50px;
+        }
+
+        @include mobile {
+            width: 115px;
+            height: 115px;
+            top: -60px;
+            right: 50px;
+        }
+        @include mobile-max {
+            width: 130px;
+            height: 130px;
+            top: -60px;
+            right: 30%;
+        }
+    }
+}
