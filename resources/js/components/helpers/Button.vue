@@ -33,11 +33,14 @@ export default {
         background-color: $red;
         text-transform: uppercase;
         border-radius: 112px;
+        border: 1px solid $red;
         opacity: 0.95;
         color: #fff;
         text-align: center;
         letter-spacing: .2px;
         cursor: pointer;
+        z-index: 1;
+        transition: .2s ease-in-out;
 
         &.mobile {
             font-family: "ArtegraSoft-Bold", sans-serif;
@@ -45,6 +48,18 @@ export default {
             background-color: transparent;
             text-decoration-line: underline;
             color: $red;
+            border: none;
+
+            &:hover {
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+        &:hover {
+            background-color: $white;
+            border: 1px solid $gray-input;
+            color: $black;
         }
     }
 

@@ -34,11 +34,20 @@
         &-container {
             display: flex;
             justify-content: space-between;
+
+            @include header-small-medium {
+                justify-content: flex-end;
+            }
         }
 
         &-list {
             font: 600 14px/17px 'Inter-SemiBold', sans-serif;
             letter-spacing: 0;
+
+
+            @include header-small-medium {
+                padding-left: 1.4em;
+            }
 
             a {
                 color: $black;

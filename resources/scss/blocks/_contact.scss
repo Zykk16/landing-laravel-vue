@@ -18,6 +18,11 @@
     @include mobile {
         padding: 3.75em 1.875em;
     }
+
+    @include huge-mobile {
+        padding: 2.5em 1.875em;
+    }
+
     @include mobile-max {
         padding: 2.5em 1.875em;
     }
@@ -26,6 +31,14 @@
         @include mobile {
             font-size: 28px;
         }
+
+        @include huge-mobile {
+            font-size: 28px;
+            line-height: 40px;
+            margin-top: 1.25em;
+            text-align: center;
+        }
+
         @include mobile-max {
             font-size: 28px;
             line-height: 40px;
@@ -48,6 +61,16 @@
             margin: 1.875em 0;
             width: auto;
         }
+
+        @include huge-mobile {
+            margin-top: 1.25em;
+            margin-bottom: 2.5em;
+            width: auto;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
         @include mobile-max {
             margin-top: 1.25em;
             margin-bottom: 2.5em;
@@ -67,9 +90,12 @@
         .contact-form-group {
             flex: 0 0 49%;
 
+            @include huge-mobile {
+                flex: 0 0 100%;
+            }
+
             @include mobile-max {
                 flex: 0 0 100%;
-
             }
 
             .field, select {
@@ -97,6 +123,9 @@
             textarea {
                 resize: none;
 
+                @include huge-mobile {
+                    height: 150px;
+                }
                 @include mobile-max {
                     height: 150px;
                 }
@@ -113,6 +142,9 @@
             color: $gray-input;
             flex: 0 0 100%;
 
+            @include huge-mobile {
+                margin-bottom: 0;
+            }
             @include mobile-max {
                 margin-bottom: 0;
             }
@@ -121,21 +153,31 @@
         .button {
             position: relative;
             display: block;
-            width: 170px;
-            height: 45px;
+            width: 180px;
+            height: 46px;
             margin-top: 4em;
             padding: 1.8em 3em 1.4em 3em;
             font: normal 10px/1 'ArtegraSoft-Medium', sans-serif;
             background-color: $red;
             text-transform: uppercase;
             border-radius: 112px;
+            border: 1px solid $red;
             opacity: 0.95;
             color: #fff;
             text-align: center;
             letter-spacing: .2px;
             cursor: pointer;
-            border: none;
+            transition: .2s ease-in-out;
 
+            &:hover {
+                background-color: $white;
+                border: 1px solid $gray-input;
+                color: $black;
+            }
+
+            @include huge-mobile {
+                width: 100%;
+            }
             @include mobile-max {
                 width: 100%;
             }
@@ -147,6 +189,11 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+
+        h1 {
+            width: 90%;
+            text-align: center;
+        }
 
         p {
             font: 500 22px/30px "ArtegraSoft-Medium", sans-serif;
@@ -175,11 +222,19 @@
             top: -60px;
             right: 50px;
         }
+
+        @include huge-mobile {
+            width: 130px;
+            height: 130px;
+            top: -60px;
+            right: 35%;
+        }
+
         @include mobile-max {
             width: 130px;
             height: 130px;
             top: -60px;
-            right: 30%;
+            right: 28%;
         }
     }
 }

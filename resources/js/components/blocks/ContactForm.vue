@@ -2,7 +2,8 @@
     <div class="contact my blur">
         <div v-if="!success">
             <h2>У Вас остались вопросы?</h2>
-            <p>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с нами. <br v-if="screen">
+            <p>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с нами. <br
+                v-if="screen">
                 Отвечаем оперативно.</p>
         </div>
         <form v-if="!success" class="contact-form" @submit.prevent="submit">
@@ -43,8 +44,7 @@
             <button type="submit" class="button">Отправить заявку</button>
         </form>
         <div v-else class="sent-message">
-            <p>Спасибо, заявка отправлена</p>
-            <Button width="150px" text="Отправить еще раз" @click.native="success = false"/>
+            <h1 class="gradient-h1">Заявка успешно отправлена, менеджер свяжется с Вами в ближайшее время!</h1>
         </div>
     </div>
 </template>
@@ -60,27 +60,21 @@ export default {
             fields: {},
             errors: {},
             success: false,
-            loaded: true,
             screen: false
         }
     },
     methods: {
         submit() {
-            if (this.loaded) {
-                this.loaded = false
-                this.success = false
-                this.errors = {}
-                axios.post('/api/contact', this.fields).then(response => {
-                    this.fields = {}
-                    this.loaded = true
-                    this.success = true
-                }).catch(error => {
-                    this.loaded = true
-                    if (error.response.status === 422) {
-                        this.errors = error.response.data.errors || {}
-                    }
-                })
-            }
+            this.success = false
+            this.errors = {}
+            axios.post('/api/contact', this.fields).then(response => {
+                this.fields = {}
+                this.success = true
+            }).catch(error => {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors || {}
+                }
+            })
         },
         onResize() {
             this.screen = window.innerWidth >= 1440;

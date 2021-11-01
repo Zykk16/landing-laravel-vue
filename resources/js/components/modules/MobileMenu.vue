@@ -67,7 +67,7 @@ export default {
     text-align: center;
     border-top: 1px solid $whiteGray;
     box-sizing: border-box;
-    z-index: 1;
+    z-index: 999;
 
     &-nav {
         list-style-type: none;

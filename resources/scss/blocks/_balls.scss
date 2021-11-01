@@ -1,0 +1,23 @@
+.ball-banner-one {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    background: url("../../../img/svg/balls/ball-1.svg") center no-repeat;
+    background-size: contain;
+    width: 23px;
+    height: 23px;
+    animation: Balls 25s ease 0s infinite normal forwards;
+    @include parallax(-.4);
+}
+
+.ball-banner-two {
+    position: absolute;
+    top: 15%;
+    left: 41%;
+    background: url("../../../img/svg/balls/ball-1.svg") center no-repeat;
+    background-size: contain;
+    width: 87px;
+    height: 87px;
+    animation: Balls 15s ease .5s infinite normal forwards;
+    @include parallax(.2);
+}

@@ -26,12 +26,12 @@
         <tabs v-else>
             <tab title="Дисплей">
                 <div class="items">
-                    <SwiperFormats name="swiper1" :array="display"/>
+                    <SwiperFormats :array="display"/>
                 </div>
             </tab>
             <tab title="In-app">
                 <div class="items">
-                    <SwiperFormats name="swiper2" :array="inApp"/>
+                    <SwiperFormats :array="inApp"/>
                 </div>
             </tab>
         </tabs>

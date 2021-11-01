@@ -6,7 +6,7 @@
     }
 
     @include mobile {
-        margin-top: 7.5em;
+        margin-top: 6.25em;
     }
 
     @include mobile-max {
@@ -30,6 +30,14 @@
             @include mobile {
                 flex: 0 0 48%;
             }
+
+            @include huge-mobile {
+                display: none;
+            }
+
+            @include mobile-max {
+                display: none;
+            }
         }
 
         .item {
@@ -39,6 +47,14 @@
 
             @include mobile {
                 flex: 0 0 48%;
+            }
+
+            @include huge-mobile {
+                flex: 0 0 70%;
+            }
+
+            @include mobile-max {
+                flex: 0 0 70%;
             }
 
             .image-wrapper {
@@ -57,7 +73,15 @@
                 }
 
                 @include mobile {
-                    padding: 1.563em 5%;
+                    padding: 1.563em 10%;
+                }
+
+                @include huge-mobile {
+                    padding: 1.563em 10%;
+                }
+
+                @include mobile-max {
+                    padding: 1.563em 10%;
                 }
             }
 

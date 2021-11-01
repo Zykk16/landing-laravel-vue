@@ -12,10 +12,8 @@ import Button from "../../../components/helpers/Button";
 export default {
     name: "ImagesUpload",
     components: {Button},
-    comments: ['MenuIcon'],
     data() {
         return {
-            name: '',
             file: '',
             error: ''
         }

@@ -23,15 +23,18 @@
 /* Admin */
 @import "blocks/admin/login";
 
+/* Other */
+@import "blocks/privacy";
+
 h1 {
     font: normal 35px/43px 'ArtegraSoft-Bold', sans-serif;
 
     @include mobile {
-        font-size: 28px;
+        font-size: 30px;
     }
 
     @include mobile-max {
-        font-size: 28px;
+        font-size: 30px;
     }
 }
 

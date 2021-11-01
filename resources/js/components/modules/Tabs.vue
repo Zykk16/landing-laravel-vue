@@ -24,7 +24,9 @@ export default {
         this.tabs = this.$children
     },
     mounted() {
-        this.selectTab(0)
+        setTimeout(() => {
+            this.selectTab(0)
+        }, 500)
     },
     methods: {
         selectTab(i) {
@@ -76,7 +78,7 @@ export default {
         margin-bottom: .6em;
     }
 
-    &:last-child{
+    &:last-child {
         margin-right: 0;
     }
 }

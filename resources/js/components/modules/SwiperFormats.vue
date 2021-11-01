@@ -51,12 +51,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../scss/helpers/media";
+
 .swiper-container {
     position: absolute;
     left: -100px;
     padding-bottom: 3.125rem;
     padding-left: 6.25rem;
     max-width: 100vw;
+
+    @include huge-mobile {
+        left: 0;
+        width: 100vw;
+        padding: 0;
+    }
+
+    @include mobile-max {
+        left: 0;
+        width: 100vw;
+        padding: 0;
+    }
 }
 
 .swiper {

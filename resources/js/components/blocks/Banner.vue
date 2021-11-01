@@ -15,18 +15,30 @@
             <div class="banner-sphere-advantages item-4 blur">Более 50 млн уникальных профилей</div>
             <div class="banner-sphere-advantages item-5 blur">Охват 240 млн уникальных устройств</div>
         </div>
+        <BallsBanner :balls="balls"/>
     </div>
 </template>
 
 <script>
 import Button from "../helpers/Button";
+import BallsBanner from "../modules/BallsBanner";
 
 export default {
     name: "Banner",
-    components: {Button}
+    components: {BallsBanner, Button},
+    data() {
+        return {
+            balls: [
+                {className: 'ballOne', img: 'ball-1'},
+                {className: 'ballTwo', img: 'ball-1'},
+                {className: 'ballThree', img: 'ball-2'},
+                {className: 'ballFour', img: 'ball-2'},
+                {className: 'ballFifth', img: 'ball-2'},
+                {className: 'ballSixth', img: 'ball-2'},
+                {className: 'ballSeventh', img: 'ball-2'},
+                {className: 'ballEighth', img: 'ball-2'},
+            ]
+        }
+    }
 }
 </script>
-
-<style scoped>
-
-</style>

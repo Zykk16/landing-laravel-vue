@@ -44,6 +44,7 @@ $screen-huge-desktop: 1920px;
 $huge-mobile: 467px;
 $hidden-sphere: 645px;
 $menu-screen: 920px;
+$header-screen: 1100px;
 $footer-screen: 1200px;
 $sphere-screen: 1600px;
 
@@ -78,6 +79,13 @@ $sphere-screen: 1600px;
 /* 1024 - 1200 */
 @mixin footer-small-medium {
     @media (min-width: #{$small-desktop-width + 1px}) and (max-width: #{$footer-screen}) {
+        @content;
+    }
+}
+
+/* 1024 - 1100 */
+@mixin header-small-medium {
+    @media (min-width: #{$small-desktop-width + 1px}) and (max-width: #{$header-screen}) {
         @content;
     }
 }
