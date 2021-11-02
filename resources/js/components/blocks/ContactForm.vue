@@ -28,9 +28,9 @@
             <div class="contact-form-group">
                 <select v-model="fields.category">
                     <option disabled value="">Являюсь представителем:</option>
-                    <option>Представитель</option>
-                    <option>Предприниматель</option>
-                    <option>Программист</option>
+                    <option value="0">Представитель</option>
+                    <option value="1">Предприниматель</option>
+                    <option value="2">Программист</option>
                 </select>
             </div>
 

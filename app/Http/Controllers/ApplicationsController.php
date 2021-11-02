@@ -2,25 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactForm;
+use App\Models\Applications;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class ContactFormController extends Controller
+class ApplicationsController extends Controller
 {
 
-    public function index(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
+     */
+    public function index(Request $request): JsonResponse
     {
         $validated = $this->validate($request, [
-            'sort' => 'required|in:created_at,name',
+            'categories' => 'nullable|array',
+            'categories.*' => 'nullable|numeric|exists:application_categories,id',
+            'sort' => 'required|in:created_at,category,name,phone,email,',
             'desc' => 'required|boolean',
             'created_at' => 'nullable|string',
-            'name' => 'nullable|string'
+            'name' => 'nullable|string',
+            'phone' => 'nullable|string',
+            'email' => 'nullable|string'
         ]);
 
-        $applications = ContactForm::orderBy($validated['sort'], $validated['desc'] ? 'desc' : 'asc');
+        $applications = Applications::query();
 
+        if (!empty($validated['categories'])) {
+            $applications->whereIn('category', $validated['categories']);
+        }
         if (!empty($validated['created_at'])) {
             $applications->where('created_at', 'like', '%' . $validated['created_at'] . '%');
         }
@@ -28,7 +40,10 @@ class ContactFormController extends Controller
             $applications->where('name', 'like', '%' . $validated['name'] . '%');
         }
 
-        return response()->json($applications->get());
+        $applications = $applications->orderBy($validated['sort'], $validated['desc'] ? 'desc' : 'asc');
+        $applications = $applications->get();
+
+        return response()->json($applications);
     }
 
     /**
@@ -45,7 +60,7 @@ class ContactFormController extends Controller
             'message' => 'required',
         ]);
 
-        ContactForm::create($request->all());
+        Applications::create($request->all());
 
 //        Mail::send('mail', array(
 //            'name' => $request->get('name'),
