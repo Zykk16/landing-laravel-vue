@@ -14,9 +14,9 @@
             </div>
 
             <div class="contact-form-group">
-                <input type="text" :class="['field', errors && errors.phone ? 'field-error' : '']"
-                       name="phone" id="phone" v-model="fields.phone"
-                       placeholder="Номер телефона" @input="errors.phone = ''"/>
+                <masked-input mask="\+\7 (111) 111-11-11" placeholder="Номер телефона" @input="errors.phone = ''"
+                              v-model="fields.phone" name="phone" id="phone"
+                              :class="['field', errors && errors.phone ? 'field-error' : '']"/>
             </div>
 
             <div class="contact-form-group">
@@ -25,12 +25,13 @@
                        placeholder="Почта" @input="errors.email = ''"/>
             </div>
 
-            <div class="contact-form-group">
+            <div class="contact-form-group select-dropdown">
                 <select v-model="fields.category">
                     <option disabled value="">Являюсь представителем:</option>
-                    <option value="0">Представитель</option>
-                    <option value="1">Предприниматель</option>
-                    <option value="2">Программист</option>
+                    <option v-for="(category, key) in categories"
+                            :key="key" :value="category.id">
+                        {{category.name}}
+                    </option>
                 </select>
             </div>
 
@@ -50,11 +51,13 @@
 </template>
 
 <script>
-import Button from "../helpers/Button";
+import Button from "../helpers/Button"
+import MaskedInput from 'vue-masked-input'
+import {mapActions, mapGetters} from "vuex";
 
 export default {
     name: "ContactForm",
-    components: {Button},
+    components: {Button, MaskedInput},
     data() {
         return {
             fields: {},
@@ -63,7 +66,18 @@ export default {
             screen: false
         }
     },
+
+    computed: {
+        ...mapGetters({
+            categories: 'applications/categories'
+        })
+    },
+
     methods: {
+        ...mapActions({
+            getCategories: 'applications/getCategories'
+        }),
+
         submit() {
             this.success = false
             this.errors = {}
@@ -90,6 +104,7 @@ export default {
     },
 
     mounted() {
+        this.getCategories()
         this.onResize()
     }
 }

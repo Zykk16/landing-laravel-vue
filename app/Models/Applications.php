@@ -20,24 +20,13 @@ class Applications extends Model
     /**
      * @var string[]
      */
-    protected $with = [
-        'category'
-    ];
-
-    /**
-     * @var string[]
-     */
     protected $casts = [
         'created_at' => 'datetime:d.m.y',
     ];
 
     /**
-     * @var string[]
+     * @return BelongsTo
      */
-    protected $hidden = [
-        'category'
-    ];
-
     public function category() : BelongsTo
     {
         return $this->belongsTo(ApplicationCategories::class, 'category');

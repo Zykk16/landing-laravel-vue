@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@mdi/font": "^6.4.95",
         "axios": "^0.21",
         "browser-sync": "^2.26.14",
         "browser-sync-webpack-plugin": "^2.2.2",
@@ -38,6 +39,8 @@
         "webpack-cli": "^4.7.0"
     },
     "dependencies": {
-        "vue-scrollto": "^2.20.0"
+        "vue-masked-input": "^0.5.2",
+        "vue-scrollto": "^2.20.0",
+        "vuetify": "^2.5.10"
     }
 }

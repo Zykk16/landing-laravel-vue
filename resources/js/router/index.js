@@ -2,13 +2,15 @@ import Vue from "vue"
 import VueRouter from 'vue-router'
 
 import Main from "../components/Main"
-import Admin from "./views/admin/Admin"
+// import Admin from "./views/admin/Admin"
 import Login from "./views/admin/Login";
 import Register from "./views/admin/Register";
 import Brands from "./views/admin/page/Brands";
 import store from '../store'
 import Applications from "./views/admin/page/Applications";
 import PrivacyPolicy from "./views/PrivacyPolicy";
+
+const Admin = () => import(/* webpackChunkName: "admin" */ './views/admin/Admin')
 
 Vue.use(VueRouter)
 
@@ -46,20 +48,5 @@ const router = new VueRouter({
     mode: "history",
     routes
 })
-
-// router.beforeEach((to, from, next) => {
-//     if (to.meta.middleware === "guest") {
-//         if (store.state.auth.authenticated) {
-//             next()
-//         }
-//         next()
-//     } else {
-//         if (store.state.auth.authenticated) {
-//             next()
-//         } else {
-//             next({name: "login"})
-//         }
-//     }
-// })
 
 export default router

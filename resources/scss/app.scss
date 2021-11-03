@@ -59,3 +59,19 @@ img {
     width: 100%;
     height: auto;
 }
+
+.centered-item {
+    td {
+        vertical-align: middle;
+    }
+}
+
+.v-data-table__expanded__content {
+    td {
+        vertical-align: middle;
+    }
+}
+
+.v-data-table > .v-data-table__wrapper tbody tr.v-data-table__expanded__content {
+    box-shadow: inset 0 0 25px -15px!important;
+}

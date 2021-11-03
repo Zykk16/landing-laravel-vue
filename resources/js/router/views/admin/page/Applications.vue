@@ -1,118 +1,66 @@
 <template>
     <div class="applications">
-        <table>
-            <thead>
-            <tr>
-                <td>
-                    <button @click="sort('created_at')">
-                        <span class="text-gi-gray-dark font-light">Дата</span>
-                        <span class="text-gi-gray-dark">
-                            <svg class="fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                <path class="fa-secondary" fill="currentColor"
-                                      d="M41.05 288.05h238c21.4 0 32.1 25.9 17 41l-119 119a23.9 23.9 0 01-33.8.1l-.1-.1-119.1-119c-15.05-15.05-4.4-41 17-41z"
-                                      opacity=".4"/><path class="fa-primary" fill="currentColor"
-                                                          d="M24.05 183.05l119.1-119A23.9 23.9 0 01177 64a.94.94 0 01.1.1l119 119c15.1 15.1 4.4 41-17 41h-238c-21.45-.05-32.1-25.95-17.05-41.05z"/>
-                            </svg>
-                        </span>
-                    </button>
-                </td>
-                <td>
-                    <button @click="sort('name')">
-                        <span>Имя</span>
-                        <span>
-                            <svg class="fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                <path class="fa-secondary" fill="currentColor"
-                                      d="M41.05 288.05h238c21.4 0 32.1 25.9 17 41l-119 119a23.9 23.9 0 01-33.8.1l-.1-.1-119.1-119c-15.05-15.05-4.4-41 17-41z"
-                                      opacity=".4"/><path class="fa-primary" fill="currentColor"
-                                                          d="M24.05 183.05l119.1-119A23.9 23.9 0 01177 64a.94.94 0 01.1.1l119 119c15.1 15.1 4.4 41-17 41h-238c-21.45-.05-32.1-25.95-17.05-41.05z"/>
-                            </svg>
-                        </span>
-                    </button>
-                </td>
-                <td>
-                    <button @click="sort('phone')">
-                        <span>Телефон</span>
-                        <span>
-                            <svg class="fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                <path class="fa-secondary" fill="currentColor"
-                                      d="M41.05 288.05h238c21.4 0 32.1 25.9 17 41l-119 119a23.9 23.9 0 01-33.8.1l-.1-.1-119.1-119c-15.05-15.05-4.4-41 17-41z"
-                                      opacity=".4"/><path class="fa-primary" fill="currentColor"
-                                                          d="M24.05 183.05l119.1-119A23.9 23.9 0 01177 64a.94.94 0 01.1.1l119 119c15.1 15.1 4.4 41-17 41h-238c-21.45-.05-32.1-25.95-17.05-41.05z"/>
-                            </svg>
-                        </span>
-                    </button>
-                </td>
-                <td>
-                    <button @click="sort('email')">
-                        <span>Email</span>
-                        <span>
-                            <svg class="fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                <path class="fa-secondary" fill="currentColor"
-                                      d="M41.05 288.05h238c21.4 0 32.1 25.9 17 41l-119 119a23.9 23.9 0 01-33.8.1l-.1-.1-119.1-119c-15.05-15.05-4.4-41 17-41z"
-                                      opacity=".4"/><path class="fa-primary" fill="currentColor"
-                                                          d="M24.05 183.05l119.1-119A23.9 23.9 0 01177 64a.94.94 0 01.1.1l119 119c15.1 15.1 4.4 41-17 41h-238c-21.45-.05-32.1-25.95-17.05-41.05z"/>
-                            </svg>
-                        </span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td class="input-filter">
-                    <input @input="filterColumn()" type="date" v-model="filters.created_at" class="input">
-                </td>
-                <td class="input-filter">
-                    <input @input="filterColumn()" type="text" v-model="filters.name" class="input">
-                </td>
-                <td class="input-filter">
-                    <input @input="filterColumn()" type="text" v-model="filters.phone" class="input">
-                </td>
-                <td class="input-filter">
-                    <input @input="filterColumn()" type="text" v-model="filters.email" class="input">
-                </td>
-                <td></td>
-                <td>
-                    <transition name="fade-slide">
-                        <div>
-                            <button @click="showFilters = !showFilters">
-                                <span class="block">Выбрать категоррию</span>
-                                <span class="ml-3 block flex align-middle">
-                                    <span class="w-4 lg:w-6">
-                                        <svg
-                                            :class="['fill-current text-gi-gray-dark transform-arrow', showFilters ? 'active' : '']"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 442.8 253.2">
-                                        <path
-                                            d="M439.3 23.3L419.5 3.5c-4.7-4.7-12.3-4.7-17 0L221.4 184.2 40.3 3.5c-4.7-4.7-12.3-4.7-17 0L3.5 23.3c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0L439.3 40.3c4.7-4.7 4.7-12.3 0-17z"/>
-                                        </svg>
-                                    </span>
-                            </span>
-                            </button>
-                            <transition name="fade-slide">
-                                <div v-if="showFilters">
-                                    <checkbox v-for="category in categories"
-                                              v-model="selectedCategories[category.id]"
-                                              :key="category.id" :options="category.name">
-                                    </checkbox>
-                                </div>
-                            </transition>
-                        </div>
-                    </transition>
-                </td>
-            </tr>
-            </thead>
-            <tbody v-if="applications.length > 0">
-            <Application v-for="application in applications" :application="application" :key="application.id"/>
-            </tbody>
-            <tbody v-else>
-            <tr>
-                <td class="w-12/12 py-2 text-gi-gray-medium font-light text-xl align-top">
-                    <div class="application-not-found">Заявок не найдено</div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <v-card>
+            <v-card-title>
+                Applications
+                <v-spacer></v-spacer>
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+                ></v-text-field>
+            </v-card-title>
+            <v-data-table
+                v-model="selected"
+                :headers="headers"
+                :items="filteredApplications"
+                :search.sync="search"
+                :custom-sort="customSort"
+                item-key="name"
+                class="elevation-1"
+                :expanded.sync="expanded"
+                show-expand
+                :item-class="rowClass"
+            >
+                <template v-slot:header="{ header }">
+                    <tr class="grey lighten-3">
+                        <th v-for="header in headers" :key="header.text">
+                            <div v-if="filters.hasOwnProperty(header.value)">
+                                <v-autocomplete
+                                    multiple
+                                    chips
+                                    clearable
+                                    :items="columnValueList(header.value)"
+                                    v-model="filters[header.value]"
+                                    return-object
+                                >
+                                    <template v-slot:selection="{ item, index }">
+                                        <v-chip v-if="index < 5">
+                                            <span>
+                                                {{ item }}
+                                            </span>
+                                        </v-chip>
+                                        <span v-if="index === 5" class="grey--text caption">
+                                            (+{{ filters[header.value].length - 5 }} others)
+                                        </span>
+                                    </template>
+                                </v-autocomplete>
+                            </div>
+                        </th>
+                    </tr>
+                </template>
+                <template v-slot:item.category="{ item }">
+                    {{ item.category.name }}
+                </template>
+                <template v-slot:expanded-item="{ headers, item }">
+                    <td :colspan="headers.length">
+                        Message: {{ item.message }}
+                    </td>
+                </template>
+            </v-data-table>
+        </v-card>
     </div>
 </template>
 
@@ -125,75 +73,88 @@ export default {
     name: 'Applications',
     components: {Checkbox, Application},
     data: () => ({
-        selectedCategories: {},
-        showFilters: false,
+        search: '',
+        expanded: [],
+        selected: [],
         filters: {
-            created_at: '',
-            name: '',
-            phone: '',
-            email: ''
+            category: [],
         },
-    }),
-    watch: {
-        'selectedCategories': {
-            handler(newVal) {
-                this.updateSelectedCategories(newVal).then(() => {
-                    console.log(this.selectedCategories)
-                    this.getApplications()
-                })
+        headers: [
+            {text: 'Name', align: 'start', value: 'name'},
+            {text: 'Phone', value: 'phone'},
+            {text: 'Email', value: 'email'},
+            {
+                text: 'Message', value: 'data-table-expand',
+                sortable: false, align: 'center', width: '100px'
             },
-            deep: true
+            {
+                text: 'Category', value: 'category', width: '400px',
+                sortable: false,
+            },
+            {text: 'Date', value: 'created_at'},
+        ],
+    }),
+
+    computed: {
+        ...mapGetters({
+            applications: 'applications/applications',
+            categories: 'applications/categories',
+        }),
+
+        filteredApplications() {
+            return this.applications.filter(d => {
+                return Object.keys(this.filters).every(f => {
+                    return this.filters[f].length < 1 || this.filters[f].includes(d[f].name)
+                })
+            })
         }
     },
-    computed: mapGetters({
-        applications: 'applications/applications',
-        categories: 'applications/categories'
-    }),
+
     methods: {
         ...mapActions({
             getApplications: 'applications/getApplications',
             getCategories: 'applications/getCategories',
-            updateSelectedCategories: 'applications/updateSelectedCategories',
-            updateSort: 'applications/updateSort',
-            updateFilters: 'applications/updateFilters'
         }),
-        sort(type) {
-            this.updateSort(type).then(() => {
-                this.getApplications()
+
+        customSort(items, index, isDesc) {
+            items.sort((a, b) => {
+                if (index === "date") {
+                    if (!isDesc) {
+                        return dateHelp.compare(a.date, b.date);
+                    } else {
+                        return dateHelp.compare(b.date, a.date);
+                    }
+                } else {
+                    if (!isDesc) {
+                        return a[index] < b[index] ? -1 : 1;
+                    } else {
+                        return b[index] < a[index] ? -1 : 1;
+                    }
+                }
+            });
+            return items;
+        },
+
+        columnValueList(val) {
+            return this.applications.map(d => {
+                const container = {}
+                container[val] = d.category.name
+
+                return container.category
             })
         },
-        filterColumn() {
-            this.updateFilters({
-                filtersCreatedAt: this.filters.created_at,
-                filtersName: this.filters.name,
-                filtersPhone: this.filters.phone,
-                filtersEmail: this.filters.email
-            }).then(() => {
-                this.getApplications()
-            })
-        },
-        fillSelectedCategories() {
-            const values = {}
 
-            this.categories.forEach(status => {
-                values[status.id] = false
-            })
-
-            this.selectedCategories = values
+        rowClass() {
+            return 'centered-item'
         },
     },
-    created() {
-        if (this.categories.length === 0) {
-            this.getCategories().then(() => {
-                this.fillSelectedCategories()
-            })
-        } else {
-            this.fillSelectedCategories()
-        }
+    mounted() {
+        this.getCategories()
+        this.getApplications()
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

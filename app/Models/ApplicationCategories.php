@@ -10,5 +10,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ApplicationCategories extends Model
 {
+    /**
+     * @var string[]
+     */
+    protected $fillable = ['name'];
+
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 }
