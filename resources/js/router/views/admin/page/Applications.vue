@@ -65,13 +65,12 @@
 </template>
 
 <script>
-import Application from "./Application"
 import {mapActions, mapGetters} from "vuex"
 import Checkbox from "../../../../components/helpers/Checkbox"
 
 export default {
     name: 'Applications',
-    components: {Checkbox, Application},
+    components: {Checkbox},
     data: () => ({
         search: '',
         expanded: [],
