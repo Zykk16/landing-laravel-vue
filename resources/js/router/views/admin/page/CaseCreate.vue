@@ -1,30 +1,43 @@
 <template>
-    <v-dialog id="create-case" content-class="create-case" v-model="dialogCreate" persistent max-width="1000px" @submit.prevent>
+    <v-dialog id="create-case" content-class="create-case" v-model="dialogCreate" persistent max-width="1000px"
+              @submit.prevent>
         <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                New cases
+                <span class="new-case-button">Новый кейс</span>
             </v-btn>
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">New cases</span>
+                <span class="text-h5 new-case-title">Новый кейс</span>
             </v-card-title>
             <v-card-text>
                 <v-form @submit.prevent>
                     <v-container>
                         <v-row>
                             <v-col cols="12" sm="6" md="4">
-                                <cases-image-uploader :cover="form.image" @loaded="updateImage"/>
+                                <cases-image-uploader :cover="form.image" @loaded="updateImage"
+                                                      @preloadImg="errorHandlerImage = true"/>
+                                <div v-if="!errorHandlerImage">
+                                    <v-alert v-if="errors.has('image')" color="red" dense text type="error">
+                                        {{ errors.get('image') }}
+                                    </v-alert>
+                                </div>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
                                 <v-text-field v-model="form.title"
-                                              label="Клиент"></v-text-field>
+                                              :error="errors.has('title')"
+                                              :error-messages="errors.get('title')"
+                                              label="Клиент" @input="errors.clear('title')"></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
                                 <v-select :items="categories"
                                           item-text="name"
                                           item-value="id"
+                                          value="id"
                                           label="Категория"
+                                          :error="errors.has('category_id')"
+                                          :error-messages="errors.get('category_id')"
+                                          @change="errors.clear('category_id')"
                                           v-model="form.category_id">
                                 </v-select>
                             </v-col>
@@ -70,11 +83,6 @@
                                 <v-text-field
                                     v-model="form.interest"
                                     label="Интерес"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field
-                                    v-model="form.thematic_resources"
-                                    label="Тематические ресурсы"></v-text-field>
                             </v-col>
                         </v-row>
                         <v-card-title class="pl-0">Показатели</v-card-title>
@@ -137,7 +145,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="dialogCreate = false">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="createItem(form.id)">Save</v-btn>
+                <v-btn color="blue darken-1" text @click="post()">Save</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -157,28 +165,30 @@ export default {
             dialogCreate: false,
             editedIndex: -1,
             errors: new Errors(),
-            form: new Form({
-                title: '',
-                goal: '',
+            errorHandlerImage: false,
+            form: {
                 category_id: '',
                 logo: '',
+                title: '',
+                goal: '',
                 geography: '',
-                placement: '',
+                placement_format: '',
+                period: '',
                 gender: '',
                 age: '',
                 income: '',
                 interest: '',
-                thematic_resources: '',
                 shows: '',
                 clicks: '',
                 ctr: '',
                 vtr: '',
+                cpv: '',
                 coverage: '',
                 refusals: '',
                 depth: '',
                 duration_session: '',
                 objectives: ''
-            }),
+            }
         }
     },
 
@@ -198,26 +208,62 @@ export default {
             this.form.logo = image
         },
 
-        createItem() {
-            this.form.submit('/api/cases', false)
-                .then(data => {
+        post() {
+            const config = {
+                headers: {
+                    "content-type": "multipart/form-data"
+                }
+            };
+
+            let formData = new FormData();
+            formData.append('category_id', this.form.category_id)
+            formData.append('image', this.form.logo)
+            formData.append('title', this.form.title)
+            formData.append('goal', this.form.goal)
+            formData.append('geography', this.form.geography)
+            formData.append('placement_format', this.form.placement_format)
+            formData.append('period', this.form.period)
+            formData.append('gender', this.form.gender)
+            formData.append('age', this.form.age)
+            formData.append('income', this.form.income)
+            formData.append('interest', this.form.interest)
+            formData.append('shows', this.form.shows)
+            formData.append('clicks', this.form.clicks)
+            formData.append('ctr', this.form.ctr)
+            formData.append('vtr', this.form.vtr)
+            formData.append('cpv', this.form.cpv)
+            formData.append('coverage', this.form.coverage)
+            formData.append('refusals', this.form.refusals)
+            formData.append('depth', this.form.depth)
+            formData.append('duration_session', this.form.duration_session)
+            formData.append('objectives', this.form.objectives)
+
+            this.store(formData, config);
+        },
+
+        store(data, config) {
+            axios.post('/api/cases', data, config)
+                .then(() => {
                     this.createCases(data);
                     this.$emit('send')
                     this.dialogCreate = false
-                }).catch(error => {
-                let formErrors = error.response;
+                })
+                .catch(error => {
+                    let {data} = error.response
 
-                if (formErrors) {
-                    this.errors.record(formErrors);
-                } else {
-                    alert('Error request!')
-                }
-            })
-        },
+                    if (data) {
+                        this.errors.record(data)
+                    }
+                })
+        }
     }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.new-case-button {
+    text-transform: none;
+    letter-spacing: 0;
+    font: 14px/18px "ArtegraSoft-Bold", sans-serif;
+}
 </style>

@@ -26,7 +26,6 @@ class CreateCasesTable extends Migration
             $table->string('age')->nullable()->default('');
             $table->string('income')->nullable()->default('');
             $table->string('interest')->nullable()->default('');
-            $table->string('thematic_resources')->nullable()->default('');
             $table->string('shows')->nullable()->default('');
             $table->string('clicks')->nullable()->default('');
             $table->string('ctr')->nullable()->default('');

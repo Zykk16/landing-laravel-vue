@@ -1,29 +1,39 @@
-.login-container {
+.login-container,
+.register-container {
     padding-bottom: 5em;
     background: rgba(255, 255, 255, 0.22);
     border: 1px solid #EEEEEE;
     box-sizing: border-box;
     border-radius: 46px;
+    margin: 10em 7.5em;
+
+    @include small-desktop {
+        margin: 5em 7.5em 10em 7.5em;
+    }
+    @include tablet {
+        margin: 5em 2.313em 10em 2.313em;
+    }
 
     @include mobile {
-        padding-bottom: 3.75em;
+        margin: 3.75em 2.125em 7.5em 2.125em;
     }
 
     @include mobile-max {
-        padding-bottom: 2.5em;
+        margin: 2.5em 1.25em 5em 1.25em;
     }
 
     h1 {
         margin-top: 2.3em;
         margin-bottom: 1.15em;
         text-align: center;
+        color: $black;
 
         @include mobile {
             margin-top: 2.2em;
         }
 
         @include mobile-max {
-            margin-top: 1.4em;
+            margin: 1em auto;
             width: auto;
         }
     }
@@ -71,6 +81,23 @@
         color: $red;
         font: bold 14px/18px 'ArtegraSoft-Medium', sans-serif;
     }
+
+    .cross {
+        position: absolute;
+        top: 35px;
+        right: 35px;
+        cursor: pointer;
+
+        @include mobile {
+            top: 25px;
+            right: 25px;
+        }
+
+        @include mobile-max {
+            top: 15px;
+            right: 15px;
+        }
+    }
 }
 
 .form-control {
@@ -86,8 +113,9 @@
     color: $gray-input;
     outline: none;
 
-    &.error-field{
+    &.error-field {
         color: $red;
+        border-color: $red;
     }
 }
 
@@ -111,5 +139,24 @@
         font: 14px/20px 'Inter-Regular', sans-serif;
         color: $black;
         margin-bottom: 2.5em;
+    }
+}
+
+.success-register {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+
+    .success-message {
+        display: flex;
+        justify-content: center;
+        padding: 10em 0 5em 0;
+
+        .gradient-h1 {
+            margin: 0;
+
+        }
     }
 }

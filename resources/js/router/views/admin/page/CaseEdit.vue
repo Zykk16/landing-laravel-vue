@@ -10,7 +10,7 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12" sm="6" md="4">
-                                <cases-image-uploader :cover="form.image" @loaded="updateImage"/>
+                                <cases-image-uploader :cover="data.image" @loaded="uploadImage"/>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
                                 <v-text-field v-model="form.title"
@@ -66,11 +66,6 @@
                                 <v-text-field
                                     v-model="form.interest"
                                     label="Интерес"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field
-                                    v-model="form.thematic_resources"
-                                    label="Тематические ресурсы"></v-text-field>
                             </v-col>
                         </v-row>
                         <v-card-title class="pl-0">Показатели</v-card-title>
@@ -133,7 +128,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="closeDialog">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="createItem(form.id)">Save</v-btn>
+                <v-btn color="blue darken-1" text @click="update">Save</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -148,12 +143,15 @@ import {mapActions, mapGetters} from "vuex";
 export default {
     name: "CaseEdit",
     components: {CasesImageUploader},
-    props: ['openEditCase', 'form'],
+    props: ['openEditCase', 'data'],
     data() {
         return {
-            editedIndex: -1,
             errors: new Errors(),
-            formEdit: ''
+            form: {
+                image: '',
+                category_id: '',
+                title: '',
+            },
         }
     },
 
@@ -169,52 +167,136 @@ export default {
             getCategories: 'categories_cases/getCategories',
         }),
 
-        updateImage(image) {
+        setForm() {
+            this.form = {
+                category_id: this.data.category_id.id,
+                image: this.data.image ?? null,
+                title: this.data.title,
+                goal: this.data.goal ?? '',
+                geography: this.data.geography ?? '',
+                placement_format: this.data.placement_format ?? '',
+                period: this.data.period ?? '',
+                gender: this.data.gender ?? '',
+                age: this.data.age ?? '',
+                income: this.data.income ?? '',
+                interest: this.data.interest ?? '',
+                shows: this.data.shows ?? '',
+                clicks: this.data.clicks ?? '',
+                ctr: this.data.ctr ?? '',
+                vtr: this.data.vtr ?? '',
+                cpv: this.data.cpv ?? '',
+                coverage: this.data.coverage ?? '',
+                refusals: this.data.refusals ?? '',
+                depth: this.data.depth ?? '',
+                duration_session: this.data.duration_session ?? '',
+                objectives: this.data.objectives ?? ''
+            }
+        },
+
+        uploadImage(image) {
             this.form.image = image
         },
 
-        createItem() {
-            this.formEdit = new Form({
-                title: this.form.title ?? '',
-                category_id: this.form.category_id.id ?? '',
-                logo: this.form.image ?? '',
-                goal: '',
-                geography: '',
-                placement: '',
-                gender: '',
-                age: '',
-                income: '',
-                interest: '',
-                thematic_resources: '',
-                shows: '',
-                clicks: '',
-                ctr: '',
-                vtr: '',
-                coverage: '',
-                refusals: '',
-                depth: '',
-                duration_session: '',
-                objectives: ''
-            })
+        update() {
+            const config = {
+                headers: {
+                    "content-type": "multipart/form-data"
+                }
+            };
 
-            this.formEdit.submit(`/api/cases/${this.form.id}`, false, 'put')
-                .then(data => {
+            let formData = new FormData();
+            formData.append('category_id', this.form.category_id)
+            formData.append('image', this.form.image)
+            formData.append('title', this.form.title)
+            formData.append('goal', this.form.goal)
+            formData.append('geography', this.form.geography)
+            formData.append('placement_format', this.form.placement_format)
+            formData.append('period', this.form.period)
+            formData.append('gender', this.form.gender)
+            formData.append('age', this.form.age)
+            formData.append('income', this.form.income)
+            formData.append('interest', this.form.interest)
+            formData.append('shows', this.form.shows)
+            formData.append('clicks', this.form.clicks)
+            formData.append('ctr', this.form.ctr)
+            formData.append('vtr', this.form.vtr)
+            formData.append('cpv', this.form.cpv)
+            formData.append('coverage', this.form.coverage)
+            formData.append('refusals', this.form.refusals)
+            formData.append('depth', this.form.depth)
+            formData.append('duration_session', this.form.duration_session)
+            formData.append('objectives', this.form.objectives)
+            formData.append('_method', 'PUT')
+
+            this.store(formData, config);
+        },
+        store(data, config) {
+            axios.post(`/api/cases/${this.data.id}`, data, config)
+                .then(() => {
                     this.updateCases(data);
                     this.$emit('send')
-                }).catch(error => {
-                let formErrors = error.response;
+                })
+                .catch(error => {
+                    let formErrors = error.response.data.errors;
 
-                if (formErrors) {
-                    this.errors.record(formErrors);
-                } else {
-                    alert('Error request!')
-                }
-            })
+                    if (formErrors) {
+                        this.errors.record(formErrors);
+                        console.log(this.errors)
+                    } else {
+                        console.log('Что-то пошло не так')
+                    }
+                })
         },
+
+        // createItem() {
+        //     this.formEdit = new Form({
+        //         title: '123',
+        //         category_id: '1234',
+        //         logo: this.form.image ?? '',
+        //         goal: '',
+        //         geography: '',
+        //         placement: '',
+        //         gender: '',
+        //         age: '',
+        //         income: '',
+        //         interest: '',
+        //         shows: '',
+        //         clicks: '',
+        //         ctr: '',
+        //         vtr: '',
+        //         coverage: '',
+        //         refusals: '',
+        //         depth: '',
+        //         duration_session: '',
+        //         objectives: ''
+        //     })
+        //
+        //     this.formEdit.submit(`/api/cases/${this.form.id}`, false)
+        //         .then(data => {
+        //             this.updateCases(data);
+        //             this.$emit('send')
+        //         }).catch(error => {
+        //         let formErrors = error.response;
+        //
+        //         if (formErrors) {
+        //             this.errors.record(formErrors);
+        //         } else {
+        //             alert('Error request!')
+        //         }
+        //     })
+        // },
 
         closeDialog() {
             this.$emit('close')
         }
+    },
+
+    mounted() {
+        this.setForm()
+    },
+
+    created() {
+        this.getCategories()
     }
 }
 </script>

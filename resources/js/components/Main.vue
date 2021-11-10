@@ -14,7 +14,7 @@
             <Advantages id="advantages"/>
 
             <!-- Advantages -->
-            <Formats/>
+            <Formats id="formats"/>
 
             <!-- Clients -->
             <Clients id="clients"/>

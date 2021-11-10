@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Button from "../../../components/helpers/Button";
+import Button from "../helpers/Button";
 
 export default {
     name: "RemindPassword",

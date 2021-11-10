@@ -18,7 +18,7 @@
                 :items="filteredApplications"
                 :search.sync="search"
                 :custom-sort="customSort"
-                item-key="name"
+                item-key="id"
                 class="elevation-1"
                 :expanded.sync="expanded"
                 show-expand

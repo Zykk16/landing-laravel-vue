@@ -2,9 +2,8 @@ import Vue from "vue"
 import VueRouter from 'vue-router'
 
 import Main from "../components/Main"
-// import Admin from "./views/admin/Admin"
-import Login from "./views/admin/Login";
-import Register from "./views/admin/Register";
+import Login from "../components/blocks/Login";
+import Register from "../components/blocks/Register";
 import Brands from "./views/admin/page/Brands";
 import store from '../store'
 import Applications from "./views/admin/page/Applications";

@@ -30,19 +30,22 @@
 
                         <case-create @send="sendItem"/>
                         <case-edit v-if="openEditCase"
-                                   :form="form"
+                                   :data="form"
                                    :openEditCase="openEditCase"
                                    @close="closeDialog"
                                    @send="sendItem"/>
 
                         <v-dialog v-model="dialogDelete" max-width="500px">
                             <v-card>
-                                <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
+                                <v-card-title class="text-h5 delete-title">Действительно удалить?
+                                </v-card-title>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                                    <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                                    <v-spacer></v-spacer>
+                                    <template>
+                                        <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+                                        <v-btn color="blue darken-1" text @click="deleteItemConfirm()">OK</v-btn>
+                                        <v-spacer></v-spacer>
+                                    </template>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -81,28 +84,7 @@ export default {
             filters: {
                 category_id: [],
             },
-            defaultItem: {
-                title: '',
-                goal: '',
-                category_id: '',
-                logo: '',
-                geography: '',
-                placement: '',
-                gender: '',
-                age: '',
-                income: '',
-                interest: '',
-                thematic_resources: '',
-                shows: '',
-                clicks: '',
-                ctr: '',
-                vtr: '',
-                coverage: '',
-                refusals: '',
-                depth: '',
-                duration_session: '',
-                objectives: ''
-            },
+            delete: ''
         }
     },
 
@@ -148,6 +130,7 @@ export default {
         },
 
         deleteItem(item) {
+            this.delete = item.id
             this.editedIndex = this.cases.indexOf(item)
             this.form = Object.assign({}, item)
             this.dialogDelete = true
@@ -155,15 +138,14 @@ export default {
 
         deleteItemConfirm() {
             this.cases.splice(this.editedIndex, 1)
-            this.closeDelete()
+
+            this.deleteCases(this.delete).finally(() => {
+                this.closeDelete()
+            })
         },
 
         closeDelete() {
             this.dialogDelete = false
-            this.$nextTick(() => {
-                this.form = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
         },
 
         columnValueList(val) {
@@ -202,32 +184,6 @@ export default {
         closeDialog() {
             this.openEditCase = false
         },
-
-        // send(id) {
-        //     console.log(this.form)
-        //     id ? this.updateCases({id: id, data: this.form}).then(() => {
-        //         this.getCases()
-        //         this.close()
-        //     }).catch(errors => {
-        //         console.log(errors.response.data)
-        //     }) : this.createCases(this.form).then(() => {
-        //         this.getCases()
-        //         this.close()
-        //     }).catch(errors => {
-        //         console.log(errors.response.data)
-        //     })
-        //
-        //     // this.form.submit(this.cases ? `/api/cases/${this.form.id}` : 'cases', false)
-        //     //     .then((data) => {
-        //     //
-        //     //         // this.getCases()
-        //     //         // this.$emit('sent');
-        //     //     })
-        //     //     .finally(() => {
-        //     //         this.getCases()
-        //     //     });
-        //     // this.cases.push(this.form)
-        // },
 
         rowClass() {
             return 'centered-item'

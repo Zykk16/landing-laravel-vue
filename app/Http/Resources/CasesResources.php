@@ -16,15 +16,29 @@ class CasesResources extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'category_id' => new CategoriesCasesResources($this->category),
-            'image' => $this->image,
-            'goal' => $this->goal,
-            'geography' => $this->geography,
-            'income' => $this->income,
-            'gender' => $this->gender,
-            'created_at' => $this->created_at
+            'id'                => $this->id,
+            'category_id'       => new CategoriesCasesResources($this->category),
+            'image'             => $this->image,
+            'title'             => $this->title,
+            'goal'              => $this->goal,
+            'geography'         => $this->geography,
+            'placement_format'  => $this->placement_format,
+            'period'            => $this->period,
+            'gender'            => $this->gender,
+            'age'               => $this->age,
+            'income'            => $this->income,
+            'interest'          => $this->interest,
+            'shows'             => $this->shows,
+            'clicks'            => $this->clicks,
+            'ctr'               => $this->ctr,
+            'vtr'               => $this->vtr,
+            'cpv'               => $this->cpv,
+            'coverage'          => $this->coverage,
+            'refusals'          => $this->refusals,
+            'depth'             => $this->depth,
+            'duration_session'  => $this->duration_session,
+            'objectives'        => $this->objectives,
+            'created_at'        => $this->created_at
         ];
     }
 }

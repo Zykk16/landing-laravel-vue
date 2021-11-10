@@ -5,7 +5,7 @@
             <tab title="Дисплей">
                 <div class="items">
                     <div class="item" v-for="(item, key) in display" :key="key">
-                        <div class="image-wrapper">
+                        <div class="image-wrapper blur">
                             <img :src="imagePath(item.img)" :alt="item.title">
                         </div>
                         <div class="title">{{ item.title }}</div>
@@ -35,6 +35,7 @@
                 </div>
             </tab>
         </tabs>
+        <BallsFormats :balls="balls"/>
     </div>
 </template>
 
@@ -42,10 +43,11 @@
 import Tab from "../modules/Tab";
 import Tabs from "../modules/Tabs";
 import SwiperFormats from "../modules/SwiperFormats";
+import BallsFormats from "../modules/BallsFormats";
 
 export default {
     name: "Formats",
-    components: {SwiperFormats, Tab, Tabs},
+    components: {BallsFormats, SwiperFormats, Tab, Tabs},
     data() {
         return {
             screen: false,
@@ -59,6 +61,11 @@ export default {
             inApp: [
                 {img: 'out-stream', title: 'Out-stream'},
                 {img: 'in-stream', title: 'In-stream'},
+            ],
+            balls: [
+                {className: 'ballOne', img: 'ball-2'},
+                {className: 'ballTwo', img: 'ball-1'},
+                {className: 'ballThree', img: 'ball-2'},
             ]
         }
     },

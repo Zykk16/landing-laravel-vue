@@ -137,8 +137,17 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'required' => 'Введите логин',
+        ],
+        'email' => [
+            'required' => 'Введите email',
+        ],
+        'password' => [
+            'required' => 'Введите пароль',
+        ],
+        'confirmed' => [
+            'required' => 'Подтвердите пароль',
         ],
     ],
 

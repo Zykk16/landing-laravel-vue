@@ -6,7 +6,7 @@ use App\Http\Requests\CasesRequest;
 use App\Http\Resources\CasesCollection;
 use App\Http\Resources\CasesResources;
 use App\Models\Cases;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,54 +32,50 @@ class CasesController extends Controller
     public function store(CasesRequest $request): CasesResources
     {
         $data = $request->data();
-        $data["image"] = $this->uploadCover($request->file("logo"));
-        $post = Cases::create($data);
 
-        return new CasesResources($post);
-    }
+        $data["image"] = $this->uploadImage($request->file("image"));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $case = Cases::create($data);
+
+        return new CasesResources($case);
     }
 
     /**
      * @param CasesRequest $request
-     * @param Cases $cases
+     * @param Cases $case
      * @return CasesResources
      */
-    public function update(CasesRequest $request, Cases $cases): CasesResources
+    public function update(CasesRequest $request, Cases $case): CasesResources
     {
         $data = $request->data();
 
-        if ($request->file('logo')) {
-            Storage::delete("public/update/" . $cases->logo);
-            $data["image"] = $this->uploadCover($request->file('logo'));
+        if ($request->file('image')) {
+            Storage::delete('public/uploads/' . $case->image);
+
+            $data['image'] = $this->uploadImage($request->file('image'));
         }
 
-        $cases->update($data);
+        $case->update($data);
 
-        return new CasesResources($cases);
+        return new CasesResources($case);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Cases $case
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Cases $case): JsonResponse
     {
-        //
+        $case->delete();
+
+        Storage::delete('public/uploads/' . $case->image);
+
+        return response()->json(['Case delete'], 204);
     }
 
-    private function uploadCover(UploadedFile $file): string
+    private function uploadImage(UploadedFile $file): string
     {
         $filename = time() . "_" . $file->getClientOriginalName();
         $file->storeAs('uploads', $filename, 'public');

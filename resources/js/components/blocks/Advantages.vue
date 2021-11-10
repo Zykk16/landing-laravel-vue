@@ -1,5 +1,5 @@
 <template>
-    <div id="advantages" class="advantages my">
+    <div class="advantages my">
         <h1>Почему стоит работать с Нами</h1>
         <div v-if="!screen" class="advantages-wrapper">
             <div v-for="(item, key) in advantages" :key="key" class="advantages-item blur">

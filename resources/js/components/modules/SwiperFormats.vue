@@ -1,7 +1,7 @@
 <template>
     <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="(item, key) in array" :key="key" class="item">
-            <div class="image-wrapper">
+            <div class="image-wrapper blur">
                 <img :src="imagePath(item.img)" :alt="item.title">
             </div>
             <div class="title">{{ item.title }}</div>
