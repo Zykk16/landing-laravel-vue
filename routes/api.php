@@ -25,16 +25,14 @@ Route::get('application-categories', [ApplicationCategoriesController::class, 'i
 
 Route::resource('cases', CasesController::class)->names([
     'index' => 'cases.index',
-    'store'  => 'cases.store',
-    'edit' => 'cases.edit',
+    'store' => 'cases.store',
+    'update' => 'cases.edit',
     'destroy' => 'cases.destroy',
 ]);
 
-Route::put('cases/{id}', [CasesController::class, 'update'])->name('cases.update');
-
 Route::apiResource('categories_cases', CategoriesCasesController::class)->names([
     'index' => 'api.categories.index',
-    'store'  => 'api.categories.store',
+    'store' => 'api.categories.store',
     'update' => 'api.categories.update',
     'destroy' => 'api.categories.destroy',
 ]);

@@ -18,7 +18,7 @@ import ImagesUpload from "../ImagesUpload"
 import {mapActions, mapGetters} from "vuex"
 
 export default {
-    name: "Brands",
+    name: "Clients",
     components: {ImagesUpload},
     data() {
         return {

@@ -18,6 +18,7 @@
         "escape-string-regexp": "^2.0.0",
         "gsap": "^3.8.0",
         "js-cookie": "^3.0.1",
+        "jw-vue-pagination": "^1.0.3",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "mustache": "^4.2.0",

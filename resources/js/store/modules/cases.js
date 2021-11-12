@@ -19,12 +19,10 @@ const actions = {
     },
 
     createCases({commit}, data) {
-        console.log(1)
         commit('prependOne', data)
     },
 
     updateCases({commit}, data) {
-        console.log(2)
         commit('updateOne', data)
     },
 
@@ -42,7 +40,6 @@ const mutations = {
         if (index > -1)
             state.casesUnsort.splice(index, 1, updatedCases);
     },
-    removeOne: (state, id) => state.casesUnsort = state.casesUnsort.filter(cases => cases.id !== id),
     setLoading: state => state.loading = true
 }
 

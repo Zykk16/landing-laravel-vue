@@ -6,9 +6,7 @@
             <Banner id="about"/>
 
             <!-- Cases -->
-            <div id="cases" class="cases my">
-                <h1>Кейсы</h1>
-            </div>
+            <Cases id="cases"/>
 
             <!-- Advantages -->
             <Advantages id="advantages"/>
@@ -35,10 +33,11 @@ import Formats from "./blocks/Formats";
 import Clients from "./blocks/Clients";
 import Header from "./Header";
 import ContactForm from "./blocks/ContactForm";
+import Cases from "./blocks/Cases";
 
 export default {
     name: "Main",
-    components: {ContactForm, Header, Clients, Formats, Footer, Banner, Advantages, Button}
+    components: {Cases, ContactForm, Header, Clients, Formats, Footer, Banner, Advantages, Button}
 }
 </script>
 

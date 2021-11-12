@@ -1,11 +1,6 @@
 <?php
 
 return [
-    \App\Models\ApplicationCategories::class => [
-        ['id' => 1, 'name' => 'Агентство'],
-        ['id' => 2, 'name' => 'Рекламодатель'],
-        ['id' => 3, 'name' => 'Вебмастер']
-    ],
     \App\Models\CategoriesCases::class => [
         ['id' => 1, 'name' => 'Авто'],
         ['id' => 2, 'name' => 'Фарма'],

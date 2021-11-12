@@ -337,7 +337,7 @@ export default {
 
         @include small-desktop {
             bottom: 300px;
-            right: -40px;
+            right: -10px;
         }
 
         @include tablet {

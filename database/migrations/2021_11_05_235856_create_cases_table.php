@@ -49,6 +49,9 @@ class CreateCasesTable extends Migration
      */
     public function down()
     {
+        Schema::table('cases', function (Blueprint $table) {
+            $table->dropForeign('cases_category_id_foreign');
+        });
         Schema::dropIfExists('cases');
     }
 }

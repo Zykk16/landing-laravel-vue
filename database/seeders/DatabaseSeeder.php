@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            CoreDataSeeder::class,
+            ApplicationsCategoriesSeeder::class,
+//            CategoriesCasesSeeder::class,
             UserSeeder::class
         ]);
     }

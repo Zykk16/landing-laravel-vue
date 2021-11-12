@@ -7,7 +7,7 @@ use App\Models\CategoriesCases;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
-class CoreDataSeeder extends Seeder
+class ApplicationsCategoriesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,11 +16,9 @@ class CoreDataSeeder extends Seeder
      */
     public function run()
     {
-        foreach (config('core_data') as $class => $contents) {
-            foreach ($contents as $model)
-                ApplicationCategories::updateOrCreate(['id' => $model['id']], $model);
+        foreach (config('applications_categories') as $class => $contents) {
             foreach ($contents as $model) {
-                CategoriesCases::updateOrCreate(['id' => $model['id']], $model);
+                ApplicationCategories::updateOrCreate(['id' => $model['id']], $model);
             }
         }
     }

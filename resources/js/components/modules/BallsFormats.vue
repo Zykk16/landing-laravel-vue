@@ -131,7 +131,7 @@ export default {
 
         @include tablet {
             top: 390px;
-            right: -80px;
+            right: -10px;
             left: auto;
         }
 

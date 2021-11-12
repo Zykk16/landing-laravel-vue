@@ -82,4 +82,15 @@ class CasesController extends Controller
 
         return asset("storage/uploads/" . $filename);
     }
+
+    /**
+     * @param $id
+     * @return CasesResources
+     */
+    public function show(Cases $case): CasesResources
+    {
+        $case->load(["category"]);
+
+        return new CasesResources($case);
+    }
 }

@@ -32,6 +32,8 @@ export default {
         selectTab(i) {
             this.selectedIndex = i
 
+            this.$emit('indexTab', this.selectedIndex)
+
             this.tabs.forEach((tab, index) => {
                 tab.isActive = (index === i)
             })

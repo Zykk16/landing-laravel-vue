@@ -21,6 +21,8 @@ class CreateApplicationsTable extends Migration
             $table->text('message');
             $table->integer('category')->unsigned()->nullable();
             $table->timestamps();
+
+            $table->foreign('category')->references('id')->on('application_categories')->onDelete('cascade');
         });
     }
 
@@ -31,6 +33,9 @@ class CreateApplicationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact_forms');
+        Schema::table('applications', function (Blueprint $table) {
+            $table->dropForeign('applications_category_foreign');
+        });
+        Schema::dropIfExists('applications');
     }
 }

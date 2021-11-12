@@ -1,7 +1,13 @@
 <template>
-    <div class="image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-        <span v-if="!imageData" class="placeholder">Choose an Image</span>
-        <input class="file-input" ref="fileInput" type="file" @input="onSelectFile" accept="image/*">
+    <div>
+        <div v-if="imageData" class="image-input" @click="chooseImage">
+            <img :src="imageData" alt="">
+            <input class="file-input" ref="fileInput" type="file" @input="onSelectFile" accept="image/*">
+        </div>
+        <div v-else class="image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+            <span v-if="!imageData" class="placeholder">Choose an Image</span>
+            <input class="file-input" ref="fileInput" type="file" @input="onSelectFile" accept="image/*">
+        </div>
     </div>
 </template>
 
@@ -20,13 +26,6 @@ export default {
         }
     },
 
-    watch: {
-        "cover"(newValue) {
-            if (newValue !== "") {
-                this.imageData = newValue;
-            }
-        }
-    },
 
     methods: {
         chooseImage() {

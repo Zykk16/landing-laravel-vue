@@ -6,7 +6,7 @@
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
-                    label="Search"
+                    label="Найти по таблице"
                     single-line
                     hide-details
                 ></v-text-field>
@@ -24,21 +24,18 @@
                 </template>
                 <template v-slot:top>
                     <v-toolbar flat>
-                        <v-toolbar-title>Cases</v-toolbar-title>
+                        <v-toolbar-title>Кейсы</v-toolbar-title>
                         <v-divider class="mx-4" inset vertical></v-divider>
                         <v-spacer></v-spacer>
-
                         <case-create @send="sendItem"/>
                         <case-edit v-if="openEditCase"
                                    :data="form"
                                    :openEditCase="openEditCase"
                                    @close="closeDialog"
                                    @send="sendItem"/>
-
                         <v-dialog v-model="dialogDelete" max-width="500px">
                             <v-card>
-                                <v-card-title class="text-h5 delete-title">Действительно удалить?
-                                </v-card-title>
+                                <v-card-title class="text-h5 delete-title">Действительно удалить?</v-card-title>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <template>
@@ -61,9 +58,9 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
-import CaseCreate from "./CaseCreate";
-import CaseEdit from "./CaseEdit";
+import {mapActions, mapGetters} from "vuex"
+import CaseCreate from "./CaseCreate"
+import CaseEdit from "./CaseEdit"
 
 export default {
     name: "CasesAdmin",
@@ -75,10 +72,10 @@ export default {
             search: '',
             form: [],
             headers: [
-                {text: 'Бренд', sortable: false, value: 'logo'},
-                {text: 'Клиент', value: 'title'},
+                {text: 'Изображение', sortable: false, value: 'logo'},
+                {text: 'Название', value: 'title'},
                 {text: 'Категория', value: 'category_id.name'},
-                {text: 'Actions', value: 'actions', sortable: false},
+                {value: 'actions', sortable: false},
             ],
             editedIndex: -1,
             filters: {
@@ -159,21 +156,13 @@ export default {
 
         customSort(items, index, isDesc) {
             items.sort((a, b) => {
-                if (index === "date") {
-                    if (!isDesc) {
-                        return dateHelp.compare(a.date, b.date);
-                    } else {
-                        return dateHelp.compare(b.date, a.date);
-                    }
+                if (!isDesc) {
+                    return a[index] < b[index] ? -1 : 1
                 } else {
-                    if (!isDesc) {
-                        return a[index] < b[index] ? -1 : 1;
-                    } else {
-                        return b[index] < a[index] ? -1 : 1;
-                    }
+                    return b[index] < a[index] ? -1 : 1
                 }
-            });
-            return items;
+            })
+            return items
         },
 
         sendItem() {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoriesCasesResources;
 use App\Models\CategoriesCases;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -28,45 +29,40 @@ class CategoriesCasesController extends Controller
 
     /**
      * @param Request $request
-     * @return AnonymousResourceCollection
+     * @return bool
      */
-    public function store(Request $request): AnonymousResourceCollection
+    public function store(Request $request, CategoriesCases $category)
     {
-        $request->validate(['names' => 'required']);
-        $categoriesNames = explode(',', $request->get('names'));
-        $categoriesSaved = CategoriesCases::register($categoriesNames);
+        $request->validate(['name' => ['required', 'string', 'min:3', 'max:255']]);
+        $category->name = $request->name;
 
-        return CategoriesCasesResources::collection($categoriesSaved);
+        return $category->save();
     }
 
     /**
      * @param Request $request
      * @param CategoriesCases $category
-     * @return CategoriesCasesResources
+     * @return JsonResponse
      */
-    public function update(Request $request, CategoriesCases $category): CategoriesCasesResources
+    public function update(Request $request): JsonResponse
     {
-        $request->validate(["name" => "required|max:255"]);
+        $category = CategoriesCases::find($request->id);
+        $category->update($request->all());
 
-        if ($request->name !== $category->name) {
-            $request->validate(["name" => "unique:categories"]);
-        }
-
-        $category->update([
-            "name" => $request->name,
+        return response()->json([
+            'message' => 'Category Updated Successfully!!',
+            'category' => $category
         ]);
-
-        return new CategoriesCasesResources($category);
     }
 
     /**
-     * @param CategoriesCases $category
+     * @param $id
      * @return JsonResponse
      */
-    public function destroy(CategoriesCases $category): JsonResponse
+    public function destroy($id): JsonResponse
     {
-        $category->delete();
+        CategoriesCases::destroy($id);
 
-        return response()->json([], 204);
+        return response()->json(['Category delete'], 204);
     }
 }

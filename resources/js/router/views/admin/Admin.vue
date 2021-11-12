@@ -1,7 +1,7 @@
 <template>
     <v-app class="admin-panel">
         <v-card>
-            <v-navigation-drawer app v-model="drawer">
+            <v-navigation-drawer app v-model="drawer" permanent>
                 <v-list-item class="px-2">
                     <v-list-item-title>{{ user.name }}</v-list-item-title>
                 </v-list-item>
@@ -24,7 +24,7 @@
                 </v-list>
                 <template v-slot:append>
                     <div class="pa-2">
-                        <v-btn block depressed rounded elevation="2" href="/">Back to site</v-btn>
+                        <v-btn block depressed rounded elevation="2" href="/">На главную</v-btn>
                     </div>
                 </template>
             </v-navigation-drawer>
@@ -49,11 +49,12 @@ export default {
             user: this.$store.state.auth.user,
             drawer: true,
             items: [
-                {title: 'Dashboard', href: '/admin', icon: 'mdi-monitor-dashboard'},
-                {title: 'Applications', href: '/admin/applications', icon: 'mdi-email-outline'},
-                {title: 'Cases', href: '/admin/cases', icon: 'mdi-briefcase-variant-outline'},
-                {title: 'Clients', href: '/admin/brands', icon: 'mdi-human-handsup'},
-                {title: 'Users', href: '/admin/users', icon: 'mdi-account'},
+                {title: 'Дашборд', href: '/admin', icon: 'mdi-monitor-dashboard'},
+                {title: 'Заявки', href: '/admin/applications', icon: 'mdi-email-outline'},
+                {title: 'Кейсы', href: '/admin/cases', icon: 'mdi-briefcase-variant-outline'},
+                {title: 'Категории', href: '/admin/category', icon: 'mdi-shape-outline'},
+                {title: 'Клиенты', href: '/admin/clients', icon: 'mdi-human-handsup'},
+                {title: 'Пользователи', href: '/admin/users', icon: 'mdi-account'},
             ],
         }
     },

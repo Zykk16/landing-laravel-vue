@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @property integer id
  * @property integer category_id
@@ -55,6 +56,13 @@ class Cases extends Model
         'depth',
         'duration_session',
         'objectives',
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'created_at' => 'datetime:d.m.y',
     ];
 
     /**
