@@ -1,5 +1,5 @@
 <template>
-    <div class="contact my blur">
+    <div :class="['contact my blur', success ? 'disable-icon' : '']">
         <div v-if="!success">
             <h2>У Вас остались вопросы?</h2>
             <p>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с нами. <br
@@ -26,11 +26,11 @@
             </div>
 
             <div class="contact-form-group select-dropdown">
-                <select v-model="fields.category">
-                    <option disabled value="">Являюсь представителем:</option>
+                <select v-model="fields.category" class="minimal">
+                    <option disabled selected value="">Являюсь представителем: </option>
                     <option v-for="(category, key) in categories"
                             :key="key" :value="category.id">
-                        {{category.name}}
+                        {{ category.name }}
                     </option>
                 </select>
             </div>
@@ -44,7 +44,10 @@
 
             <button type="submit" class="button">Отправить заявку</button>
         </form>
-        <div v-else class="sent-message">
+        <div v-else class="send-message">
+            <a class="cross-back" @click="success = false">
+                <img src="../../../img/svg/cross.svg" alt="">
+            </a>
             <h1 class="gradient-h1">Заявка успешно отправлена, менеджер свяжется с Вами в ближайшее время!</h1>
         </div>
     </div>
@@ -90,6 +93,7 @@ export default {
                 }
             })
         },
+
         onResize() {
             this.screen = window.innerWidth >= 1440;
         }

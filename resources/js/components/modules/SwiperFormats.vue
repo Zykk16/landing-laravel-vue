@@ -61,13 +61,13 @@ export default {
     max-width: 100vw;
 
     @include huge-mobile {
-        left: 0;
+        left: -20px;
         width: 100vw;
         padding: 0;
     }
 
     @include mobile-max {
-        left: 0;
+        left: -20px;
         width: 100vw;
         padding: 0;
     }
