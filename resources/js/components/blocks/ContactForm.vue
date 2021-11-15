@@ -1,10 +1,12 @@
 <template>
     <div :class="['contact my', success ? 'disable-icon' : '']">
         <form v-if="!success" class="contact-form blur" @submit.prevent="submit">
-            <h2>У Вас остались вопросы?</h2>
-            <p>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с нами. <br
-                v-if="screen">
-                Отвечаем оперативно.</p>
+            <div class="contact-form-info">
+                <h2>У Вас остались вопросы?</h2>
+                <p>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с нами.
+                    <br v-if="screen">Отвечаем оперативно.
+                </p>
+            </div>
             <div class="contact-form-group">
                 <input type="text" :class="['field', errors && errors.name ? 'field-error' : '']"
                        name="name" id="name" v-model="fields.name"
@@ -26,7 +28,7 @@
             <div class="contact-form-group select-dropdown">
                 <select v-model="fields.category" class="minimal"
                         :class="['field', errors && errors.category ? 'field-error' : '']">
-                    <option value="" disabled>Являюсь представителем: </option>
+                    <option value="" disabled>Являюсь представителем:</option>
                     <option v-for="(category, key) in categories"
                             :key="key" :value="category.id">
                         {{ category.name }}
