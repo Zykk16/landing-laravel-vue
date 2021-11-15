@@ -63,6 +63,14 @@ export default {
     display: inline-block;
     width: 100%;
     min-height: 400px;
+
+    @include mobile {
+        min-height: 300px;
+    }
+
+    @include mobile-max {
+        min-height: 300px;
+    }
 }
 
 .tabs li {

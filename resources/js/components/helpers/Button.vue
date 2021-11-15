@@ -64,7 +64,7 @@ export default {
     }
 
     &.mobile {
-        margin-left: calc(-10% - 0.5em);
+        margin-left: calc(0% - 0.5em);
     }
 }
 </style>

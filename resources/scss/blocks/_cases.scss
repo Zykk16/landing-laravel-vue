@@ -1,26 +1,21 @@
 .cases {
+    position: relative;
     width: auto;
+    margin-top: 10em;
 
     @include mobile {
         height: 650px;
+        margin-top: 5em;
     }
 
     @include mobile-max {
         height: 650px;
+        margin-top: 2.5em;
     }
 
     h1 {
-        margin-top: 4.6em;
         text-align: center;
         color: $black;
-
-        @include mobile {
-            margin-top: 2.5em;
-        }
-
-        @include mobile-max {
-            margin-top: 2.5em;
-        }
     }
 
     &-items {
@@ -68,7 +63,8 @@
             }
 
             &-image {
-                max-width: 340px;
+                min-width: 120px;
+                max-width: 160px;
                 margin-bottom: 2.5em;
 
                 img {
@@ -186,6 +182,7 @@
 }
 
 .case {
+    position: relative;
     margin: 10em 7.5em;
 
     @include small-desktop {
@@ -196,20 +193,20 @@
     }
 
     @include mobile {
-        margin: 3.75em 2.125em 7.5em 2.125em;
+        margin: 7.5em 2.125em 7.5em 2.125em;
     }
 
     @include mobile-max {
-        margin: 2.5em 1.25em 5em 1.25em;
+        margin: 5em 1.25em 5em 1.25em;
     }
 
     &-wrapper {
         position: relative;
-        background: rgba(255, 255, 255, 0.22);
         border: 1px solid #EEEEEE;
         box-sizing: border-box;
         border-radius: 46px;
         padding: 5em 10em;
+        z-index: 9;
 
         @include small-desktop {
             padding: 5em 2.5em;
@@ -230,7 +227,7 @@
         img {
             display: flex;
             justify-content: center;
-            max-width: 300px;
+            max-width: 186px;
             margin: 0 auto 5em;
         }
 
@@ -386,6 +383,7 @@
             position: absolute;
             top: 15px;
             right: 15px;
+            cursor: pointer;
 
             img {
                 width: 30px;

@@ -10,13 +10,14 @@
     }
 
     h1 {
-        margin-bottom: 2.6em;
+        margin-top: 3em;
+        margin-bottom: 2.5em;
         text-align: center;
         font-size: 35px;
         color: $black;
 
         @include tablet {
-            margin-bottom: 2.6em;
+            margin-bottom: 2.5em;
         }
 
         @include mobile {

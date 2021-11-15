@@ -6,7 +6,7 @@
             <h2>Otclick ADV</h2>
             <p>Мы используем свой стек технологий, собственные аудиторные данные и многолетний опыт работы для
                 того, чтобы рекламные кампании проходили качественно и эффективно.</p>
-            <Button width="100px" text="Заказать услугу"/>
+            <Button url="#" scroll-to="#contactForm" width="100px" text="Заказать услугу"/>
         </div>
         <div class="banner-wrapper banner-sphere">
             <div class="banner-sphere-advantages item-1 blur">Более 10 000 проведенных рекламных кампаний</div>

@@ -12,7 +12,7 @@
                 </li>
             </ul>
         </nav>
-        <Button url="#" scroll-to="contactForm" :width="screen ? 'auto' : '115px'" :mobile="screen" text="Связаться со мной"/>
+        <Button url="#" scroll-to="#contactForm" :width="screen ? 'auto' : '115px'" :mobile="screen" text="Связаться со мной"/>
         <MobileMenu v-if="screen" :menu="menu"/>
         <router-link class="login blur" to="/admin">Admin</router-link>
     </header>

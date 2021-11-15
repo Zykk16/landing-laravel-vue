@@ -14,7 +14,7 @@
                         <a href="#" v-scroll-to="item.url">{{ item.name }}</a>
                     </li>
                 </ul>
-                <Button width="115px" text="Связаться со мной"/>
+                <Button url="#" scroll-to="#contactForm" width="115px" text="Связаться со мной"/>
             </div>
         </transition>
     </div>

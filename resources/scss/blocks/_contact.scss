@@ -2,29 +2,13 @@
     position: relative;
     margin-top: 14em;
     margin-bottom: 8.125em;
-    padding: 5em 10em;
-    background: rgba(252, 98, 0, 0.06);
-    border-radius: 46px;
-
-    @include small-desktop {
-        padding: 5em 6.25em;
-    }
-
-    @include tablet {
-        margin-top: 12.5em;
-        padding: 3.75em;
-    }
 
     @include mobile {
-        padding: 3.75em 1.875em;
-    }
-
-    @include huge-mobile {
-        padding: 2.5em 1.875em;
+        margin-top: 7em;
     }
 
     @include mobile-max {
-        padding: 2.5em 1.875em;
+        margin-top: 7em;
     }
 
     h2 {
@@ -86,6 +70,31 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+
+        padding: 5em 10em;
+        background: rgba(252, 98, 0, 0.06);
+        border-radius: 46px;
+
+        @include small-desktop {
+            padding: 5em 6.25em;
+        }
+
+        @include tablet {
+            margin-top: 12.5em;
+            padding: 3.75em;
+        }
+
+        @include mobile {
+            padding: 3.75em 1.875em;
+        }
+
+        @include huge-mobile {
+            padding: 2.5em 1.875em;
+        }
+
+        @include mobile-max {
+            padding: 2.5em 1.875em;
+        }
 
         &-group {
             flex: 0 0 49%;
@@ -207,6 +216,26 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        padding: 10em;
+        box-sizing: border-box;
+        border-radius: inherit;
+
+        @include tablet {
+            padding: 7em 5em;
+        }
+
+        @include mobile {
+            padding: 7em 5em;
+        }
+
+        @include huge-mobile {
+            padding: 5em 2.5em;
+
+        }
+
+        @include mobile-max {
+            padding: 5em 2.5em;
+        }
 
         h1 {
             width: 90%;
@@ -220,8 +249,8 @@
 
         .cross-back {
             position: absolute;
-            top: -60px;
-            right: -140px;
+            top: 30px;
+            right: 30px;
         }
     }
 
@@ -250,15 +279,23 @@
         @include huge-mobile {
             width: 130px;
             height: 130px;
+            margin-left: auto;
+            margin-right: auto;
             top: -60px;
-            right: 35%;
+            left: 0;
+            right: 0;
+            text-align: center;
         }
 
         @include mobile-max {
             width: 130px;
             height: 130px;
+            margin-left: auto;
+            margin-right: auto;
             top: -60px;
-            right: 28%;
+            left: 0;
+            right: 0;
+            text-align: center;
         }
     }
 

@@ -2,8 +2,8 @@
     <div>
         <Header/>
         <main role="main" v-if="data">
-            <div class="case blur">
-                <div class="case-wrapper">
+            <div class="case">
+                <div class="case-wrapper blur">
                     <a class="cross-back" @click="backHome">
                         <img src="../../../img/svg/cross.svg" alt="">
                     </a>
@@ -118,6 +118,7 @@
                         </div>
                     </div>
                 </div>
+                <BallsCase :balls="balls"/>
             </div>
         </main>
         <Footer/>
@@ -127,14 +128,26 @@
 <script>
 import Header from "../Header";
 import Footer from "../Footer";
+import BallsCase from "../modules/BallsCase";
 
 export default {
     name: "Case",
-    components: {Footer, Header},
+    components: {BallsCase, Footer, Header},
     props: ['test'],
     data() {
         return {
-            data: this.$route.params.data
+            data: this.$route.params.data,
+            balls: [
+                {className: 'ballOne', img: 'ball-1'},
+                {className: 'ballTwo', img: 'ball-2'},
+                {className: 'ballThree', img: 'ball-2'},
+                {className: 'ballFour', img: 'ball-2'},
+                {className: 'ballFifth', img: 'ball-2'},
+                {className: 'ballSixth', img: 'ball-1'},
+                {className: 'ballSeventh', img: 'ball-2'},
+                {className: 'ballEighth', img: 'ball-2'},
+                {className: 'ballNinth', img: 'ball-1'},
+            ]
         }
     },
 

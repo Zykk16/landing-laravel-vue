@@ -1,72 +1,97 @@
 .clients {
+    position: relative;
+
     h1 {
+        margin-top: 5em;
         text-align: center;
         color: $black;
+
+        @include mobile-max {
+            margin-top: 2.5em;
+        }
     }
 
     &-wrapper {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        margin-top: 5.625em;
+        margin-top: 5em;
+
+        @include mobile-max {
+            margin-top: 2.5em;
+        }
     }
 
     &-item {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex: 0 0 15.18%;
-        height: 13.2vw;
-        margin-bottom: 1.875em;
-        background: rgba(255, 255, 255, 0.22);
+        flex: 0 0 15%;
+        margin-bottom: 2.5em;
         border: 1px solid #EEEEEE;
         box-sizing: border-box;
         border-radius: 46px;
 
-        @include medium-desktop {
-            flex: 0 0 14.70%;
-            height: 12.23vw;
-        }
-
         @include small-desktop {
-            flex: 0 0 14.70%;
-            height: 12.23vw;
+            flex: 0 0 18%;
         }
-
+        //
         @include tablet {
-            flex: 0 0 14.70%;
-            height: 12.23vw;
+            flex: 0 0 18%;
         }
 
         @include mobile {
-            flex: 0 0 14.70%;
-            height: 12.23vw;
+            flex: 0 0 30%;
+            border-radius: 22px;
         }
-
+        //
         @include mobile-max {
-            flex: 0 0 14.70%;
-            height: 12.23vw;
+            flex: 0 0 48%;
+            border-radius: 22px;
+            margin-bottom: 1.125em;
         }
 
         &-image {
-            max-width: 180px;
-            width: 10vw;
-            height: auto;
+            //padding: 3.5em 2.6em;
+            //width: 7vw;
+            //height: 7vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 200px;
+            padding: 20%;
+            //max-width: 180px;
+            //width: 10vw;
+            //height: auto;
 
-            @include small-desktop {
-                width: 7vw;
-            }
-
-            @include tablet {
-                width: 7vw;
-            }
-
+            //@include small-desktop {
+            //    width: 7vw;
+            //}
+            //
+            //@include tablet {
+            //    max-width: 120px;
+            //    height: 50px;
+            //    padding: 1em;
+            //}
+            //
             @include mobile {
-                width: 7vw;
+                padding: 10%;
+                height: 20vw;
             }
 
             @include mobile-max {
-                width: 7vw;
+                padding: 10%;
+                height: 30vw;
+            }
+
+            img {
+                @include mobile {
+                    width: 80%;
+                }
+
+                @include mobile-max {
+                    width: 80%;
+                }
             }
         }
     }

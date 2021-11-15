@@ -3,42 +3,40 @@
         <h1>Кейсы</h1>
         <tabs v-if="!screen" @indexTab="activeTabs">
             <tab :title="item" v-for="(item, i) in getCategoryTabs" :key="i">
-                <div>
-                    <div class="cases-items">
-                        <router-link class="item blur" v-for="(item, key) in pageOfItems" :key="key"
-                                     :to="{ name: 'case', params: {id: item.id, data: item}}">
-                            <div class="item-image">
-                                <img :src="item.image" :alt="item.title">
-                            </div>
-                            <h4 class="item-audience">Аудитория</h4>
-                            <div class="item-audience-wrapper">
-                                <div v-if="item.age" class="stats">Возраст: {{ item.age }};</div>
-                                <div v-if="item.income" class="stats">Доход: {{ item.income }};</div>
-                                <div v-if="item.goal" class="stats">Доход: {{ item.goal }};</div>
-                            </div>
+                <div class="cases-items">
+                    <router-link class="item blur" v-for="(item, key) in pageOfItems" :key="key"
+                                 :to="{ name: 'case', params: {id: item.id, data: item}}">
+                        <div class="item-image">
+                            <img :src="item.image" :alt="item.title">
+                        </div>
+                        <h4 class="item-audience">Аудитория</h4>
+                        <div class="item-audience-wrapper">
+                            <div v-if="item.age" class="stats">Возраст: {{ item.age }};</div>
+                            <div v-if="item.income" class="stats">Доход: {{ item.income }};</div>
+                            <div v-if="item.goal" class="stats">Доход: {{ item.goal }};</div>
+                        </div>
 
-                            <div class="item-wrapper-indicators">
-                                <div class="indicator">
-                                    <h4 class="indicator-title">Клики</h4>
-                                    <div class="indicator-value gradient-h1">{{ item.clicks }}</div>
-                                </div>
-                                <div class="indicator">
-                                    <h4 class="indicator-title">CTR</h4>
-                                    <div class="indicator-value gradient-h1">{{ item.ctr }}</div>
-                                </div>
-                                <div class="indicator">
-                                    <h4 class="indicator-title">Показы</h4>
-                                    <div class="indicator-value gradient-h1">{{ item.shows }}</div>
-                                </div>
-                                <div class="indicator">
-                                    <h4 class="indicator-title">Охват</h4>
-                                    <div class="indicator-value gradient-h1">{{ item.coverage }}</div>
-                                </div>
+                        <div class="item-wrapper-indicators">
+                            <div class="indicator">
+                                <h4 class="indicator-title">Клики</h4>
+                                <div class="indicator-value gradient-h1">{{ item.clicks }}</div>
                             </div>
-                        </router-link>
-                    </div>
-                    <jw-pagination :items="sortCasesByTabs" @changePage="onChangePage" :pageSize="3"/>
+                            <div class="indicator">
+                                <h4 class="indicator-title">CTR</h4>
+                                <div class="indicator-value gradient-h1">{{ item.ctr }}</div>
+                            </div>
+                            <div class="indicator">
+                                <h4 class="indicator-title">Показы</h4>
+                                <div class="indicator-value gradient-h1">{{ item.shows }}</div>
+                            </div>
+                            <div class="indicator">
+                                <h4 class="indicator-title">Охват</h4>
+                                <div class="indicator-value gradient-h1">{{ item.coverage }}</div>
+                            </div>
+                        </div>
+                    </router-link>
                 </div>
+                <jw-pagination ref="pagination" :items="sortCasesByTabs" @changePage="onChangePage" :pageSize="6"/>
             </tab>
         </tabs>
         <tabs v-else @indexTab="activeTabs">
@@ -80,6 +78,7 @@
                 </div>
             </tab>
         </tabs>
+        <BallsCases :balls="balls"/>
     </div>
 </template>
 
@@ -90,10 +89,11 @@ import {mapActions, mapGetters} from "vuex"
 import {Swiper, SwiperSlide, directive} from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import JwPagination from 'jw-vue-pagination'
+import BallsCases from "../modules/BallsCases";
 
 export default {
     name: "Cases",
-    components: {Tabs, Tab, Swiper, SwiperSlide, JwPagination},
+    components: {BallsCases, Tabs, Tab, Swiper, SwiperSlide, JwPagination},
     data() {
         return {
             screen: false,
@@ -103,7 +103,14 @@ export default {
                 slidesPerView: "auto",
                 centeredSlides: true,
                 spaceBetween: 20,
-            }
+            },
+            balls: [
+                {className: 'ballOne', img: 'ball-2'},
+                {className: 'ballTwo', img: 'ball-1'},
+                {className: 'ballThree', img: 'ball-2'},
+                {className: 'ballFour', img: 'ball-2'},
+                {className: 'ballFifth', img: 'ball-2'},
+            ]
         }
     },
 
@@ -121,7 +128,7 @@ export default {
         },
 
         getCategoryTabs() {
-            return [...new Set(this.cases.map(a => a.category_id.name))]
+            return [...new Set(this.cases.map(a => a.category_id.name).sort())]
         },
 
         sortCasesByTabs() {
@@ -141,6 +148,7 @@ export default {
         activeTabs(i) {
             this.activeTab = i
         },
+
         onChangePage(pageOfItems) {
             this.pageOfItems = pageOfItems;
         }
@@ -157,6 +165,8 @@ export default {
     mounted() {
         this.onResize()
         this.getCases()
+
+        this.pageOfItems && this.pageOfItems.length <= 6 ? this.$refs.pagination[0].$el.classList.add('disabled') : ''
     }
 }
 </script>
@@ -168,7 +178,7 @@ export default {
     position: absolute;
     left: -83px;
     padding-bottom: 3.125rem;
-    padding-left: 6rem;
+    padding-left: 4rem;
     max-width: 97vw;
 
     @include mobile-max {

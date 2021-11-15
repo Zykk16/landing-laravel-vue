@@ -1,12 +1,10 @@
 <template>
-    <div :class="['contact my blur', success ? 'disable-icon' : '']">
-        <div v-if="!success">
+    <div :class="['contact my', success ? 'disable-icon' : '']">
+        <form v-if="!success" class="contact-form blur" @submit.prevent="submit">
             <h2>У Вас остались вопросы?</h2>
             <p>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с нами. <br
                 v-if="screen">
                 Отвечаем оперативно.</p>
-        </div>
-        <form v-if="!success" class="contact-form" @submit.prevent="submit">
             <div class="contact-form-group">
                 <input type="text" :class="['field', errors && errors.name ? 'field-error' : '']"
                        name="name" id="name" v-model="fields.name"
@@ -26,8 +24,9 @@
             </div>
 
             <div class="contact-form-group select-dropdown">
-                <select v-model="fields.category" class="minimal">
-                    <option disabled selected value="">Являюсь представителем: </option>
+                <select v-model="fields.category" class="minimal"
+                        :class="['field', errors && errors.category ? 'field-error' : '']">
+                    <option value="" disabled>Являюсь представителем: </option>
                     <option v-for="(category, key) in categories"
                             :key="key" :value="category.id">
                         {{ category.name }}
@@ -44,12 +43,13 @@
 
             <button type="submit" class="button">Отправить заявку</button>
         </form>
-        <div v-else class="send-message">
+        <div v-else class="send-message blur">
             <a class="cross-back" @click="success = false">
                 <img src="../../../img/svg/cross.svg" alt="">
             </a>
             <h1 class="gradient-h1">Заявка успешно отправлена, менеджер свяжется с Вами в ближайшее время!</h1>
         </div>
+        <BallsContactForm :balls="balls"/>
     </div>
 </template>
 
@@ -57,16 +57,24 @@
 import Button from "../helpers/Button"
 import MaskedInput from 'vue-masked-input'
 import {mapActions, mapGetters} from "vuex";
+import BallsContactForm from "../modules/BallsContactForm";
 
 export default {
     name: "ContactForm",
-    components: {Button, MaskedInput},
+    components: {BallsContactForm, Button, MaskedInput},
     data() {
         return {
-            fields: {},
+            fields: {
+                category: ''
+            },
             errors: {},
             success: false,
-            screen: false
+            screen: false,
+            balls: [
+                {className: 'ballOne', img: 'ball-2'},
+                {className: 'ballTwo', img: 'ball-1'},
+                {className: 'ballThree', img: 'ball-2'}
+            ]
         }
     },
 
@@ -84,13 +92,15 @@ export default {
         submit() {
             this.success = false
             this.errors = {}
-            axios.post('/api/contact', this.fields).then(response => {
+            axios.post('/api/contact', this.fields).then(() => {
                 this.fields = {}
                 this.success = true
             }).catch(error => {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors || {}
                 }
+            }).finally(() => {
+                this.fields.category = ''
             })
         },
 

@@ -127,4 +127,23 @@ img {
             display: none !important;
         }
     }
+
+    &.disabled {
+        display: none !important;
+    }
+}
+
+.ballOne,
+.ballTwo,
+.ballThree,
+.ballFour,
+.ballFifth,
+.ballSixth,
+.ballSeventh,
+.ballEighth {
+    pointer-events: none;
+}
+
+.cross-back {
+    cursor: pointer;
 }
