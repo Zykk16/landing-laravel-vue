@@ -63,26 +63,50 @@
                 border: 1px solid #EEEEEE;
                 box-sizing: border-box;
                 border-radius: 46px;
-                padding: 1.563em 17%;
+                padding: 1.125em 10% 0;
 
                 @include small-desktop {
-                    padding: 1.563em 5%;
+                    padding: 1.125em 5% 0;
                 }
 
                 @include tablet {
-                    padding: 1.563em 5%;
+                    padding: 1.125em 5% 0;
                 }
 
                 @include mobile {
-                    padding: 1.563em 10%;
+                    padding: 1.125em 5% 0;
                 }
 
                 @include huge-mobile {
-                    padding: 1.563em 10%;
+                    padding: 1.125em 5% 0;
                 }
 
                 @include mobile-max {
-                    padding: 1.563em 10%;
+                    padding: 1.125em 5% 0;
+                }
+
+                &.mobile {
+                    padding: 1.125em 30% 0;
+
+                    @include small-desktop {
+                        padding: 1.125em 28% 0;
+                    }
+
+                    @include tablet {
+                        padding: 1.125em 28% 0;
+                    }
+
+                    @include mobile {
+                        padding: 1.125em 28% 0;
+                    }
+
+                    @include huge-mobile {
+                        padding: 1.125em 28% 0;
+                    }
+
+                    @include mobile-max {
+                        padding: 1.125em 28% 0;
+                    }
                 }
             }
 

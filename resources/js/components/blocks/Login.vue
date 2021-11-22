@@ -65,16 +65,16 @@ export default {
             signIn: 'auth/login'
         }),
         async login() {
-            this.loading = true
-            await axios.get('/sanctum/csrf-cookie')
-            await axios.post('/login', this.auth).then(() => {
-                this.signIn()
+            await this.signIn(this.auth).then(() => {
+                this.$router.replace({name: 'admin'})
+                setTimeout(() => {
+                    location.reload()
+                }, 500)
             }).catch(({response: {data}}) => {
                 this.errors.email = data.errors.email ? data.errors.email[0] : ''
                 this.errors.password = data.errors.password ? data.errors.password[0] : ''
-            }).finally(() => {
-                this.loading = false
             })
+
         }
     }
 }

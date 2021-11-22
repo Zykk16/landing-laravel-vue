@@ -15,7 +15,7 @@
             <tab title="In-app">
                 <div class="items">
                     <div class="item" v-for="(item, key) in inApp" :key="key">
-                        <div class="image-wrapper">
+                        <div class="image-wrapper blur mobile">
                             <img :src="imagePath(item.img)" :alt="item.title">
                         </div>
                         <div class="title">{{ item.title }}</div>
@@ -31,7 +31,7 @@
             </tab>
             <tab title="In-app">
                 <div class="items">
-                    <SwiperFormats :array="inApp"/>
+                    <SwiperFormats :in-app="'mobile'" :array="inApp"/>
                 </div>
             </tab>
         </tabs>
@@ -59,8 +59,11 @@ export default {
                 {img: 'in-stream', title: 'In-stream'},
             ],
             inApp: [
-                {img: 'out-stream', title: 'Out-stream'},
-                {img: 'in-stream', title: 'In-stream'},
+                {img: 'standard-banner_mobile', title: 'Стандартный баннер'},
+                {img: 'fullscreen_mobile', title: 'Fullscreen'},
+                {img: 'playable-ads_mobile', title: 'Playable Ads'},
+                {img: 'video_mobile', title: 'Видео'},
+                {img: 'native_mobile', title: 'Native'},
             ],
             balls: [
                 {className: 'ballOne', img: 'ball-2'},
@@ -72,7 +75,7 @@ export default {
 
     methods: {
         imagePath(icon) {
-            return require('../../../img/blocks/banners/' + icon + '.png')
+            return require('../../../img/blocks/banners/' + icon + '.svg')
         },
         onResize() {
             this.screen = window.innerWidth <= 467;

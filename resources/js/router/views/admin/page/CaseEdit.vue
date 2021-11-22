@@ -14,6 +14,22 @@
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
                                 <v-text-field v-model="form.title" label="Клиент"></v-text-field>
+                                <v-row>
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-select
+                                            v-if="statuses"
+                                            :items="statuses"
+                                            item-text="name"
+                                            item-value="id"
+                                            value="id"
+                                            label="Статус"
+                                            :error="errors.has('status_id')"
+                                            :error-messages="errors.get('status_id')"
+                                            @change="errors.clear('status_id')"
+                                            v-model="form.status_id">
+                                        </v-select>
+                                    </v-col>
+                                </v-row>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
                                 <v-select :items="categories"
@@ -33,7 +49,7 @@
                                 <v-text-field v-model="form.placement_format" label="Формат размещения"></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="form.period" label="Период компании"></v-text-field>
+                                <v-text-field v-model="form.period" label="Период кампании"></v-text-field>
                             </v-col>
                         </v-row>
                         <v-card-title class="pl-0">Аудитория</v-card-title>
@@ -119,7 +135,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            categories: 'categories_cases/categories'
+            categories: 'categories_cases/categories',
+            statuses: 'cases/statuses'
         })
     },
 
@@ -127,11 +144,13 @@ export default {
         ...mapActions({
             updateCases: 'cases/updateCases',
             getCategories: 'categories_cases/getCategories',
+            getStatuses: 'cases/getStatuses'
         }),
 
         setForm() {
             this.form = {
                 category_id: this.data.category_id.id,
+                status_id: this.data.status_id,
                 image: this.data.image ?? null,
                 title: this.data.title,
                 goal: this.data.goal ?? '',
@@ -168,6 +187,7 @@ export default {
 
             let formData = new FormData()
             formData.append('category_id', this.form.category_id)
+            formData.append('status_id', this.form.status_id)
             formData.append('image', this.form.image)
             formData.append('title', this.form.title)
             formData.append('goal', this.form.goal)
@@ -203,7 +223,6 @@ export default {
 
                     if (formErrors) {
                         this.errors.record(formErrors)
-                        console.log(this.errors)
                     }
                 })
         },
@@ -219,6 +238,7 @@ export default {
 
     created() {
         this.getCategories()
+        this.getStatuses()
     }
 }
 </script>

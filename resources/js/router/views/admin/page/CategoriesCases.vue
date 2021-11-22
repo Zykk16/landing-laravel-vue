@@ -13,7 +13,9 @@
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="500px">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">New Item</v-btn>
+                        <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
+                            <span class="new-default-admin-button">Новая категория</span>
+                        </v-btn>
                     </template>
                     <v-card>
                         <v-card-title>
@@ -23,7 +25,11 @@
                             <v-container>
                                 <v-row>
                                     <v-col cols="12">
-                                        <v-text-field v-model="editedItem.name" label="Название"></v-text-field>
+                                        <v-text-field v-model="editedItem.name" label="Название"
+                                                      :error="errors.has('name')"
+                                                      :error-messages="errors.get('name')"
+                                                      @input="errors.clear('name')">
+                                        </v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -59,12 +65,14 @@
 <script>
 import {mapActions, mapGetters} from "vuex"
 import Form from "../../../../utils/Form"
+import Errors from "../../../../utils/Errors";
 
 export default {
     name: "CategoriesCases",
     data: () => ({
         dialog: false,
         dialogDelete: false,
+        errors: new Errors(),
         headers: [
             {text: 'ID', align: 'start', sortable: false, value: 'id'},
             {text: 'Имя', value: 'name', width: '80%'},
@@ -100,7 +108,7 @@ export default {
         }),
 
         formTitle() {
-            return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+            return this.editedIndex === -1 ? 'Новая категория' : 'Изменить категорию'
         },
     },
 
@@ -157,16 +165,29 @@ export default {
                 this.updateCategory({id: this.editedItem.id, data: this.editedItem}).then(() => {
                     this.getCategory()
                     this.close()
+                }).catch(error => {
+                    let {data} = error.response
+
+                    if (data) {
+                        this.errors.record(data)
+                    }
                 })
             } else {
                 axios.post('/api/categories_cases', formData).then((data) => {
                     this.createCategory(data)
                     this.getCategory()
                     this.close()
+                }).catch(error => {
+                    let {data} = error.response
+
+                    if (data) {
+                        this.errors.record(data)
+                    }
                 })
             }
         },
     },
+
     created() {
         this.getCategory()
     }

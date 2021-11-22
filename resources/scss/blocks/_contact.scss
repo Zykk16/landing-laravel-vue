@@ -12,6 +12,8 @@
     }
 
     h2 {
+        line-height: 40px;
+
         @include mobile {
             font-size: 28px;
         }
@@ -212,6 +214,7 @@
         &-info {
             display: flex;
             flex-direction: column;
+            margin-bottom: 2.5em;
         }
     }
 

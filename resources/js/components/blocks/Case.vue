@@ -133,7 +133,6 @@ import BallsCase from "../modules/BallsCase";
 export default {
     name: "Case",
     components: {BallsCase, Footer, Header},
-    props: ['test'],
     data() {
         return {
             data: this.$route.params.data,
@@ -157,9 +156,9 @@ export default {
         },
 
         init() {
-            axios.get('/api/cases/' + this.$route.params.id)
+            axios.get('/api/cases/' + this.$route.params.slug)
                 .then(response => {
-                    this.data = response.data.data
+                    this.data = response.data
                 }).finally(() => {
                 document.title = this.data.title
             })

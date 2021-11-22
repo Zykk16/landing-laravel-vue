@@ -1,5 +1,5 @@
 <template>
-    <v-app class="admin-panel">
+    <v-app class="admin-panel" v-if="authenticated">
         <v-card>
             <v-navigation-drawer app v-model="drawer" permanent>
                 <v-list-item class="px-2">
@@ -39,14 +39,13 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import 'vuetify/dist/vuetify.min.css'
 
 export default {
     name: 'Admin',
     data() {
         return {
-            user: this.$store.state.auth.user,
             drawer: true,
             items: [
                 {title: 'Дашборд', href: '/admin', icon: 'mdi-monitor-dashboard'},
@@ -54,13 +53,22 @@ export default {
                 {title: 'Кейсы', href: '/admin/cases', icon: 'mdi-briefcase-variant-outline'},
                 {title: 'Категории', href: '/admin/category', icon: 'mdi-shape-outline'},
                 {title: 'Клиенты', href: '/admin/clients', icon: 'mdi-human-handsup'},
-                {title: 'Пользователи', href: '/admin/users', icon: 'mdi-account'},
+                // {title: 'Пользователи', href: '/admin/users', icon: 'mdi-account'},
             ],
         }
     },
+
+    computed: {
+        ...mapGetters({
+            authenticated: 'auth/authenticated',
+            user: 'auth/user'
+        })
+    },
+
     methods: {
         ...mapActions({
-            signOut: "auth/logout"
+            getUser: 'auth/me',
+            signOut: 'auth/logout'
         }),
 
         // async logout() {
@@ -69,6 +77,10 @@ export default {
         //         this.$router.push({name: "login"})
         //     })
         // }
+    },
+
+    mounted() {
+        this.getUser()
     }
 }
 </script>
@@ -139,5 +151,10 @@ $font-family: 'ArtegraSoft-Medium', sans-serif;
             }
         }
     }
+}
+
+.vue-notification {
+    font-size: 18px;
+    margin: 5px;
 }
 </style>

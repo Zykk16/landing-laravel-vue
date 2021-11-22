@@ -1,7 +1,7 @@
 <template>
     <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="(item, key) in array" :key="key" class="item">
-            <div class="image-wrapper blur">
+            <div class="image-wrapper blur" :class="inApp">
                 <img :src="imagePath(item.img)" :alt="item.title">
             </div>
             <div class="title">{{ item.title }}</div>
@@ -16,7 +16,8 @@ import 'swiper/css/swiper.css'
 export default {
     name: "SwiperFormats",
     props: {
-        array: Array
+        array: Array,
+        inApp: String
     },
     components: {
         Swiper,
@@ -40,7 +41,7 @@ export default {
 
     methods: {
         imagePath(icon) {
-            return require('../../../img/blocks/banners/' + icon + '.png')
+            return require('../../../img/blocks/banners/' + icon + '.svg')
         }
     },
 

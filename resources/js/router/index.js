@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -24,10 +23,10 @@ const routes = [
         component: Main,
         name: 'main',
         meta: {
-            title: 'Otclick-ADV Платформа эффективного онлайн-маркетинга', middleware: 'guest'
+            title: 'Otclick-ADV Платформа эффективного онлайн-маркетинга'
         }
     },
-    {path: '/case/:id', name: 'case', component: Case, props: true},
+    {path: '/case/:slug', name: 'case', component: Case, props: true},
     {
         path: '/admin', component: Admin, name: 'admin', meta: {title: 'Дашборд', middleware: 'auth'},
         children: [
@@ -50,20 +49,13 @@ const routes = [
                 name: 'admin.category',
                 meta: {title: 'Категории', middleware: 'auth'}
             },
-            {
-                path: 'users',
-                component: Users,
-                name: 'admin.users',
-                meta: {title: 'Пользователи', middleware: 'auth'}
-            }
-        ],
-        beforeEnter: (to, from, next) => {
-            if (store.state.auth.authenticated) {
-                next()
-            } else {
-                next({name: 'login'})
-            }
-        }
+            // {
+            //     path: 'users',
+            //     component: Users,
+            //     name: 'admin.users',
+            //     meta: {title: 'Пользователи', middleware: 'auth'}
+            // }
+        ]
     },
     {path: '/login', component: Login, name: 'login', meta: {title: 'Авторизация', middleware: 'guest'}},
     {path: '/register', component: Register, name: 'register', meta: {title: 'Регистрация', middleware: 'guest'}},
@@ -77,7 +69,10 @@ const routes = [
 
 const router = new VueRouter({
     mode: 'history',
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        return {x: 0, y: 0}
+    }
 })
 
 router.afterEach((to, from) => {

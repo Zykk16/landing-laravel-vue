@@ -2,10 +2,8 @@
     <div :class="['contact my', success ? 'disable-icon' : '']">
         <form v-if="!success" class="contact-form blur" @submit.prevent="submit">
             <div class="contact-form-info">
-                <h2>У Вас остались вопросы?</h2>
-                <p>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с нами.
-                    <br v-if="screen">Отвечаем оперативно.
-                </p>
+                <h2>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с
+                    нами.</h2>
             </div>
             <div class="contact-form-group">
                 <input type="text" :class="['field', errors && errors.name ? 'field-error' : '']"
@@ -14,7 +12,8 @@
             </div>
 
             <div class="contact-form-group">
-                <masked-input mask="\+\7 (111) 111-11-11" placeholder="Номер телефона" @input="errors.phone = ''"
+                <masked-input :mask="'\\+\\' + country + ' (111) 111-11-11'" placeholder="Номер телефона"
+                              @input="errors.phone = ''"
                               v-model="fields.phone" name="phone" id="phone"
                               :class="['field', errors && errors.phone ? 'field-error' : '']"/>
             </div>
@@ -40,7 +39,6 @@
                 <textarea :class="['field', errors && errors.message ? 'field-error' : '']" v-model="fields.message"
                           placeholder="Комментарий" @input="errors.message = ''"></textarea>
             </div>
-
             <p class="personal-data">Отправляя данные, Вы даете согласие на обработку своих персональных данных</p>
 
             <button type="submit" class="button">Отправить заявку</button>
@@ -56,10 +54,10 @@
 </template>
 
 <script>
-import Button from "../helpers/Button"
+import Button from '../helpers/Button'
 import MaskedInput from 'vue-masked-input'
-import {mapActions, mapGetters} from "vuex";
-import BallsContactForm from "../modules/BallsContactForm";
+import {mapActions, mapGetters} from 'vuex'
+import BallsContactForm from '../modules/BallsContactForm'
 
 export default {
     name: "ContactForm",
@@ -76,7 +74,8 @@ export default {
                 {className: 'ballOne', img: 'ball-2'},
                 {className: 'ballTwo', img: 'ball-1'},
                 {className: 'ballThree', img: 'ball-2'}
-            ]
+            ],
+            country: ''
         }
     },
 
@@ -108,6 +107,13 @@ export default {
 
         onResize() {
             this.screen = window.innerWidth >= 1440;
+        },
+
+        async inputMaskCountry() {
+            await axios.get('/api/sypexgeo')
+                .then(request => {
+                    this.country = request.data.country.phone
+                })
         }
     },
 
@@ -122,6 +128,7 @@ export default {
     mounted() {
         this.getCategories()
         this.onResize()
+        this.inputMaskCountry()
     }
 }
 </script>

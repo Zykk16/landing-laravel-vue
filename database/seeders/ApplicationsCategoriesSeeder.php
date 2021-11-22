@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\ApplicationCategories;
-use App\Models\CategoriesCases;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
 class ApplicationsCategoriesSeeder extends Seeder

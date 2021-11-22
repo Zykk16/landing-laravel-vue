@@ -41,10 +41,6 @@ export default {
         deleteImage(id) {
             this.delete(id).finally(() => {
                 this.getClients()
-                // this.$notify({
-                //     text: `Вакансия ${id} успешно удалена.`,
-                //     type: 'success'
-                // })
             })
         },
         handlerInput(id, orderId) {

@@ -3,18 +3,19 @@
               @submit.prevent>
         <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                <span class="new-case-button">Новый кейс</span>
+                <span class="new-default-admin-button">Новый кейс</span>
             </v-btn>
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5 new-case-title">Новый кейс</span>
+                <span class="text-h5 new-case-title">Создание кейса</span>
             </v-card-title>
             <v-card-text>
-                <v-form @submit.prevent>
+                <v-form ref="formStore" @submit.prevent>
                     <v-container>
                         <v-row>
                             <v-col cols="12" sm="6" md="4">
+                                {{form.image}}
                                 <cases-image-uploader :cover="form.image" @loaded="updateImage"
                                                       @preloadImg="errorHandlerImage = true"/>
                                 <div v-if="!errorHandlerImage">
@@ -28,17 +29,35 @@
                                               :error="errors.has('title')"
                                               :error-messages="errors.get('title')"
                                               label="Клиент" @input="errors.clear('title')"></v-text-field>
+                                    <v-row>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-select
+                                                v-if="statuses"
+                                                :items="statuses"
+                                                item-text="name"
+                                                item-value="id"
+                                                value="id"
+                                                label="Статус"
+                                                :error="errors.has('status_id')"
+                                                :error-messages="errors.get('status_id')"
+                                                @change="errors.clear('status_id')"
+                                                v-model="form.status_id">
+                                            </v-select>
+                                        </v-col>
+                                    </v-row>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
-                                <v-select :items="categories"
-                                          item-text="name"
-                                          item-value="id"
-                                          value="id"
-                                          label="Категория"
-                                          :error="errors.has('category_id')"
-                                          :error-messages="errors.get('category_id')"
-                                          @change="errors.clear('category_id')"
-                                          v-model="form.category_id">
+                                <v-select
+                                    v-if="categories"
+                                    :items="categories"
+                                    item-text="name"
+                                    item-value="id"
+                                    value="id"
+                                    label="Категория"
+                                    :error="errors.has('category_id')"
+                                    :error-messages="errors.get('category_id')"
+                                    @change="errors.clear('category_id')"
+                                    v-model="form.category_id">
                                 </v-select>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
@@ -59,7 +78,7 @@
                             <v-col cols="12" sm="6" md="4">
                                 <v-text-field
                                     v-model="form.period"
-                                    label="Период компании"></v-text-field>
+                                    label="Период кампании"></v-text-field>
                             </v-col>
                         </v-row>
                         <v-card-title class="pl-0">Аудитория</v-card-title>
@@ -168,6 +187,7 @@ export default {
             errorHandlerImage: false,
             form: {
                 category_id: '',
+                status_id: '',
                 logo: '',
                 title: '',
                 goal: '',
@@ -194,13 +214,15 @@ export default {
 
     computed: {
         ...mapGetters({
-            categories: 'categories_cases/categories'
+            categories: 'categories_cases/categories',
+            statuses: 'cases/statuses'
         })
     },
 
     methods: {
         ...mapActions({
             createCases: 'cases/createCases',
+            getStatuses: 'cases/getStatuses',
             getCategories: 'categories_cases/getCategories',
         }),
 
@@ -217,6 +239,7 @@ export default {
 
             let formData = new FormData();
             formData.append('category_id', this.form.category_id)
+            formData.append('status_id', this.form.status_id)
             formData.append('image', this.form.logo)
             formData.append('title', this.form.title)
             formData.append('goal', this.form.goal)
@@ -247,6 +270,9 @@ export default {
                     this.createCases(data);
                     this.$emit('send')
                     this.dialogCreate = false
+
+                    this.$refs.formStore.reset()
+                    this.form.logo = ''
                 })
                 .catch(error => {
                     let {data} = error.response
@@ -256,14 +282,11 @@ export default {
                     }
                 })
         }
+    },
+
+    mounted() {
+        this.getCategories()
+        this.getStatuses()
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.new-case-button {
-    text-transform: none;
-    letter-spacing: 0;
-    font: 14px/18px "ArtegraSoft-Bold", sans-serif;
-}
-</style>

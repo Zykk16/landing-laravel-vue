@@ -18,6 +18,8 @@ class CasesResources extends JsonResource
         return [
             'id'                => $this->id,
             'category_id'       => new CategoriesCasesResources($this->category),
+            'status_id'         => $this->status_id,
+            'slug'              => $this->slug,
             'image'             => $this->image,
             'title'             => $this->title,
             'goal'              => $this->goal,
@@ -38,7 +40,8 @@ class CasesResources extends JsonResource
             'depth'             => $this->depth,
             'duration_session'  => $this->duration_session,
             'objectives'        => $this->objectives,
-            'created_at'        => $this->created_at
+            'created_at'        => $this->created_at,
+            'updated_at'        => $this->updated_at
         ];
     }
 }

@@ -2,12 +2,14 @@ import request from '../../utils/Request'
 
 const state = {
     cases: {},
+    statuses: {},
     casesUnsort: [],
     loading: false
 }
 
 const getters = {
     cases: state => state.cases,
+    statuses: state => state.statuses,
     loading: state => state.loading
 }
 
@@ -16,6 +18,11 @@ const actions = {
         const {data} = await request.get('/api/cases')
         commit('setCases', data.data)
         commit('setLoading')
+    },
+
+    async getStatuses({commit}) {
+        const {data} = await request.get('/api/statuses')
+        commit('setStatus', data)
     },
 
     createCases({commit}, data) {
@@ -33,6 +40,7 @@ const actions = {
 
 const mutations = {
     setCases: (state, cases) => state.cases = cases,
+    setStatus: (state, statuses) => state.statuses = statuses,
     prependOne: (state, cases) => state.casesUnsort.unshift(cases),
     updateOne: (state, updatedCases) => {
         const index = state.casesUnsort.findIndex(cases => cases.id === updatedCases.id);

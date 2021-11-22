@@ -12,11 +12,6 @@ use Illuminate\Support\Str;
 
 class CategoriesCasesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('api')->only(['store', 'update', 'destroy']);
-    }
-
     /**
      * @return AnonymousResourceCollection
      */

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property integer id
  * @property integer category_id
+ * @property integer status_id
  * @property string image
  * @property string title
  * @property string goal
@@ -36,6 +37,8 @@ class Cases extends Model
 {
     protected $fillable = [
         'category_id',
+        'status_id',
+        'slug',
         'image',
         'title',
         'goal',
@@ -62,8 +65,14 @@ class Cases extends Model
      * @var string[]
      */
     protected $casts = [
-        'created_at' => 'datetime:d.m.y',
+        'created_at' => 'encrypted:Y-m-d H:i:s',
+        'updated_at' => 'encrypted:Y-m-d H:i:s'
     ];
+
+//    public function getRouteKeyName()
+//    {
+//        return "slug";
+//    }
 
     /**
      * @return BelongsTo

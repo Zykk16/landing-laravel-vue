@@ -27,6 +27,8 @@ class CasesRequest extends FormRequest
 
         $rules = [
             'category_id' => ['required', 'string'],
+            'status_id' => ['required'],
+            'slug' => ['nullable'],
             'image' => ['nullable'],
             'title' => ['required', 'string', 'min:2', 'max:255'],
             'goal' => ['nullable'],
@@ -71,6 +73,8 @@ class CasesRequest extends FormRequest
     {
         return $this->only([
             'category_id',
+            'status_id',
+            'slug',
             'image',
             'title',
             'goal',

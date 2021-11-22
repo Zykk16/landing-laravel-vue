@@ -8,15 +8,12 @@ use App\Http\Resources\CasesResources;
 use App\Models\Cases;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CasesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware("api")->only(["store", "update", "destroy"]);
-    }
-
     /**
      * @return CasesCollection
      */
@@ -33,8 +30,9 @@ class CasesController extends Controller
     {
         $data = $request->data();
 
-        $data["image"] = $this->uploadImage($request->file("image"));
+        $data['image'] = $this->uploadImage($request->file('image'));
 
+        $data['slug'] = Str::slug($data['title']);
         $case = Cases::create($data);
 
         return new CasesResources($case);
@@ -55,6 +53,8 @@ class CasesController extends Controller
             $data['image'] = $this->uploadImage($request->file('image'));
         }
 
+        $case->slug = Str::slug($case->title);
+        $case->updated_at = Carbon::now();
         $case->update($data);
 
         return new CasesResources($case);
@@ -84,13 +84,14 @@ class CasesController extends Controller
     }
 
     /**
-     * @param $id
-     * @return CasesResources
+     * @param Cases $case
+     * @return JsonResponse
      */
-    public function show(Cases $case): CasesResources
+    public function show($case): JsonResponse
     {
-        $case->load(["category"]);
+//        $case->load(["category"]);
+        $data = Cases::with('category')->where('slug', $case)->get();
 
-        return new CasesResources($case);
+        return response()->json($data[0]);
     }
 }

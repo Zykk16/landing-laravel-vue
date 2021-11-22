@@ -74,6 +74,22 @@
             margin-bottom: 1.25em;
             font: normal 18px/23px 'ArtegraSoft-Bold', sans-serif;
             color: $red;
+
+            @include small-desktop {
+                height: 45px;
+            }
+
+            @include tablet {
+                height: 45px;
+            }
+
+            @include mobile {
+                height: 45px;
+            }
+
+            @include mobile-max {
+                height: 45px;
+            }
         }
 
         &-description {

@@ -31,7 +31,6 @@ class ApplicationsController extends Controller
             'email' => 'required|email',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'category' => 'required',
-            'message' => 'required',
         ]);
 
         Applications::create($request->all());

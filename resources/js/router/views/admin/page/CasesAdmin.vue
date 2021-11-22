@@ -19,8 +19,8 @@
                 item-key="id"
                 class="elevation-1"
                 :item-class="rowClass">
-                <template v-slot:item.logo="{ item }">
-                    <img class="image-brand-backend" :src="item.image" alt="">
+                <template v-slot:item.status_id="{ item }">
+                    <div v-if="loading">{{ statusHandler(item.status_id) }}</div>
                 </template>
                 <template v-slot:top>
                     <v-toolbar flat>
@@ -72,22 +72,26 @@ export default {
             search: '',
             form: [],
             headers: [
-                {text: 'Изображение', sortable: false, value: 'logo'},
-                {text: 'Название', value: 'title'},
+                {text: 'ID', value: 'id'},
+                {text: 'Название клиента', value: 'title'},
                 {text: 'Категория', value: 'category_id.name'},
+                {text: 'Дата создания', value: 'created_at'},
+                {text: 'Дата обновления', value: 'updated_at'},
+                {text: 'Статус', value: 'status_id'},
                 {value: 'actions', sortable: false},
             ],
             editedIndex: -1,
             filters: {
                 category_id: [],
             },
-            delete: ''
+            delete: '',
         }
     },
 
     watch: {
         loading() {
             this.getCases()
+            this.getStatuses()
         },
         dialog(val) {
             val || this.close()
@@ -100,6 +104,7 @@ export default {
     computed: {
         ...mapGetters({
             cases: 'cases/cases',
+            statuses: 'cases/statuses',
             loading: 'cases/loading'
         }),
 
@@ -118,7 +123,14 @@ export default {
         ...mapActions({
             deleteCases: 'cases/remove',
             getCases: 'cases/getCases',
+            getStatuses: 'cases/getStatuses'
         }),
+
+        statusHandler(status) {
+            if (this.loading) {
+                return this.statuses.find(e => e.id === status).name
+            }
+        },
 
         editItem(item) {
             this.editedIndex = this.cases.indexOf(item)
@@ -180,15 +192,11 @@ export default {
     },
 
     mounted() {
+        this.getStatuses()
         this.getCases()
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.image-brand-backend {
-    width: 100px;
-    height: auto;
-    padding: 1em;
-}
 </style>

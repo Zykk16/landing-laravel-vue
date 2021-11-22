@@ -25,14 +25,7 @@ class StoreOrUpdatePositionRequest extends FormRequest
     {
         return [
             'file' => 'required|mimes:jpg,jpeg,png,svg|max:2048',
-            'category' => 'required|string',
-//            'name'         => ['required', 'string', 'min:3', 'max:255'],
-//            'url'          => ['required', 'url', 'max:255'],
-//            'category_id'  => ['required', 'integer', 'exists:categories,id' ],
-//            'email'        => ['required', 'string', 'min:3', 'max:255', new Emails()],
-//            'location_id'  => ['nullable', 'integer', 'exists:locations,id'],
-//            'project_id'   => ['nullable', 'integer', 'exists:projects,id'],
-//            'is_archived'   => ['boolean']
+            'category' => 'required|string'
         ];
     }
 
@@ -41,14 +34,6 @@ class StoreOrUpdatePositionRequest extends FormRequest
         return [
             'file.required' => 'Прежде чем отправить изображение, необходимо его добавить',
             'file.mimes' => 'Поддерживает форматы - jpg,jpeg,png,svg'
-//            'name.required'        => 'Это поле обязательно для заполнения.',
-//            'name.min'             => 'Слишком короткое название вакансии.',
-//            'name.max'             => 'Слишком длинное название вакансии.',
-//            'category_id.required' => 'Категория обязательна для заполнения.',
-//            'email.required'       => 'Это поле обязательно для заполнения.',
-//            'email.min'            => 'Слишком короткий email.',
-//            'url.required'         => 'Это поле обязательно для заполнения.',
-//            'url.url'              => 'Введите валидный URL.',
         ];
     }
 }

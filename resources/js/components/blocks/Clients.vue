@@ -1,5 +1,5 @@
 <template>
-    <div class="clients my">
+    <div v-if="clients.length >= 1" class="clients my">
         <h1>Нам доверяют</h1>
         <div class="clients-wrapper">
             <div class="clients-item blur" v-for="(item, key) in clients" :key="key">

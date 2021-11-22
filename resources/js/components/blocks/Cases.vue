@@ -1,19 +1,25 @@
 <template>
-    <div v-if="cases" class="cases my">
+    <div v-if="cases.length >= 1" class="cases my">
         <h1>Кейсы</h1>
         <tabs v-if="!screen" @indexTab="activeTabs">
             <tab :title="item" v-for="(item, i) in getCategoryTabs" :key="i">
                 <div class="cases-items">
                     <router-link class="item blur" v-for="(item, key) in pageOfItems" :key="key"
-                                 :to="{ name: 'case', params: {id: item.id, data: item}}">
+                                 :to="{ name: 'case', params: {slug: item.slug, data: item}}">
                         <div class="item-image">
                             <img :src="item.image" :alt="item.title">
                         </div>
                         <h4 class="item-audience">Аудитория</h4>
                         <div class="item-audience-wrapper">
+                            <div v-if="item.gender" class="stats">Возраст: {{ item.gender }};</div>
                             <div v-if="item.age" class="stats">Возраст: {{ item.age }};</div>
                             <div v-if="item.income" class="stats">Доход: {{ item.income }};</div>
-                            <div v-if="item.goal" class="stats">Доход: {{ item.goal }};</div>
+                            <div v-if="item.goal" class="stats">Цель: {{ item.goal }};</div>
+                            <div class="stats" v-show="readMore"></div>
+                            <div class="read-more" @click.prevent="readMore =! readMore">
+                                <div class="hidden" v-if="readMore">свернуть</div>
+                                <div class="more" v-else>...подробнее</div>
+                            </div>
                         </div>
 
                         <div class="item-wrapper-indicators">
@@ -44,15 +50,16 @@
                 <div class="cases-items">
                     <swiper ref="mySwiper" :options="swiperOptions">
                         <swiper-slide class="item blur" v-for="(item, key) in sortCasesByTabs" :key="key"
-                                      @click.native="$router.push({ name: 'case', params: {id: item.id, data: item}})">
+                                      @click.native="$router.push({ name: 'case', params: {slug: item.slug, data: item}})">
                             <div class="item-image">
                                 <img :src="item.image" :alt="item.title">
                             </div>
                             <h4 class="item-audience">Аудитория</h4>
                             <div class="item-audience-wrapper">
+                                <div v-if="item.gender" class="stats">Возраст: {{ item.gender }};</div>
                                 <div v-if="item.age" class="stats">Возраст: {{ item.age }};</div>
                                 <div v-if="item.income" class="stats">Доход: {{ item.income }};</div>
-                                <div v-if="item.goal" class="stats">Доход: {{ item.goal }};</div>
+                                <div v-if="item.goal" class="stats">Цель: {{ item.goal }};</div>
                             </div>
 
                             <div class="item-wrapper-indicators">
@@ -99,6 +106,7 @@ export default {
             screen: false,
             activeTab: 0,
             pageOfItems: [],
+            readMore: false,
             swiperOptions: {
                 slidesPerView: "auto",
                 centeredSlides: true,
@@ -150,7 +158,7 @@ export default {
         },
 
         onChangePage(pageOfItems) {
-            this.pageOfItems = pageOfItems;
+            this.pageOfItems = pageOfItems.filter(e => e.status_id === 1)
         }
     },
 
@@ -166,7 +174,12 @@ export default {
         this.onResize()
         this.getCases()
 
-        this.pageOfItems && this.pageOfItems.length <= 6 ? this.$refs.pagination[0].$el.classList.add('disabled') : ''
+        // this.cases.length >= 1 &&
+        setTimeout(() => {
+            if (this.$refs.pagination) {
+                this.pageOfItems.length <= 6 ? this.$refs.pagination[0].$el.classList.add('disabled') : ''
+            }
+        }, 500)
     }
 }
 </script>
