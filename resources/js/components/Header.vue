@@ -17,7 +17,7 @@
         <Button url="#" scroll-to="#contactForm"
                 :id="'another-button'"
                 @click.native.prevent="backToHome('another-button')"
-                :width="screen ? 'auto' : '115px'"
+                :width="screen ? 'auto' : '120px'"
                 :mobile="screen" text="Связаться со мной"/>
         <MobileMenu v-if="screen" :menu="menu"/>
     </header>

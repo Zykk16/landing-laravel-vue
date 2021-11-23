@@ -16,7 +16,7 @@
                 </div>
                 <Checkbox options="Запомнить меня"/>
                 <div class="remind" @click="remindPassword = !remindPassword">Напомнить пароль</div>
-                <Button :text="loading ? 'Загрузка...' : 'Авторизоваться'" width="100px" @click.native="login"/>
+                <Button :text="loading ? 'Загрузка...' : 'Авторизоваться'" width="105px" @click.native="login"/>
             </form>
             <RemindPassword v-else @sendRemind="remindPassword = false"/>
         </div>

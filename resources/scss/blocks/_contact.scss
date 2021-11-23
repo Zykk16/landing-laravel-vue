@@ -120,6 +120,7 @@
                 font: 14px/20px "Inter-Regular", sans-serif;
                 outline: none;
                 color: $gray-input;
+                -webkit-appearance: none;
 
                 &.field-error {
                     border-color: $red;
