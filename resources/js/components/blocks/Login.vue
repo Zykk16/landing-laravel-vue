@@ -15,6 +15,7 @@
                     <span v-if="errors.password" class="error">{{ errors.password }}</span>
                 </div>
                 <Checkbox options="Запомнить меня"/>
+                <div class="remind register" @click="$router.push('/registration')">Регистрация</div>
                 <div class="remind" @click="remindPassword = !remindPassword">Напомнить пароль</div>
                 <Button :text="loading ? 'Загрузка...' : 'Авторизоваться'" width="105px" @click.native="login"/>
             </form>
@@ -66,10 +67,10 @@ export default {
         }),
         async login() {
             await this.signIn(this.auth).then(() => {
-                this.$router.replace({name: 'admin'})
-                setTimeout(() => {
-                    location.reload()
-                }, 500)
+                // this.$router.replace({name: 'admin'})
+                // setTimeout(() => {
+                //     location.reload()
+                // }, 500)
             }).catch(({response: {data}}) => {
                 this.errors.email = data.errors.email ? data.errors.email[0] : ''
                 this.errors.password = data.errors.password ? data.errors.password[0] : ''

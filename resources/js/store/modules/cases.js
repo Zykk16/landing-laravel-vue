@@ -2,6 +2,7 @@ import request from '../../utils/Request'
 
 const state = {
     cases: {},
+    casesAll: {},
     statuses: {},
     casesUnsort: [],
     loading: false
@@ -9,6 +10,7 @@ const state = {
 
 const getters = {
     cases: state => state.cases,
+    casesAll: state => state.casesAll,
     statuses: state => state.statuses,
     loading: state => state.loading
 }
@@ -17,6 +19,12 @@ const actions = {
     async getCases({commit}) {
         const {data} = await request.get('/api/cases')
         commit('setCases', data.data)
+        commit('setLoading')
+    },
+
+    async getCasesAll({commit}) {
+        const {data} = await request.get('/api/cases-all')
+        commit('setCasesAll', data)
         commit('setLoading')
     },
 
@@ -40,6 +48,7 @@ const actions = {
 
 const mutations = {
     setCases: (state, cases) => state.cases = cases,
+    setCasesAll: (state, casesAll) => state.casesAll = casesAll,
     setStatus: (state, statuses) => state.statuses = statuses,
     prependOne: (state, cases) => state.casesUnsort.unshift(cases),
     updateOne: (state, updatedCases) => {

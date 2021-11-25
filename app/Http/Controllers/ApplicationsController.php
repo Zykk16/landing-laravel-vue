@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applications;
+use App\Rules\Emails;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -28,7 +29,7 @@ class ApplicationsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => ['required', 'string', 'min:3', 'max:255', new Emails()],
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'category' => 'required',
         ]);

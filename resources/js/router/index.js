@@ -16,6 +16,7 @@ import CasesAdmin from './views/admin/page/CasesAdmin'
 import CategoriesCases from './views/admin/page/CategoriesCases'
 import Clients from './views/admin/page/Clients'
 import Users from "./views/admin/page/Users"
+import LoginAdmin from "../components/blocks/LoginAdmin";
 
 const routes = [
     {
@@ -57,8 +58,9 @@ const routes = [
             // }
         ]
     },
-    {path: '/login', component: Login, name: 'login', meta: {title: 'Авторизация', middleware: 'guest'}},
-    {path: '/register', component: Register, name: 'register', meta: {title: 'Регистрация', middleware: 'guest'}},
+    {path: '/login', component: Login, name: 'login', meta: {title: 'Авторизация'}},
+    {path: '/login-admin', component: LoginAdmin, name: 'login-admin', meta: {title: 'Авторизация', middleware: 'guest'}},
+    {path: '/registration', component: Register, name: 'registration', meta: {title: 'Регистрация', middleware: 'guest'}},
     {
         path: '/privacy-policy',
         component: PrivacyPolicy,

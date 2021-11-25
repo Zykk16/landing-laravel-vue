@@ -2,10 +2,11 @@
     <div>
         <Header/>
         <div class="register-container registr my blur">
-            <form v-if="!successRegister" action="javascript:void(0)" class="login-form" method="post">
+            <form ref="register" v-if="!successRegister" action="javascript:void(0)" class="login-form" method="post">
                 <h1>Регистрация</h1>
                 <div class="form-group">
                     <input type="text" v-model="user.name" class="form-control blur" placeholder="Логин"
+                           @keypress="isLetter($event)"
                            :class="[errors.name ? 'error-field' : '']" @input="errors.name = ''">
                     <span v-if="errors.name" class="error">{{ errors.name }}</span>
                 </div>
@@ -23,6 +24,7 @@
                     <input type="password" v-model="user.password_confirmation"
                            class="form-control blur" placeholder="Подтверждение пароля"
                            :class="[errors.password_confirmation ? 'error-field' : '']"
+                           name="password_confirmation"
                            @input="errors.password_confirmation = ''">
                     <span v-if="errors.password_confirmation" class="error">{{ errors.password_confirmation }}</span>
                 </div>
@@ -30,7 +32,8 @@
                 <Button
                     :text="loading ? 'Загрузка...' : 'Зарегистрироваться'"
                     width="120px"
-                    @click.native="successRegister = !successRegister"/> <!-- todo: нужно добавить метод register чтобы воспроизвести регистрацию -->
+                    @click.native="register"/>
+                <!-- todo: нужно добавить successRegister = !successRegister чтобы воспроизвести регистрацию -->
             </form>
             <SuccessRegisterMessage v-else @success="successRegister = false"/>
         </div>
@@ -79,14 +82,26 @@ export default {
     },
 
     methods: {
-        ...mapActions({
-            signIn: 'auth/login'
-        }),
+        // ...mapActions({
+        //     signIn: 'auth/login'
+        // }),
+
+        isLetter(e) {
+            let char = String.fromCharCode(e.keyCode)
+
+            if (/^[A-Za-z]+$/.test(char)) {
+                return true
+            } else {
+                e.preventDefault()
+            }
+        },
 
         async register() {
             this.loading = true
             await axios.post('/register', this.user).then(() => {
-                this.signIn()
+                // this.signIn()
+                this.$refs.register.reset()
+                this.successRegister = !this.successRegister
             }).catch(({response: {data}}) => {
                 this.errors.name = data.errors.name ? data.errors.name[0] : ''
                 this.errors.email = data.errors.email ? data.errors.email[0] : ''

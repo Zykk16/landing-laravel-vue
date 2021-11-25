@@ -22,6 +22,13 @@ class CasesController extends Controller
         return new CasesCollection(Cases::all());
     }
 
+    public function frontendCases(): JsonResponse
+    {
+        $cases = Cases::with('category')->where('status_id', 1)->get();
+
+        return response()->json($cases);
+    }
+
     /**
      * @param CasesRequest $request
      * @return CasesResources
@@ -30,9 +37,10 @@ class CasesController extends Controller
     {
         $data = $request->data();
 
-        $data['image'] = $this->uploadImage($request->file('image'));
+        if (!is_string($data['image'])) {
+            $data['image'] = $this->uploadImage($request->file('image'));
+        }
 
-        $data['slug'] = Str::slug($data['title']);
         $case = Cases::create($data);
 
         return new CasesResources($case);
@@ -89,7 +97,7 @@ class CasesController extends Controller
      */
     public function show($case): JsonResponse
     {
-//        $case->load(["category"]);
+        dd($case);
         $data = Cases::with('category')->where('slug', $case)->get();
 
         return response()->json($data[0]);

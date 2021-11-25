@@ -1,17 +1,17 @@
 <template>
-    <div v-if="cases.length >= 1" class="cases my">
+    <div v-if="loading" class="cases my">
         <h1>Кейсы</h1>
         <tabs v-if="!screen" @indexTab="activeTabs">
             <tab :title="item" v-for="(item, i) in getCategoryTabs" :key="i">
                 <div class="cases-items">
                     <router-link class="item blur" v-for="(item, key) in pageOfItems" :key="key"
-                                 :to="{ name: 'case', params: {slug: item.slug, data: item}}">
+                                 :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
                         <div class="item-image">
                             <img :src="item.image" :alt="item.title">
                         </div>
                         <h4 class="item-audience">Аудитория</h4>
                         <div class="item-audience-wrapper">
-                            <div v-if="item.gender" class="stats">Возраст: {{ item.gender }};</div>
+                            <div v-if="item.gender" class="stats">Пол: {{ item.gender }};</div>
                             <div v-if="item.age" class="stats">Возраст: {{ item.age }};</div>
                             <div v-if="item.income" class="stats">Доход: {{ item.income }};</div>
                             <div v-if="item.goal" class="stats">Цель: {{ item.goal }};</div>
@@ -42,7 +42,10 @@
                         </div>
                     </router-link>
                 </div>
-                <jw-pagination ref="pagination" :items="sortCasesByTabs" @changePage="onChangePage" :pageSize="6"/>
+                <div v-if="loading">
+                    <jw-pagination :class="sortCasesByTabs.length <= 6 ? 'disabled' : ''"
+                                   :items="sortCasesByTabs" @changePage="onChangePage" :pageSize="6"/>
+                </div>
             </tab>
         </tabs>
         <tabs v-else @indexTab="activeTabs">
@@ -56,7 +59,7 @@
                             </div>
                             <h4 class="item-audience">Аудитория</h4>
                             <div class="item-audience-wrapper">
-                                <div v-if="item.gender" class="stats">Возраст: {{ item.gender }};</div>
+                                <div v-if="item.gender" class="stats">Пол: {{ item.gender }};</div>
                                 <div v-if="item.age" class="stats">Возраст: {{ item.age }};</div>
                                 <div v-if="item.income" class="stats">Доход: {{ item.income }};</div>
                                 <div v-if="item.goal" class="stats">Цель: {{ item.goal }};</div>
@@ -128,7 +131,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            cases: 'cases/cases'
+            cases: 'cases/casesAll',
+            loading: 'cases/loading'
         }),
 
         swiper() {
@@ -136,17 +140,17 @@ export default {
         },
 
         getCategoryTabs() {
-            return [...new Set(this.cases.map(a => a.category_id.name).sort())]
+            return [...new Set(this.cases.map(a => a.category.name).sort())]
         },
 
         sortCasesByTabs() {
-            return this.cases.filter(x => x.category_id.name === this.getCategoryTabs[this.activeTab])
+            return this.cases.filter(x => x.category.name === this.getCategoryTabs[this.activeTab])
         }
     },
 
     methods: {
         ...mapActions({
-            getCases: 'cases/getCases'
+            getCases: 'cases/getCasesAll'
         }),
 
         onResize() {
@@ -173,13 +177,6 @@ export default {
     mounted() {
         this.onResize()
         this.getCases()
-
-        // this.cases.length >= 1 &&
-        setTimeout(() => {
-            if (this.$refs.pagination) {
-                this.pageOfItems.length <= 6 ? this.$refs.pagination[0].$el.classList.add('disabled') : ''
-            }
-        }, 500)
     }
 }
 </script>

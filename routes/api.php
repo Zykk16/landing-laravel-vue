@@ -33,6 +33,8 @@ Route::resource('cases', CasesController::class)->names([
     'destroy' => 'cases.destroy',
 ]);
 
+Route::get('cases-all', [CasesController::class, 'frontendCases'])->name('cases');
+
 Route::apiResource('categories_cases', CategoriesCasesController::class)->names([
     'index' => 'api.categories.index',
     'store' => 'api.categories.store',

@@ -5,26 +5,26 @@
                 <h2>Если Вы заинтересовались нашими услугами или у Вас остались вопросы, свяжитесь, пожалуйста, с
                     нами.</h2>
             </div>
-            <div class="contact-form-group">
+            <div class="contact-form-group required">
                 <input type="text" :class="['field', errors && errors.name ? 'field-error' : '']"
                        name="name" id="name" v-model="fields.name"
                        placeholder="Имя" @input="errors.name = ''"/>
             </div>
 
-            <div class="contact-form-group">
+            <div class="contact-form-group required">
                 <masked-input :mask="'\\+\\' + country + ' (111) 111-11-11'" placeholder="Номер телефона"
                               @input="errors.phone = ''"
                               v-model="fields.phone" name="phone" id="phone"
                               :class="['field', errors && errors.phone ? 'field-error' : '']"/>
             </div>
 
-            <div class="contact-form-group">
+            <div class="contact-form-group required">
                 <input type="email" :class="['field', errors && errors.email ? 'field-error' : '']"
                        name="email" id="email" v-model="fields.email"
                        placeholder="Почта" @input="errors.email = ''"/>
             </div>
 
-            <div class="contact-form-group select-dropdown">
+            <div class="contact-form-group required select-dropdown">
                 <select v-model="fields.category" class="minimal"
                         :class="['field', errors && errors.category ? 'field-error' : '']">
                     <option value="" disabled>Являюсь представителем:</option>

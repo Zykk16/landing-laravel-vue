@@ -1,8 +1,11 @@
 <template>
     <form class="update-image" @submit="formSubmit" enctype="multipart/form-data">
-        <input ref="file" type="file" class="update-image__input" @change="onChange">
-        <p v-if="error" class="errors">{{ error }}</p>
-        <button class="btn btn-primary btn-block">Отправить</button>
+        <div class="input-image">
+            <input ref="file" type="file" class="update-image__input" @change="onChange">
+            <p v-if="error" class="errors">{{ error }}</p>
+        </div>
+        <v-btn type="submit" elevation="2" class="mt-4">Отправить</v-btn>
+        <v-divider style=""></v-divider>
     </form>
 </template>
 
@@ -49,6 +52,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.update-image {
+    //display: flex;
 
+    .input-image {
+        display: flex;
+        flex-direction: column;
+    }
+}
 </style>

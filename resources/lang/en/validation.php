@@ -149,6 +149,9 @@ return [
         'confirmed' => [
             'required' => 'Данные введены некорректно',
         ],
+        'password_confirmation' => [
+            'required' => 'Данные введены некорректно',
+        ],
     ],
 
     /*
