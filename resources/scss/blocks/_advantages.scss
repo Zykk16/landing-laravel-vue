@@ -10,22 +10,25 @@
     }
 
     h1 {
-        margin-top: 3em;
+        margin-top: 4em;
         margin-bottom: 2.5em;
         text-align: center;
         font-size: 35px;
         color: $black;
 
         @include tablet {
+            margin-top: 0;
             margin-bottom: 2.5em;
         }
 
         @include mobile {
+            margin-top: 0;
             margin-bottom: 0;
             font-size: 30px;
         }
 
         @include mobile-max {
+            margin-top: 0;
             margin-bottom: 0;
             font-size: 30px;
         }

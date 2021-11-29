@@ -36,8 +36,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Cases extends Model
 {
-    use Sluggable;
-
     protected $fillable = [
         'category_id',
         'status_id',
@@ -83,19 +81,5 @@ class Cases extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(CategoriesCases::class);
-    }
-
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
     }
 }

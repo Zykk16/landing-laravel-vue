@@ -79,7 +79,11 @@ const router = new VueRouter({
 
 router.afterEach((to, from) => {
     Vue.nextTick(() => {
-        document.title = to.meta.title
+        if (to.meta.title === undefined){
+            document.title = 'Otclick-ADV'
+        } else {
+            document.title = to.meta.title
+        }
     })
 })
 

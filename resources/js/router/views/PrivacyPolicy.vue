@@ -124,7 +124,7 @@ import Footer from "../../components/Footer";
 
 export default {
     name: "PrivacyPolicy",
-    components: {Footer, Header}
+    components: {Footer, Header},
 }
 </script>
 

@@ -5,8 +5,9 @@
                 <v-list-item class="px-2">
                     <v-list-item-title>{{ user.name }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item class="px-2">
+                <v-list-item class="px-2 d-flex">
                     <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+                    <a href="#" @click.prevent="logout">Выйти</a>
                 </v-list-item>
 
                 <v-divider></v-divider>
@@ -71,12 +72,13 @@ export default {
             signOut: 'auth/logout'
         }),
 
-        // async logout() {
-        //     await axios.post('/logout').then(({data}) => {
-        //         this.signOut()
-        //         this.$router.push({name: "login"})
-        //     })
-        // }
+        async logout() {
+            await axios.post('/logout').then(() => {
+                this.signOut()
+                this.$router.push({name: "login-admin"})
+                location.reload()
+            })
+        }
     },
 
     mounted() {

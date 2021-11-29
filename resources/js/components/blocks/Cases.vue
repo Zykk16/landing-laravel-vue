@@ -2,26 +2,25 @@
     <div v-if="loading" class="cases my">
         <h1>Кейсы</h1>
         <tabs v-if="!screen" @indexTab="activeTabs">
-            <tab :title="item" v-for="(item, i) in getCategoryTabs" :key="i">
+            <!-- Все -->
+            <tab title="Все">
                 <div class="cases-items">
-                    <router-link class="item blur" v-for="(item, key) in pageOfItems" :key="key"
-                                 :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
+                    <div class="item blur" v-for="(item, key) in pageOfAllItems" :key="key">
                         <div class="item-image">
                             <img :src="item.image" :alt="item.title">
                         </div>
                         <h4 class="item-audience">Аудитория</h4>
                         <div class="item-audience-wrapper">
-                            <div v-if="item.gender" class="stats">Пол: {{ item.gender }};</div>
-                            <div v-if="item.age" class="stats">Возраст: {{ item.age }};</div>
-                            <div v-if="item.income" class="stats">Доход: {{ item.income }};</div>
-                            <div v-if="item.goal" class="stats">Цель: {{ item.goal }};</div>
-                            <div class="stats" v-show="readMore"></div>
-                            <div class="read-more" @click.prevent="readMore =! readMore">
-                                <div class="hidden" v-if="readMore">свернуть</div>
-                                <div class="more" v-else>...подробнее</div>
+                            <div class="stats">
+                                {{ additionText(item).substr(0, 170) }}
+                            </div>
+                            <div v-if="additionText(item).length > 170" class="read-more">
+                                <router-link class="more" :key="key"
+                                             :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
+                                    ...подробнее
+                                </router-link>
                             </div>
                         </div>
-
                         <div class="item-wrapper-indicators">
                             <div class="indicator">
                                 <h4 class="indicator-title">Клики</h4>
@@ -40,7 +39,51 @@
                                 <div class="indicator-value gradient-h1">{{ item.coverage }}</div>
                             </div>
                         </div>
-                    </router-link>
+                    </div>
+                </div>
+                <div v-if="loading">
+                    <jw-pagination :class="sortCasesByAllItem.length <= 6 ? 'disabled' : ''"
+                                   :items="sortCasesByAllItem" @changePage="onChangeAllPage" :pageSize="6"/>
+                </div>
+            </tab>
+            <!-- По категориям -->
+            <tab :title="item" v-for="(item, i) in getCategoryTabs" :key="i">
+                <div class="cases-items">
+                    <div class="item blur" v-for="(item, key) in pageOfItems" :key="key">
+                        <div class="item-image">
+                            <img :src="item.image" :alt="item.title">
+                        </div>
+                        <h4 class="item-audience">Аудитория</h4>
+                        <div class="item-audience-wrapper">
+                            <div class="stats">
+                                {{ additionText(item).substr(0, 170) }}
+                            </div>
+                            <div v-if="additionText(item).length > 170" class="read-more">
+                                <router-link class="more" :key="key"
+                                             :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
+                                    ...подробнее
+                                </router-link>
+                            </div>
+                        </div>
+                        <div class="item-wrapper-indicators">
+                            <div class="indicator">
+                                <h4 class="indicator-title">Клики</h4>
+                                <div class="indicator-value gradient-h1">{{ item.clicks }}</div>
+                            </div>
+                            <div class="indicator">
+                                <h4 class="indicator-title">CTR</h4>
+                                <div class="indicator-value gradient-h1">{{ item.ctr }}</div>
+                            </div>
+                            <div class="indicator">
+                                <h4 class="indicator-title">Показы</h4>
+                                <div class="indicator-value gradient-h1">{{ item.shows }}</div>
+                            </div>
+                            <div class="indicator">
+                                <h4 class="indicator-title">Охват</h4>
+                                <div class="indicator-value gradient-h1">{{ item.coverage }}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div v-if="loading">
                     <jw-pagination :class="sortCasesByTabs.length <= 6 ? 'disabled' : ''"
@@ -48,23 +91,27 @@
                 </div>
             </tab>
         </tabs>
-        <tabs v-else @indexTab="activeTabs">
-            <tab :title="item" v-for="(item, i) in getCategoryTabs" :key="i">
+        <tabs v-else @indexTab="activeTabs" :screen="screen">
+            <!-- Все -->
+            <tab title="Все">
                 <div class="cases-items">
                     <swiper ref="mySwiper" :options="swiperOptions">
-                        <swiper-slide class="item blur" v-for="(item, key) in sortCasesByTabs" :key="key"
-                                      @click.native="$router.push({ name: 'case', params: {slug: item.slug, data: item}})">
+                        <swiper-slide class="item blur" v-for="(item, key) in pageOfAllItems" :key="key">
                             <div class="item-image">
                                 <img :src="item.image" :alt="item.title">
                             </div>
                             <h4 class="item-audience">Аудитория</h4>
                             <div class="item-audience-wrapper">
-                                <div v-if="item.gender" class="stats">Пол: {{ item.gender }};</div>
-                                <div v-if="item.age" class="stats">Возраст: {{ item.age }};</div>
-                                <div v-if="item.income" class="stats">Доход: {{ item.income }};</div>
-                                <div v-if="item.goal" class="stats">Цель: {{ item.goal }};</div>
+                                <div class="stats">
+                                    {{ additionText(item).substr(0, 170) }}
+                                </div>
+                                <div v-if="additionText(item).length > 170" class="read-more">
+                                    <router-link class="more" :key="key"
+                                                 :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
+                                        ...подробнее
+                                    </router-link>
+                                </div>
                             </div>
-
                             <div class="item-wrapper-indicators">
                                 <div class="indicator">
                                     <h4 class="indicator-title">Клики</h4>
@@ -85,6 +132,57 @@
                             </div>
                         </swiper-slide>
                     </swiper>
+                </div>
+                <div v-if="loading">
+                    <jw-pagination :class="sortCasesByAllItem.length <= 6 ? 'disabled' : ''"
+                                   :items="sortCasesByAllItem" @changePage="onChangeAllPage" :pageSize="6"/>
+                </div>
+            </tab>
+            <!-- По категориям -->
+            <tab :title="item" v-for="(item, i) in getCategoryTabs" :key="i">
+                <div class="cases-items">
+                    <swiper ref="mySwiper" :options="swiperOptions">
+                        <swiper-slide class="item blur" v-for="(item, key) in pageOfItems" :key="key"
+                                      @click.native="$router.push({ name: 'case', params: {slug: item.slug, data: item}})">
+                            <div class="item-image">
+                                <img :src="item.image" :alt="item.title">
+                            </div>
+                            <h4 class="item-audience">Аудитория</h4>
+                            <div class="item-audience-wrapper">
+                                <div class="stats">
+                                    {{ additionText(item).substr(0, 170) }}
+                                </div>
+                                <div v-if="additionText(item).length > 170" class="read-more">
+                                    <router-link class="more" :key="key"
+                                                 :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
+                                        ...подробнее
+                                    </router-link>
+                                </div>
+                            </div>
+                            <div class="item-wrapper-indicators">
+                                <div class="indicator">
+                                    <h4 class="indicator-title">Клики</h4>
+                                    <div class="indicator-value gradient-h1">{{ item.clicks }}</div>
+                                </div>
+                                <div class="indicator">
+                                    <h4 class="indicator-title">CTR</h4>
+                                    <div class="indicator-value gradient-h1">{{ item.ctr }}</div>
+                                </div>
+                                <div class="indicator">
+                                    <h4 class="indicator-title">Показы</h4>
+                                    <div class="indicator-value gradient-h1">{{ item.shows }}</div>
+                                </div>
+                                <div class="indicator">
+                                    <h4 class="indicator-title">Охват</h4>
+                                    <div class="indicator-value gradient-h1">{{ item.coverage }}</div>
+                                </div>
+                            </div>
+                        </swiper-slide>
+                    </swiper>
+                </div>
+                <div v-if="loading">
+                    <jw-pagination :class="sortCasesByTabs.length <= 6 ? 'disabled' : ''"
+                                   :items="sortCasesByTabs" @changePage="onChangePage" :pageSize="6"/>
                 </div>
             </tab>
         </tabs>
@@ -109,6 +207,7 @@ export default {
             screen: false,
             activeTab: 0,
             pageOfItems: [],
+            pageOfAllItems: [],
             readMore: false,
             swiperOptions: {
                 slidesPerView: "auto",
@@ -145,12 +244,16 @@ export default {
 
         sortCasesByTabs() {
             return this.cases.filter(x => x.category.name === this.getCategoryTabs[this.activeTab])
-        }
+        },
+
+        sortCasesByAllItem() {
+            return this.cases.filter(x => x)
+        },
     },
 
     methods: {
         ...mapActions({
-            getCases: 'cases/getCasesAll'
+            getCases: 'cases/getCasesAll',
         }),
 
         onResize() {
@@ -158,11 +261,37 @@ export default {
         },
 
         activeTabs(i) {
-            this.activeTab = i
+            this.activeTab = i - 1
         },
 
         onChangePage(pageOfItems) {
             this.pageOfItems = pageOfItems.filter(e => e.status_id === 1)
+        },
+
+        onChangeAllPage(pageOfAllItems) {
+            this.pageOfAllItems = pageOfAllItems.filter(e => e.status_id === 1)
+        },
+
+        additionText(text) {
+            let value = ''
+
+            if (text.gender) {
+                value += 'Пол: ' + text.gender + '; '
+            }
+
+            if (text.age) {
+                value += 'Возраст: ' + text.age + '; '
+            }
+
+            if (text.income) {
+                value += 'Доход: ' + text.income + '; '
+            }
+
+            if (text.goal) {
+                value += 'Цель: ' + text.goal + '; '
+            }
+
+            return value
         }
     },
 
@@ -191,7 +320,12 @@ export default {
     padding-left: 4rem;
     max-width: 97vw;
 
+    @include mobile {
+        position: relative;
+    }
+
     @include mobile-max {
+        position: relative;
         width: 96vw;
     }
 }

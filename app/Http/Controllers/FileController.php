@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOrUpdatePositionRequest;
+use App\Http\Requests\StoreOrUpdateRequest;
 use App\Models\FileUpload;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 class FileController extends Controller
 {
     /**
-     * @param StoreOrUpdatePositionRequest $request
+     * @param StoreOrUpdateRequest $request
      * @return JsonResponse|void
      */
-    public function upload(StoreOrUpdatePositionRequest $request)
+    public function upload(StoreOrUpdateRequest $request)
     {
         $request->validated();
 
@@ -34,7 +34,7 @@ class FileController extends Controller
 
     /**
      * @param FileUpload $fileUpload
-     * @param StoreOrUpdatePositionRequest $request
+     * @param StoreOrUpdateRequest $request
      * @return JsonResponse
      */
     public function updateOrderClients(Request $request): JsonResponse

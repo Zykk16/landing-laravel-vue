@@ -6,7 +6,7 @@
             <a href="mailto:support@otclick-adv.ru">support@otclick-adv.ru</a>
             <a id="contactForm" href="#" @click.prevent="backToHome()"
                v-scroll-to="'#contactForm'">Форма обратной связи</a>
-            <router-link to="/admin" class="account">Личный кабинет</router-link>
+            <router-link to="/login" class="account">Личный кабинет</router-link>
         </div>
         <div class="footer-bottom-wrapper">
             <div class="copyright">&copy; 2011 - {{ new Date().getFullYear() }} {{ getHostname }}</div>

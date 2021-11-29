@@ -41,6 +41,7 @@ class CasesController extends Controller
             $data['image'] = $this->uploadImage($request->file('image'));
         }
 
+        $data['slug'] = Str::slug($data['title']);
         $case = Cases::create($data);
 
         return new CasesResources($case);
@@ -97,9 +98,10 @@ class CasesController extends Controller
      */
     public function show($case): JsonResponse
     {
-        dd($case);
-        $data = Cases::with('category')->where('slug', $case)->get();
+        preg_match('/-([0-9]+)$/', $case, $result);
+        $id = $result[1];
 
+        $data = Cases::with('category')->where('id', $id)->get();
         return response()->json($data[0]);
     }
 }

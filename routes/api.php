@@ -5,7 +5,6 @@ use App\Http\Controllers\ApplicationsController;
 use App\Http\Controllers\CasesController;
 use App\Http\Controllers\CategoriesCasesController;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\UsersController;
 use App\Models\CasesStatus;
 use App\Models\FileUpload;
 use GuzzleHttp\Client;

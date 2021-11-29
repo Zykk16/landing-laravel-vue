@@ -6,12 +6,14 @@
                 <h1>Авторизация</h1>
                 <div class="form-group">
                     <input type="text" v-model="auth.email" class="form-control blur" placeholder="Логин"
-                           :class="[errors.email ? 'error-field' : '']" @input="errors.email = ''">
+                           :class="[errors.email ? 'error-field' : '']" @input="errors.email = ''"
+                           @keypress="isLetter($event)">
                     <span v-if="errors.email" class="error">{{ errors.email }}</span>
                 </div>
                 <div class="form-group">
                     <input type="password" v-model="auth.password" class="form-control blur" placeholder="Пароль"
-                           :class="[errors.password ? 'error-field' : '']" @input="errors.password = ''">
+                           :class="[errors.password ? 'error-field' : '']" @input="errors.password = ''"
+                           @keypress="isLetter($event)">
                     <span v-if="errors.password" class="error">{{ errors.password }}</span>
                 </div>
                 <Checkbox options="Запомнить меня"/>
@@ -65,18 +67,34 @@ export default {
         ...mapActions({
             signIn: 'auth/login'
         }),
-        async login() {
-            await this.signIn(this.auth).then(() => {
-                // this.$router.replace({name: 'admin'})
-                // setTimeout(() => {
-                //     location.reload()
-                // }, 500)
-            }).catch(({response: {data}}) => {
-                this.errors.email = data.errors.email ? data.errors.email[0] : ''
-                this.errors.password = data.errors.password ? data.errors.password[0] : ''
-            })
 
-        }
+        login() {
+            this.errors = [];
+
+            if (!this.auth.email) {
+                this.errors.email = 'Данные введены некорректно'
+            } else {
+                this.errors = ''
+            }
+
+            if (!this.auth.password) {
+                this.errors.password = 'Данные введены некорректно'
+            }
+
+            if (!this.errors.length) {
+                return true;
+            }
+        },
+
+        isLetter(e) {
+            let char = String.fromCharCode(e.keyCode)
+
+            if (!/а|б|в|г|д|е|ё|ж|з|и|ё|к|л|м|н|о|п|р|с|т|у|ф|х|ц|ч|ш|щ|ъ|ы|ь|э|ю|я/gi.test(char)) {
+                return true
+            } else {
+                e.preventDefault()
+            }
+        },
     }
 }
 </script>

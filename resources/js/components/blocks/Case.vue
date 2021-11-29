@@ -152,27 +152,28 @@ export default {
 
     methods: {
         backHome() {
-            this.$router.go(-1)
+            this.$router.push('/')
         },
 
         init() {
             axios.get('/api/cases/' + this.$route.params.slug)
                 .then(response => {
                     this.data = response.data
-                }).finally(() => {
                 document.title = this.data.title
-            })
+                })
         }
     },
 
     watch: {
         '$route'(to, from) {
+            console.log(to)
+            console.log(from)
             if (from.name !== 'case') {
                 this.init()
             } else {
                 this.data = ''
             }
-        }
+        },
     },
 
     mounted() {

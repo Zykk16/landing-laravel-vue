@@ -9,6 +9,7 @@
                 <input type="text" :class="['field', errors && errors.name ? 'field-error' : '']"
                        name="name" id="name" v-model="fields.name"
                        placeholder="Имя" @input="errors.name = ''"/>
+                <span v-if="errors.name" class="error">{{ errors.name }}</span>
             </div>
 
             <div class="contact-form-group required">
@@ -16,23 +17,26 @@
                               @input="errors.phone = ''"
                               v-model="fields.phone" name="phone" id="phone"
                               :class="['field', errors && errors.phone ? 'field-error' : '']"/>
+                <span v-if="errors.phone" class="error">{{ errors.phone }}</span>
             </div>
 
             <div class="contact-form-group required">
-                <input type="email" :class="['field', errors && errors.email ? 'field-error' : '']"
+                <input type="text" :class="['field', errors.email ? 'field-error' : '']"
                        name="email" id="email" v-model="fields.email"
                        placeholder="Почта" @input="errors.email = ''"/>
+                <span v-if="errors.email" class="error">{{ errors.email }}</span>
             </div>
 
             <div class="contact-form-group required select-dropdown">
                 <select v-model="fields.category" class="minimal"
-                        :class="['field', errors && errors.category ? 'field-error' : '']">
+                        :class="['field', errors.category && !fields.category ? 'field-error' : '']">
                     <option value="" disabled>Являюсь представителем:</option>
                     <option v-for="(category, key) in categories"
                             :key="key" :value="category.id">
                         {{ category.name }}
                     </option>
                 </select>
+                <span v-if="errors.category && !fields.category" class="error">{{ errors.category }}</span>
             </div>
 
             <div class="contact-form-group group-textarea">
@@ -67,7 +71,11 @@ export default {
             fields: {
                 category: ''
             },
-            errors: {},
+            errors: {
+                name: '',
+                email: '',
+                category: ''
+            },
             success: false,
             screen: false,
             balls: [
@@ -92,16 +100,15 @@ export default {
 
         submit() {
             this.success = false
-            this.errors = {}
             axios.post('/api/contact', this.fields).then(() => {
-                this.fields = {}
                 this.success = true
-            }).catch(error => {
-                if (error.response.status === 422) {
-                    this.errors = error.response.data.errors || {}
-                }
+            }).catch(({response: {data}}) => {
+                this.errors.name = data.errors.name ? data.errors.name[0] : ''
+                this.errors.email = data.errors.email ? data.errors.email[0] : ''
+                this.errors.phone = data.errors.phone ? data.errors.phone[0] : ''
+                this.errors.category = data.errors.category ? data.errors.category[0] : ''
             }).finally(() => {
-                this.fields.category = ''
+                // this.errors.category = ''
             })
         },
 

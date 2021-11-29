@@ -106,6 +106,7 @@ class CasesRequest extends FormRequest
             'title.required' => 'Это поле обязательно для заполнения.',
             'title.min' => 'Слишком короткое название.',
             'title.max' => 'Слишком длинное название.',
+            'status_id.required' => 'Это поле обязательно для заполнения.',
             'category_id.required' => 'Категория обязательна для заполнения.',
         ];
     }

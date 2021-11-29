@@ -12,12 +12,14 @@
                 </div>
                 <div class="form-group">
                     <input type="email" v-model="user.email" class="form-control blur" placeholder="Email"
-                           :class="[errors.email ? 'error-field' : '']" @input="errors.email = ''">
+                           :class="[errors.email ? 'error-field' : '']" @input="errors.email = ''"
+                           @keypress="isLetter($event)">
                     <span v-if="errors.email" class="error">{{ errors.email }}</span>
                 </div>
                 <div class="form-group">
                     <input type="password" v-model="user.password" class="form-control blur" placeholder="Пароль"
-                           :class="[errors.password ? 'error-field' : '']" @input="errors.password = ''">
+                           :class="[errors.password ? 'error-field' : '']" @input="errors.password = ''"
+                           @keypress="isLetter($event)">
                     <span v-if="errors.password" class="error">{{ errors.password }}</span>
                 </div>
                 <div class="form-group">
@@ -25,10 +27,12 @@
                            class="form-control blur" placeholder="Подтверждение пароля"
                            :class="[errors.password_confirmation ? 'error-field' : '']"
                            name="password_confirmation"
-                           @input="errors.password_confirmation = ''">
+                           @input="errors.password_confirmation = ''"
+                           @keypress="isLetter($event)">
                     <span v-if="errors.password_confirmation" class="error">{{ errors.password_confirmation }}</span>
                 </div>
                 <Checkbox @input="checked" options="Ознакомлен и согласен с правилами работы в системе otClick"/>
+                <span v-if="errors.checkbox && !user.checkbox" class="error">{{ errors.checkbox }}</span>
                 <Button
                     :text="loading ? 'Загрузка...' : 'Зарегистрироваться'"
                     width="120px"
@@ -43,7 +47,6 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
 import Checkbox from "../helpers/Checkbox";
 import Button from "../helpers/Button";
 import Header from "../Header";
@@ -60,12 +63,16 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-                password_confirmation: ''
+                password_confirmation: '',
+                checkbox: ''
             },
             successRegister: false,
             errors: {
+                name: '',
                 email: '',
                 password: '',
+                password_confirmation: '',
+                checkbox: ''
             },
             balls: [
                 {className: 'ballOne', img: 'ball-2'},
@@ -77,7 +84,6 @@ export default {
                 {className: 'ballSeventh', img: 'ball-2'},
             ],
             loading: false,
-            checkbox: false
         }
     },
 
@@ -89,7 +95,7 @@ export default {
         isLetter(e) {
             let char = String.fromCharCode(e.keyCode)
 
-            if (/^[A-Za-z]+$/.test(char)) {
+            if (!/а|б|в|г|д|е|ё|ж|з|и|ё|к|л|м|н|о|п|р|с|т|у|ф|х|ц|ч|ш|щ|ъ|ы|ь|э|ю|я/gi.test(char)) {
                 return true
             } else {
                 e.preventDefault()
@@ -107,13 +113,14 @@ export default {
                 this.errors.email = data.errors.email ? data.errors.email[0] : ''
                 this.errors.password = data.errors.password ? data.errors.password[0] : ''
                 this.errors.password_confirmation = data.errors.password_confirmation ? data.errors.password_confirmation[0] : ''
+                this.errors.checkbox = data.errors.checkbox ? data.errors.checkbox[0] : ''
             }).finally(() => {
                 this.loading = false
             })
         },
 
         checked(val) {
-            this.checkbox = val
+            this.user.checkbox = val
         }
     }
 }

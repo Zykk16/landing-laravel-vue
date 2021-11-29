@@ -1,6 +1,6 @@
 .contact {
     position: relative;
-    margin-top: 14em;
+    margin-top: 10em;
     margin-bottom: 8.125em;
 
     @include mobile {
@@ -175,6 +175,13 @@
                     background-size: contain;
                 }
             }
+
+            .error {
+                display: block;
+                margin-bottom: 1.25em;
+                color: $red;
+                font: bold 14px/18px 'ArtegraSoft-Medium', sans-serif;
+            }
         }
 
         .personal-data {
@@ -196,7 +203,7 @@
             display: block;
             width: 180px;
             height: 46px;
-            margin-top: 4em;
+            margin-top: .5em;
             padding: 1.8em 3em 1.4em 3em;
             font: normal 10px/1 'ArtegraSoft-Medium', sans-serif;
             background-color: $red;
