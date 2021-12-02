@@ -226,7 +226,7 @@ export default {
 
     .ballFour {
         top: 120px;
-        right: -6%;
+        right: -5%;
         width: 25px;
         height: 25px;
         opacity: .5;
