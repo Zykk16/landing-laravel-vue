@@ -2,35 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersRequest;
+use App\Http\Resources\UsersCollection;
+use App\Http\Resources\UsersResources;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class UsersController extends Controller
 {
-
     /**
-     * @return JsonResponse
+     * @return UsersCollection
      */
-    public function index(): JsonResponse
+    public function index(): UsersCollection
     {
-        return response()->json(User::all());
+        return new UsersCollection(User::all());
     }
 
-    public function store(Request $request, User $user): JsonResponse
+    /**
+     * @param UsersRequest $request
+     * @return UsersResources
+     */
+    public function store(UsersRequest $request): UsersResources
     {
-        $validated = $request->validate([
-            'name' => 'require|min:3|max:50',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8'
-        ]);
+        $data = $request->data();
+        $data['password'] = bcrypt($request->password);
 
-        $user->fill($validated);
+        $user = User::create($data);
 
-        $user->password = bcrypt($validated->password);
-        $user->save();
 
-        return response()->json($user->fresh());
+        return new UsersResources($user);
+    }
+
+    public function update(UsersRequest $request, $id)
+    {
+        $data = $request->data();
+        $user = User::findOrFail($id);
+
+        if ($request->input('password')) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user->updated_at = Carbon::now();
+        $user->update($data);
+
+        return new UsersResources($user);
     }
 
     /**
@@ -39,9 +55,8 @@ class UsersController extends Controller
      */
     public function destroy(User $user): JsonResponse
     {
-        $user->is_admin = User::inactive;
-        $user->save();
+        $user->delete();
 
-        return response()->json(['message' => 'Пользователь деактивирован']);
+        return response()->json(['message' => ' User delete'], 204);
     }
 }

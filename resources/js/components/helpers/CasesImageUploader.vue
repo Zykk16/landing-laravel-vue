@@ -5,7 +5,7 @@
             <input class="file-input" ref="fileInput" type="file" @input="onSelectFile" accept="image/*">
         </div>
         <div v-else class="image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-            <span v-if="!imageData" class="placeholder">Choose an Image</span>
+            <span v-if="!imageData" class="placeholder">Choose an Image (160x80)</span>
             <input class="file-input" ref="fileInput" type="file" @input="onSelectFile" accept="image/*">
         </div>
     </div>

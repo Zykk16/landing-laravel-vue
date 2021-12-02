@@ -11,7 +11,6 @@
                         <v-row>
                             <v-col cols="12" sm="6" md="4">
                                 <cases-image-uploader :cover="data.image" @loaded="uploadImage"/>
-                                <span class="size" v-if="size">{{'Размер файла: ' + size + ' Kb'}}</span>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
                                 <v-text-field v-model="form.title" label="Клиент"></v-text-field>
@@ -130,8 +129,7 @@ export default {
                 image: '',
                 category_id: '',
                 title: '',
-            },
-            size: null
+            }
         }
     },
 
@@ -178,7 +176,6 @@ export default {
 
         uploadImage(image) {
             this.form.image = image
-            this.size = Math.round(image.size / 1024)
         },
 
         update() {

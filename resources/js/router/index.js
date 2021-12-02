@@ -50,12 +50,12 @@ const routes = [
                 name: 'admin.category',
                 meta: {title: 'Категории', middleware: 'auth'}
             },
-            // {
-            //     path: 'users',
-            //     component: Users,
-            //     name: 'admin.users',
-            //     meta: {title: 'Пользователи', middleware: 'auth'}
-            // }
+            {
+                path: 'users',
+                component: Users,
+                name: 'admin.users',
+                meta: {title: 'Пользователи', middleware: 'auth'}
+            }
         ]
     },
     {path: '/login', component: Login, name: 'login', meta: {title: 'Авторизация'}},

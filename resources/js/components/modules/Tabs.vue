@@ -1,7 +1,13 @@
 <template lang="html">
     <div class="tabs">
-        <div v-if="screen" class="select blur" @click="showList = true" v-html="selected"></div>
-        <ul v-show="showList || !screen" class='tabs-header'>
+        <div v-if="screen" class="arrow-select">
+            <select @change="switchView($event, $event.target.selectedIndex)" class="select blur">
+                <option v-for='(tab, index) in tabs' :value="tab.title" :key='index'>
+                    {{ tab.title }}
+                </option>
+            </select>
+        </div>
+        <ul v-show="!screen" class='tabs-header'>
             <li v-for='(tab, index) in tabs'
                 :key='tab.title'
                 @click='selectTab(index)'
@@ -21,9 +27,7 @@ export default {
     data() {
         return {
             selectedIndex: 0,
-            selected: 'Выберите категорию',
-            tabs: [],
-            showList: false
+            tabs: []
         }
     },
     created() {
@@ -35,6 +39,15 @@ export default {
         }, 500)
     },
     methods: {
+        switchView(event, selectedIndex) {
+            this.selectedIndex = selectedIndex
+            this.$emit('indexTab', this.selectedIndex)
+
+            this.tabs.forEach((tab, index) => {
+                tab.isActive = (index === this.selectedIndex)
+            })
+        },
+
         selectTab(i) {
             this.selectedIndex = i
 
@@ -53,8 +66,6 @@ export default {
                     }
                 })
             }, 100)
-
-            this.showList = false
         }
     }
 }
@@ -65,46 +76,40 @@ export default {
 @import "../../../scss/helpers/varibles";
 
 .tabs {
-    .select {
+    .arrow-select {
         position: relative;
-        display: flex;
-        margin-top: 2.5em;
-        margin-bottom: 1em;
-        padding: 1.125em;
-        background: rgba(255, 255, 255, 0.22);
-        border: 1px solid #DCDCDC;
-        font: 14px/18px 'ArtegraSoft-Bold', sans-serif;
-        color: $red;
-        box-sizing: border-box;
-        border-radius: 37px;
+
+        .select {
+            display: flex;
+            width: 100%;
+            margin-top: 2.5em;
+            margin-bottom: 1em;
+            padding: 1.125em;
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid #DCDCDC;
+            font: 14px/18px 'ArtegraSoft-Bold', sans-serif;
+            color: $red;
+            box-sizing: border-box;
+            border-radius: 37px;
+            outline: none;
+        }
 
         &:before {
             content: '';
             position: absolute;
             top: 17px;
-            right: 20px;
-            width: 17px;
+            right: 4px;
+            width: 40px;
             height: 17px;
-            background: url("../../../img/arrow-select.png") center no-repeat;
+            background: #fff url("../../../img/arrow-select-red.png") no-repeat center;
             background-size: contain;
+            z-index: 9;
         }
     }
 }
 
 .tabs-header {
     text-align: center;
-
-    @include mobile {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    @include mobile-max {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-    }
 }
 
 .tabs-header > li {
@@ -115,16 +120,6 @@ export default {
     cursor: pointer;
     font: 14px/18px 'ArtegraSoft-Bold', sans-serif;
     color: #fff;
-
-    @include mobile {
-        width: 100%;
-        margin-top: 0 !important;
-    }
-
-    @include mobile-max {
-        width: 100%;
-        margin-top: 0 !important;
-    }
 }
 
 .tab {

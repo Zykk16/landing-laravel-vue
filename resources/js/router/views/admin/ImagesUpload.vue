@@ -1,7 +1,7 @@
 <template>
     <form class="update-image" @submit="formSubmit" enctype="multipart/form-data">
         <div class="input-image">
-            <input ref="file" type="file" class="update-image__input" @change="onChange">
+            <input ref="file" type="file" class="update-image__input" @change="onChange" accept="image/*">
             <p v-if="error" class="errors">{{ error }}</p>
         </div>
         <v-btn type="submit" elevation="2" class="mt-4">Отправить</v-btn>

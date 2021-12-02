@@ -48,7 +48,7 @@
             <button type="submit" class="button">Отправить заявку</button>
         </form>
         <div v-else class="send-message blur">
-            <a class="cross-back" @click="success = false">
+            <a class="cross-back" @click="close">
                 <img src="../../../img/svg/cross.svg" alt="">
             </a>
             <h1 class="gradient-h1">Заявка успешно отправлена, менеджер свяжется с Вами в ближайшее время!</h1>
@@ -98,17 +98,24 @@ export default {
             getCategories: 'applications/getCategories'
         }),
 
-        submit() {
+        close() {
             this.success = false
+            this.fields.category = ''
+        },
+
+        submit() {
             axios.post('/api/contact', this.fields).then(() => {
                 this.success = true
+                this.fields.name = ''
+                this.fields.email = ''
+                this.fields.phone = ''
+                this.fields.category = ''
+                this.fields.message = ''
             }).catch(({response: {data}}) => {
                 this.errors.name = data.errors.name ? data.errors.name[0] : ''
                 this.errors.email = data.errors.email ? data.errors.email[0] : ''
                 this.errors.phone = data.errors.phone ? data.errors.phone[0] : ''
                 this.errors.category = data.errors.category ? data.errors.category[0] : ''
-            }).finally(() => {
-                // this.errors.category = ''
             })
         },
 

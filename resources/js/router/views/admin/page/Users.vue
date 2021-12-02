@@ -23,7 +23,19 @@
                             <v-container>
                                 <v-row>
                                     <v-col cols="12">
-                                        <v-text-field v-model="editedItem.name" label="Название"></v-text-field>
+                                        <v-text-field v-model="editedItem.name" label="Логин"
+                                                      @input="errors.clear('name')"
+                                                      :error="errors.has('name')"
+                                                      :error-messages="errors.get('name')"></v-text-field>
+                                        <v-text-field v-model="editedItem.email" label="Почта"
+                                                      @input="errors.clear('email')"
+                                                      :error="errors.has('email')"
+                                                      :error-messages="errors.get('email')"></v-text-field>
+                                        <v-text-field type="password" v-model="editedItem.password"
+                                                      @input="errors.clear('password')"
+                                                      :error="errors.has('password')"
+                                                      :error-messages="errors.get('password')"
+                                                      label="Пароль"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -57,29 +69,36 @@
 </template>
 
 <script>
-import Form from "../../../../utils/Form"
+
+import Errors from "../../../../utils/Errors";
 
 export default {
     name: "Users",
-    data: () => ({
-        dialog: false,
-        dialogDelete: false,
-        headers: [
-            {text: 'Имя', value: 'name'},
-            {text: 'Email', value: 'email'},
-            {text: 'Дата создания', value: 'created_at'},
-            {text: 'Actions', value: 'actions', sortable: false, width: '10%'},
-        ],
-        users: [],
-        editedIndex: -1,
-        editedItem: new Form({
-            name: ''
-        }),
-        defaultItem: {
-            name: ''
-        },
-        delete: ''
-    }),
+    data() {
+        return {
+            dialog: false,
+            dialogDelete: false,
+            headers: [
+                {text: 'Имя', value: 'name'},
+                {text: 'Email', value: 'email'},
+                {text: 'Дата создания', value: 'created_at'},
+                {text: 'Actions', value: 'actions', sortable: false, width: '10%'},
+            ],
+            users: [],
+            editedIndex: -1,
+            errors: new Errors(),
+            editedItem: {
+                name: this.users ? this.users.name : '',
+                email: this.users ? this.users.email : '',
+                password: this.editedIndex ? '' : '',
+
+            },
+            defaultItem: {
+                name: ''
+            },
+            delete: ''
+        }
+    },
 
     watch: {
         dialog(val) {
@@ -106,6 +125,7 @@ export default {
         editItem(item) {
             this.editedIndex = this.users.indexOf(item)
             this.editedItem = Object.assign({}, item)
+            this.editedItem.password = ''
             this.dialog = true
         },
 
@@ -117,7 +137,7 @@ export default {
         },
 
         deleteItemConfirm() {
-            this.remove(this.delete).finally(() => {
+            axios.delete(`/api/users/${this.delete}`).then(() => {
                 this.getUsers()
                 this.closeDelete()
             })
@@ -137,26 +157,39 @@ export default {
 
         getUsers() {
             axios.get('/api/users').then(response => {
-                this.users = response.data
+                this.users = response.data.data
             })
         },
 
-        save() {
+        async save() {
             let formData = new FormData()
             formData.append('name', this.editedItem.name)
             formData.append('email', this.editedItem.email)
-            formData.append('email', this.editedItem.password)
-            formData.append('email', this.editedItem.password_confirmation)
+            formData.append('password', this.editedItem.password)
 
             if (this.editedIndex > -1) {
-                axios.put(`/api/users/${id}`, formData).then(() => {
+                formData.append('_method', 'PUT')
+
+                await axios.post(`/api/users/${this.editedItem.id}`, formData).then(() => {
                     this.getUsers()
                     this.close()
+                }).catch(error => {
+                    let {data} = error.response
+
+                    if (data) {
+                        this.errors.record(data)
+                    }
                 })
             } else {
-                axios.post('/api/users', formData).then(() => {
+                await axios.post('/api/users', formData).then(() => {
                     this.getUsers()
                     this.close()
+                }).catch(error => {
+                    let {data} = error.response
+
+                    if (data) {
+                        this.errors.record(data)
+                    }
                 })
             }
         },

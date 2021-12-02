@@ -5,6 +5,7 @@ use App\Http\Controllers\ApplicationsController;
 use App\Http\Controllers\CasesController;
 use App\Http\Controllers\CategoriesCasesController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UsersController;
 use App\Models\CasesStatus;
 use App\Models\FileUpload;
 use GuzzleHttp\Client;
@@ -47,10 +48,14 @@ Route::get('statuses', function (){
 
 Route::post('upload', [FileController::class, 'upload'])->name('upload');
 
-//Route::middleware('auth:sanctum')->group(function () {
-//    Route::get('users', [UsersController::class, 'index'])->name('users');
-//    Route::delete('users/{id}', [UsersController::class, 'destroy'])->name('delete.users');
-//});
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('users', UsersController::class)->names([
+        'index' => 'users.index',
+        'store' => 'users.store',
+        'update' => 'users.edit',
+        'destroy' => 'users.destroy',
+    ]);
+});
 
 Route::get('sypexgeo', function (Client $client) {
     $body = $client->get('api.sypexgeo.net/json')->getBody();

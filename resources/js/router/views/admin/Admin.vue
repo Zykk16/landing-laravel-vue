@@ -54,7 +54,7 @@ export default {
                 {title: 'Кейсы', href: '/admin/cases', icon: 'mdi-briefcase-variant-outline'},
                 {title: 'Категории', href: '/admin/category', icon: 'mdi-shape-outline'},
                 {title: 'Клиенты', href: '/admin/clients', icon: 'mdi-human-handsup'},
-                // {title: 'Пользователи', href: '/admin/users', icon: 'mdi-account'},
+                {title: 'Пользователи', href: '/admin/users', icon: 'mdi-account'},
             ],
         }
     },

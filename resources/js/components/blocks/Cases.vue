@@ -5,7 +5,8 @@
             <!-- Все -->
             <tab title="Все">
                 <div class="cases-items">
-                    <div class="item blur" v-for="(item, key) in pageOfAllItems" :key="key">
+                    <router-link class="item blur" v-for="(item, key) in pageOfAllItems" :key="key"
+                                 :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
                         <div class="item-image">
                             <img :src="item.image" :alt="item.title">
                         </div>
@@ -39,7 +40,7 @@
                                 <div class="indicator-value gradient-h1">{{ item.coverage }}</div>
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
                 <div v-if="loading">
                     <jw-pagination :class="sortCasesByAllItem.length <= 6 ? 'disabled' : ''"
@@ -49,7 +50,8 @@
             <!-- По категориям -->
             <tab :title="item" v-for="(item, i) in getCategoryTabs" :key="i">
                 <div class="cases-items">
-                    <div class="item blur" v-for="(item, key) in pageOfItems" :key="key">
+                    <router-link class="item blur" v-for="(item, key) in pageOfItems" :key="key"
+                                 :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
                         <div class="item-image">
                             <img :src="item.image" :alt="item.title">
                         </div>
@@ -83,7 +85,7 @@
                                 <div class="indicator-value gradient-h1">{{ item.coverage }}</div>
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
                 <div v-if="loading">
                     <jw-pagination :class="sortCasesByTabs.length <= 6 ? 'disabled' : ''"
@@ -96,7 +98,8 @@
             <tab title="Все">
                 <div class="cases-items">
                     <swiper ref="mySwiper" :options="swiperOptions">
-                        <swiper-slide class="item blur" v-for="(item, key) in pageOfAllItems" :key="key">
+                        <swiper-slide class="item blur" v-for="(item, key) in pageOfAllItems" :key="key"
+                                      @click.native="$router.push({ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}})">
                             <div class="item-image">
                                 <img :src="item.image" :alt="item.title">
                             </div>
@@ -106,10 +109,7 @@
                                     {{ additionText(item).substr(0, 170) }}
                                 </div>
                                 <div v-if="additionText(item).length > 170" class="read-more">
-                                    <router-link class="more" :key="key"
-                                                 :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
-                                        ...подробнее
-                                    </router-link>
+                                    <div class="more">...далее</div>
                                 </div>
                             </div>
                             <div class="item-wrapper-indicators">
@@ -143,7 +143,7 @@
                 <div class="cases-items">
                     <swiper ref="mySwiper" :options="swiperOptions">
                         <swiper-slide class="item blur" v-for="(item, key) in pageOfItems" :key="key"
-                                      @click.native="$router.push({ name: 'case', params: {slug: item.slug, data: item}})">
+                                      @click.native="$router.push({ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}})">
                             <div class="item-image">
                                 <img :src="item.image" :alt="item.title">
                             </div>
@@ -153,10 +153,7 @@
                                     {{ additionText(item).substr(0, 170) }}
                                 </div>
                                 <div v-if="additionText(item).length > 170" class="read-more">
-                                    <router-link class="more" :key="key"
-                                                 :to="{ name: 'case', params: {slug: item.slug + '-' + item.id, data: item}}">
-                                        ...подробнее
-                                    </router-link>
+                                    <div class="more">...далее</div>
                                 </div>
                             </div>
                             <div class="item-wrapper-indicators">

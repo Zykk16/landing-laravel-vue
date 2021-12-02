@@ -18,7 +18,6 @@
                                 {{form.image}}
                                 <cases-image-uploader :cover="form.image" @loaded="updateImage"
                                                       @preloadImg="errorHandlerImage = true"/>
-                                <span class="size" v-if="size">{{'Размер файла: ' + size + ' Kb'}}</span>
                                 <div v-if="!errorHandlerImage">
                                     <v-alert v-if="errors.has('image')" color="red" dense text type="error">
                                         {{ errors.get('image') }}
@@ -209,8 +208,7 @@ export default {
                 depth: '',
                 duration_session: '',
                 objectives: ''
-            },
-            size: null
+            }
         }
     },
 
@@ -230,7 +228,6 @@ export default {
 
         updateImage(image) {
             this.form.logo = image
-            this.size = Math.round(image.size / 1024)
         },
 
         post() {

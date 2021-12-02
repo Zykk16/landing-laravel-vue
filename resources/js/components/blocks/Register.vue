@@ -32,7 +32,7 @@
                     <span v-if="errors.password_confirmation" class="error">{{ errors.password_confirmation }}</span>
                 </div>
                 <Checkbox @input="checked" options="Ознакомлен и согласен с правилами работы в системе otClick"/>
-                <span v-if="errors.checkbox && !user.checkbox" class="error">{{ errors.checkbox }}</span>
+                <span v-if="errors.checkbox && !user.checkbox" class="error error-checkbox">{{ errors.checkbox }}</span>
                 <Button
                     :text="loading ? 'Загрузка...' : 'Зарегистрироваться'"
                     width="120px"
@@ -108,6 +108,7 @@ export default {
                 // this.signIn()
                 this.$refs.register.reset()
                 this.successRegister = !this.successRegister
+                axios.post('/logout')
             }).catch(({response: {data}}) => {
                 this.errors.name = data.errors.name ? data.errors.name[0] : ''
                 this.errors.email = data.errors.email ? data.errors.email[0] : ''

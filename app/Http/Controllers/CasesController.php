@@ -24,7 +24,8 @@ class CasesController extends Controller
 
     public function frontendCases(): JsonResponse
     {
-        $cases = Cases::with('category')->where('status_id', 1)->get();
+        $cases = Cases::with('category')->where('status_id', 1)
+            ->orderBy('created_at', 'DESC')->get();
 
         return response()->json($cases);
     }

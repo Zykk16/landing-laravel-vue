@@ -82,6 +82,28 @@
         font: bold 14px/18px 'ArtegraSoft-Medium', sans-serif;
     }
 
+    .error-checkbox {
+        margin-top: 1.25em;
+
+        @include mobile {
+            margin-top: 2.5em;
+        }
+
+        @include mobile-max {
+            margin-top: 2.5em;
+        }
+    }
+
+    .checkbox{
+        @include mobile {
+            margin-top: 2.5em!important;
+        }
+
+        @include mobile-max {
+            margin-top: 2.5em!important;
+        }
+    }
+
     .cross {
         position: absolute;
         top: 35px;

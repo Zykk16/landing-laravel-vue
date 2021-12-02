@@ -4,9 +4,6 @@
         <main role="main" v-if="data">
             <div class="case">
                 <div class="case-wrapper blur">
-                    <a class="cross-back" @click="backHome">
-                        <img src="../../../img/svg/cross.svg" alt="">
-                    </a>
                     <img :src="data.image" :alt="data.title">
                     <div class="case-sections">
                         <div class="section">
@@ -151,10 +148,6 @@ export default {
     },
 
     methods: {
-        backHome() {
-            this.$router.push('/')
-        },
-
         init() {
             axios.get('/api/cases/' + this.$route.params.slug)
                 .then(response => {

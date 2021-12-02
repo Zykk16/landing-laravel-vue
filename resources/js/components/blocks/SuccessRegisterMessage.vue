@@ -16,7 +16,7 @@ export default {
     name: "SuccessRegisterMessage",
     methods: {
         success() {
-            this.$emit('success', true)
+            location.reload()
         }
     }
 }
