@@ -92,6 +92,7 @@ export default {
             box-sizing: border-box;
             border-radius: 37px;
             outline: none;
+            -webkit-appearance: none;
         }
 
         &:before {

@@ -24,6 +24,15 @@
         flex-flow: row wrap;
         justify-content: space-between;
 
+        @include huge-mobile {
+            height: 270px;
+        }
+
+        @include mobile-max {
+            height: 270px;
+
+        }
+
         &::after {
             content: "";
             flex: 0 0 32%;

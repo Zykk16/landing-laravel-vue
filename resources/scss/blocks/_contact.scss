@@ -14,21 +14,27 @@
     h2 {
         line-height: 40px;
 
+        @include tablet{
+            line-height: 28px;
+            font-size: 22px;
+        }
+
         @include mobile {
-            font-size: 28px;
+            line-height: 28px;
+            font-size: 22px;
         }
 
         @include huge-mobile {
-            font-size: 28px;
-            line-height: 40px;
-            margin-top: 1.25em;
+            line-height: 24px;
+            font-size: 20px;
+            margin-top: 2.5em;
             text-align: center;
         }
 
         @include mobile-max {
-            font-size: 28px;
-            line-height: 40px;
-            margin-top: 1.25em;
+            line-height: 24px;
+            font-size: 20px;
+            margin-top: 2.5em;
             text-align: center;
         }
     }
@@ -189,13 +195,6 @@
             font: 400 14px/18px "ArtegraSoft-Bold", sans-serif;
             color: $gray-input;
             flex: 0 0 100%;
-
-            @include huge-mobile {
-                margin-bottom: 0;
-            }
-            @include mobile-max {
-                margin-bottom: 0;
-            }
         }
 
         .button {
@@ -294,6 +293,8 @@
         background-size: cover;
 
         @include tablet {
+            width: 150px;
+            height: 150px;
             right: 50px;
         }
 

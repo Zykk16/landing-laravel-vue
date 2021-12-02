@@ -22,13 +22,13 @@
         }
 
         @include mobile {
-            margin-top: 0;
+            margin-top: 2.5em;
             margin-bottom: 0;
             font-size: 30px;
         }
 
         @include mobile-max {
-            margin-top: 0;
+            margin-top: 2.5em;
             margin-bottom: 0;
             font-size: 30px;
         }
