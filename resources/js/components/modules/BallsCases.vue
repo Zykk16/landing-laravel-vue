@@ -164,14 +164,6 @@ export default {
         bottom: -120px;
         left: -10px;
 
-        @include small-desktop {
-
-        }
-
-        @include tablet {
-
-        }
-
         @include mobile-max {
             width: 18px;
             height: 18px;
@@ -195,12 +187,12 @@ export default {
         opacity: .5;
 
         @include small-desktop {
-            left: 46%;
+            left: 66%;
             bottom: -140px;
         }
 
         @include tablet {
-            left: 46%;
+            left: 66%;
             bottom: -140px;
         }
 
