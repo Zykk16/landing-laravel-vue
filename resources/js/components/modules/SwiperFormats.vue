@@ -1,6 +1,6 @@
 <template>
     <swiper ref="mySwiper" :options="swiperOptions">
-        <swiper-slide v-for="(item, key) in array" :key="key" class="item">
+        <swiper-slide v-for="(item, key) in array" :key="key" class="item" :class="inApp">
             <div class="image-wrapper blur" :class="inApp">
                 <img :src="imagePath(item.img)" :alt="item.title">
             </div>

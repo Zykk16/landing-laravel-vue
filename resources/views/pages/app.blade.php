@@ -2,5 +2,5 @@
 
 @section('content')
     <main id="app"></main>
-    <script src="{{ mix('/js/app.js') }}" type="text/javascript"></script>
+    <script src="{{ mix('/js/app.js') }}" type="text/javascript" async></script>
 @endsection

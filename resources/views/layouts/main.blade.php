@@ -31,9 +31,6 @@
     <![endif]-->
 </head>
 <body>
-<noscript>
-    Ваш браузер не поддерживается, обновите до последней версии
-</noscript>
 @yield('content')
 </body>
 </html>

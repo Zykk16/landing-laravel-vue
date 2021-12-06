@@ -36,7 +36,7 @@ export default {
     mounted() {
         setTimeout(() => {
             this.selectTab(0)
-        }, 500)
+        }, 1000)
     },
     methods: {
         switchView(event, selectedIndex) {
