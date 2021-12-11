@@ -1,0 +1,342 @@
+.contact {
+    position: relative;
+    margin-top: 10em;
+    margin-bottom: 8.125em;
+
+    @include mobile {
+        margin-top: 7em;
+    }
+
+    @include mobile-max {
+        margin-top: 7em;
+    }
+
+    h2 {
+        line-height: 40px;
+
+        @include tablet{
+            line-height: 28px;
+            font-size: 22px;
+        }
+
+        @include mobile {
+            line-height: 28px;
+            font-size: 22px;
+        }
+
+        @include huge-mobile {
+            line-height: 24px;
+            font-size: 20px;
+            margin-top: 2.5em;
+            text-align: center;
+        }
+
+        @include mobile-max {
+            line-height: 24px;
+            font-size: 20px;
+            margin-top: 2.5em;
+            text-align: center;
+        }
+    }
+
+    p {
+        margin: 2.5em 0;
+        font: 500 22px/30px "ArtegraSoft-Medium", sans-serif;
+        color: $gray-input;
+
+        @include tablet {
+            margin: 1.875em 0;
+            width: 550px;
+        }
+
+        @include mobile {
+            margin: 1.875em 0;
+            width: auto;
+        }
+
+        @include huge-mobile {
+            margin-top: 1.25em;
+            margin-bottom: 2.5em;
+            width: auto;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        @include mobile-max {
+            margin-top: 1.25em;
+            margin-bottom: 2.5em;
+            width: auto;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+    }
+
+    &-form {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        padding: 5em 10em;
+        background: rgba(252, 98, 0, 0.06);
+        border-radius: 46px;
+
+        @include small-desktop {
+            padding: 5em 6.25em;
+        }
+
+        @include tablet {
+            margin-top: 12.5em;
+            padding: 3.75em;
+        }
+
+        @include mobile {
+            padding: 3.75em 1.875em;
+        }
+
+        @include huge-mobile {
+            padding: 2.5em 1.875em;
+        }
+
+        @include mobile-max {
+            padding: 2.5em 1.875em;
+        }
+
+        &-group {
+            position: relative;
+            flex: 0 0 49%;
+
+            @include huge-mobile {
+                flex: 0 0 100%;
+            }
+
+            @include mobile-max {
+                flex: 0 0 100%;
+            }
+
+            &.required:after {
+                content:"*";
+                position: absolute;
+                display: block;
+                top: 0;
+                right: 0;
+                width: 3px;
+                height: 3px;
+                color: $red;
+            }
+
+            .field, select {
+                width: 100%;
+                margin-bottom: 1.25em;
+                padding: 1.25em 2.5em;
+                background: rgba(255, 255, 255, 0.88);
+                border: 1px solid #EEEEEE;
+                box-sizing: border-box;
+                border-radius: 46px;
+                font: 14px/20px "Inter-Regular", sans-serif;
+                outline: none;
+                color: $gray-input;
+                -webkit-appearance: none;
+
+                &.field-error {
+                    border-color: $red;
+                }
+            }
+
+            .error-message {
+                margin-bottom: 1.25em;
+                font: 12px/20px "Inter-Regular", sans-serif;
+                color: $red;
+            }
+
+            textarea {
+                resize: none;
+                scroll: none;
+
+                @include huge-mobile {
+                    height: 150px;
+                }
+                @include mobile-max {
+                    height: 150px;
+                }
+            }
+
+            &.group-textarea {
+                flex: 0 0 100%;
+            }
+
+            &.select-dropdown {
+                position: relative;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 19px;
+                    right: 4px;
+                    width: 60px;
+                    height: 17px;
+                    background: url("../../img/arrow-select.png") center no-repeat #fff;
+                    background-size: contain;
+                }
+            }
+
+            .error {
+                display: block;
+                margin-bottom: 1.25em;
+                color: $red;
+                font: bold 14px/18px 'ArtegraSoft-Medium', sans-serif;
+            }
+        }
+
+        .personal-data {
+            margin-top: 1.25em;
+            font: 400 14px/18px "ArtegraSoft-Bold", sans-serif;
+            color: $gray-input;
+            flex: 0 0 100%;
+        }
+
+        .button {
+            position: relative;
+            display: block;
+            width: 180px;
+            height: 46px;
+            margin-top: .5em;
+            padding: 1.8em 3em 1.4em 3em;
+            font: normal 10px/1 'ArtegraSoft-Medium', sans-serif;
+            background-color: $red;
+            text-transform: uppercase;
+            border-radius: 112px;
+            border: 1px solid $red;
+            opacity: 0.95;
+            color: #fff;
+            text-align: center;
+            letter-spacing: .2px;
+            cursor: pointer;
+            transition: .2s ease-in-out;
+
+            &:hover {
+                background-color: $white;
+                border: 1px solid $gray-input;
+                color: $black;
+            }
+
+            @include huge-mobile {
+                width: 100%;
+            }
+            @include mobile-max {
+                width: 100%;
+            }
+        }
+
+        &-info {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2.5em;
+        }
+    }
+
+    .send-message {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10em;
+        box-sizing: border-box;
+        border-radius: inherit;
+
+        @include tablet {
+            padding: 7em 5em;
+        }
+
+        @include mobile {
+            padding: 7em 5em;
+        }
+
+        @include huge-mobile {
+            padding: 5em 2.5em;
+
+        }
+
+        @include mobile-max {
+            padding: 5em 2.5em;
+        }
+
+        h1 {
+            width: 90%;
+            text-align: center;
+        }
+
+        p {
+            font: 500 22px/30px "ArtegraSoft-Medium", sans-serif;
+            margin-bottom: 1.25em;
+        }
+
+        .cross-back {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+        }
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        right: 100px;
+        background: url("../../img/icon-form.png") center no-repeat;
+        width: 185px;
+        height: 185px;
+        z-index: 9;
+        background-size: cover;
+
+        @include tablet {
+            width: 150px;
+            height: 150px;
+            right: 50px;
+        }
+
+        @include mobile {
+            width: 115px;
+            height: 115px;
+            top: -60px;
+            right: 50px;
+        }
+
+        @include huge-mobile {
+            width: 130px;
+            height: 130px;
+            margin-left: auto;
+            margin-right: auto;
+            top: -60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        @include mobile-max {
+            width: 130px;
+            height: 130px;
+            margin-left: auto;
+            margin-right: auto;
+            top: -60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+    }
+
+    &.disable-icon {
+        background: rgba(255, 255, 255, 0.22);
+        border: 1px solid #EEEEEE;
+        box-sizing: border-box;
+        border-radius: 46px;
+
+        &:before {
+            content: none;
+        }
+    }
+
+}

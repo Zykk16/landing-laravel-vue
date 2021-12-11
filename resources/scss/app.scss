@@ -12,21 +12,29 @@
 /* Blocks */
 @import "blocks/header";
 @import "blocks/footer";
+
 @import "blocks/banner";
 @import "blocks/cases";
 @import "blocks/advantages";
+@import "blocks/formats";
+@import "blocks/clients";
+@import "blocks/contact";
 
+/* Admin */
 @import "blocks/admin/login";
+
+/* Other */
+@import "blocks/privacy";
 
 h1 {
     font: normal 35px/43px 'ArtegraSoft-Bold', sans-serif;
 
     @include mobile {
-        font-size: 28px;
+        font-size: 30px;
     }
 
     @include mobile-max {
-        font-size: 28px;
+        font-size: 30px;
     }
 }
 
@@ -43,6 +51,11 @@ h2 {
     }
 }
 
+h4 {
+    font: 14px/18px 'ArtegraSoft-Bold', sans-serif;
+    color: $gray-input;
+}
+
 a {
     color: $black;
 }
@@ -50,4 +63,93 @@ a {
 img {
     width: 100%;
     height: auto;
+}
+
+.centered-item {
+    td {
+        vertical-align: middle;
+    }
+}
+
+.v-data-table__expanded__content {
+    td {
+        max-width: 1000px;
+        vertical-align: middle;
+    }
+}
+
+.v-data-table > .v-data-table__wrapper tbody tr.v-data-table__expanded__content {
+    box-shadow: inset 0 0 25px -15px !important;
+}
+
+.pagination {
+    display: flex !important;
+    justify-content: center;
+
+    .page-item {
+        a {
+            display: flex !important;
+            justify-content: center;
+            flex-direction: column;
+            height: 48px;
+            width: 48px;
+            margin: 6px 12px;
+            padding: 0 !important;
+            font: normal 14px/18 "ArtegraSoft-Medium", sans-serif;
+            border: 1px solid #DCDCDC;
+            box-sizing: border-box;
+            border-radius: 44px;
+            float: none !important;
+        }
+
+        &.active {
+            a {
+                color: $white;
+                background: linear-gradient(241.44deg, #F45E64 16.71%, #E84542 40.25%, #B80F0C 81.58%, rgba(129, 97, 237, 0) 133.8%);
+                border: none;
+                opacity: 0.95;
+            }
+        }
+
+        &.first {
+            display: none !important;
+        }
+
+        &.previous {
+            display: none !important;
+        }
+
+        &.next {
+            display: none !important;
+        }
+
+        &.last {
+            display: none !important;
+        }
+    }
+
+    &.disabled {
+        display: none !important;
+    }
+}
+
+.ballOne,
+.ballTwo,
+.ballThree,
+.ballFour,
+.ballFifth,
+.ballSixth,
+.ballSeventh,
+.ballEighth {
+    pointer-events: none;
+}
+
+.cross-back {
+    cursor: pointer;
+}
+
+.new-default-admin-button {
+    text-transform: none;
+    letter-spacing: 0;
+    font: 14px/18px "ArtegraSoft-Bold", sans-serif;
 }

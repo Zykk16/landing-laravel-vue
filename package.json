@@ -10,12 +10,15 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@mdi/font": "^6.4.95",
+        "autoprefixer": "^10.4.0",
         "axios": "^0.21",
         "browser-sync": "^2.26.14",
         "browser-sync-webpack-plugin": "^2.2.2",
         "cross-env": "^5.1",
         "escape-string-regexp": "^2.0.0",
-        "js-cookie": "^3.0.1",
+        "gsap": "^3.8.0",
+        "jw-vue-pagination": "^1.0.3",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "mustache": "^4.2.0",
@@ -25,18 +28,20 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.32.13",
         "sass-loader": "^11.1.1",
+        "targets-webpack-plugin": "^4.0.0",
         "url-loader": "^4.1.1",
         "vue": "^2.6.12",
         "vue-awesome-swiper": "^4.1.1",
         "vue-loader": "^15.9.7",
+        "vue-masked-input": "^0.5.2",
         "vue-router": "^3.1.3",
         "vue-template-compiler": "^2.6.10",
         "vuex": "^3.1.2",
-        "vuex-persistedstate": "^4.1.0",
         "webpack": "^5.37.0",
         "webpack-cli": "^4.7.0"
     },
     "dependencies": {
-        "vue-scrollto": "^2.20.0"
+        "vue-scrollto": "^2.20.0",
+        "vuetify": "^2.5.10"
     }
 }

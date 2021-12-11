@@ -15,8 +15,8 @@ class Request {
                 // redirect to login page if the request is not authorized,
                 // otherwise push a new error notification to the notifications
                 error.response.status === 401 ?
-                    window.location.href = '/login' : null;
-                    //store.dispatch('notifications/push', new Notification(error.response.data.message));
+                    window.location.href = '/login-admin' : null;
+                //store.dispatch('notifications/push', new Notification(error.response.data.message));
 
                 return Promise.reject(error);
             });

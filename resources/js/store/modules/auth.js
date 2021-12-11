@@ -1,31 +1,38 @@
-import axios from 'axios'
-import router from '../../router'
+import request from "../../utils/Request"
+
 
 const state = {
     authenticated: false,
     user: null
-};
+}
 
 const getters = {
     authenticated: state => state.authenticated,
     user: state => state.user
-};
+}
 
 const actions = {
-    login({commit}) {
-        return axios.get('/api/user').then(({data}) => {
-            commit('setUser', data)
-            commit('setAuthenticated', true)
-            router.push({name: 'admin'})
-        }).catch(() => {
-            commit('setUser', {})
-            commit('setAuthenticated', false)
-        })
+    async login ({ dispatch }, credentials) {
+        await request.get('/sanctum/csrf-cookie')
+        await request.post('/login', credentials)
+
+        return dispatch('me')
     },
 
-    logout({commit}) {
-        commit('setUser', {})
-        commit('setAuthenticated', false)
+    async logout ({ dispatch }) {
+        await request.post('/logout')
+
+        return dispatch('me')
+    },
+
+    me ({ commit }) {
+        return request.get('/api/user').then((response) => {
+            commit('setAuthenticated', true)
+            commit('setUser', response.data)
+        }).catch(() => {
+            commit('setAuthenticated', false)
+            commit('setUser', null)
+        })
     }
 }
 

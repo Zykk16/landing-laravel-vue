@@ -16,6 +16,12 @@
     box-sizing: border-box;
 }
 
+@mixin blur() {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.32);
+    box-sizing: border-box;
+}
+
 .my {
     margin: 2.125em 7.5em 1.875em 7.5em;
 
@@ -70,3 +76,44 @@
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
 }
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */
+{
+    opacity: 0;
+}
+
+@mixin ball-animate() {
+    @keyframes Balls {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        10%,
+        30%,
+        50%,
+        70% {
+            transform: translateY(-4px);
+        }
+
+        20%,
+        40%,
+        60% {
+            transform: translateY(4px);
+        }
+
+        80% {
+            transform: translateY(4px);
+        }
+
+        90% {
+            transform: translateY(-4px);
+        }
+    }
+}
+
+@include ball-animate;

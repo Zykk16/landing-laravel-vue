@@ -1,4 +1,5 @@
 .advantages {
+    position: relative;
 
     @include mobile {
         height: 450px;
@@ -9,20 +10,25 @@
     }
 
     h1 {
-        margin-bottom: 2.6em;
+        margin-top: 4em;
+        margin-bottom: 2.5em;
         text-align: center;
         font-size: 35px;
         color: $black;
 
         @include tablet {
-            margin-bottom: 2.6em;
+            margin-top: 0;
+            margin-bottom: 2.5em;
         }
 
         @include mobile {
+            margin-top: 2.5em;
             margin-bottom: 0;
+            font-size: 30px;
         }
 
         @include mobile-max {
+            margin-top: 2.5em;
             margin-bottom: 0;
             font-size: 30px;
         }
@@ -71,6 +77,22 @@
             margin-bottom: 1.25em;
             font: normal 18px/23px 'ArtegraSoft-Bold', sans-serif;
             color: $red;
+
+            @include small-desktop {
+                height: 45px;
+            }
+
+            @include tablet {
+                height: 45px;
+            }
+
+            @include mobile {
+                height: 45px;
+            }
+
+            @include mobile-max {
+                height: 45px;
+            }
         }
 
         &-description {

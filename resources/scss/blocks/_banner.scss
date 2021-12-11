@@ -17,15 +17,17 @@
     }
 
     @include mobile-max {
+        padding-top: 2.5em;
         padding-bottom: 2.5em;
         flex-direction: column;
     }
 
     &-offer {
         margin: 15.625em 0;
+        z-index: 9;
 
         @include small-desktop {
-            margin: 8.188em 0;
+            margin: 6.188em 0;
         }
 
         @include tablet {
@@ -116,14 +118,15 @@
         align-self: center;
         background: url("../../img/svg/sphere.svg") no-repeat center;
         background-size: contain;
+        z-index: 9;
 
         @include sphere-screen {
             margin-right: 5em;
         }
 
         @include small-desktop {
-            width: 404px;
-            height: 404px;
+            width: 454px;
+            height: 454px;
             margin-top: 2.5em;
             margin-right: calc(30% - 250px);
         }

@@ -1,5 +1,5 @@
 <template>
-    <div id="advantages" class="advantages my">
+    <div class="advantages my">
         <h1>Почему стоит работать с Нами</h1>
         <div v-if="!screen" class="advantages-wrapper">
             <div v-for="(item, key) in advantages" :key="key" class="advantages-item blur">
@@ -11,16 +11,17 @@
             </div>
         </div>
         <SwiperAdvantages :advantages="advantages" v-if="advantages && screen"/>
-
+        <BallsAdvantages :balls="balls"/>
     </div>
 </template>
 
 <script>
 import SwiperAdvantages from "../modules/SwiperAdvantages";
+import BallsAdvantages from "../modules/BallsAdvantages";
 
 export default {
     name: "Advantages",
-    components: {SwiperAdvantages},
+    components: {BallsAdvantages, SwiperAdvantages},
 
     data() {
         return {
@@ -66,6 +67,13 @@ export default {
                     title: 'Современные технологии',
                     description: 'Аудиторный таргетинг, look-a-like, ретаргетинг, таргетинг по тематическим ресурсам'
                 },
+            ],
+            balls: [
+                {className: 'ballOne', img: 'ball-2'},
+                {className: 'ballTwo', img: 'ball-2'},
+                {className: 'ballThree', img: 'ball-1'},
+                {className: 'ballFour', img: 'ball-1'},
+                {className: 'ballFifth', img: 'ball-2'},
             ]
         }
     },

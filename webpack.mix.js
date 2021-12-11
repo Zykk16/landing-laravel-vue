@@ -1,4 +1,20 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
+
+mix.webpackConfig(webpack => {
+    return {
+        module: {
+            rules: [{
+                test: /(\.(png|jpe?g|gif|webp)$|^((?!font).)*\.svg$)/,
+                use: [{
+                    loader: require.resolve('file-loader'),
+                    options: {
+                        esModule: false
+                    }
+                }]
+            }]
+        }
+    }
+})
 
 mix.js('resources/js/app.js', 'public/js').vue()
     .sass('resources/scss/app.scss', 'public/css')
@@ -15,19 +31,3 @@ mix.js('resources/js/app.js', 'public/js').vue()
         host: process.env.HOSTNAME,
         proxy: process.env.HOSTNAME
     });
-
-mix.webpackConfig(webpack => {
-    return {
-        module: {
-            rules: [{
-                test: /(\.(png|jpe?g|gif|webp)$|^((?!font).)*\.svg$)/,
-                use: [{
-                    loader: require.resolve('file-loader'),
-                    options: {
-                        esModule: false
-                    }
-                }]
-            }]
-        }
-    };
-});

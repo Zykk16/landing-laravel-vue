@@ -1,0 +1,45 @@
+.privacy-policy {
+    color: $black;
+    padding-bottom: 5em;
+
+    h1 {
+        margin: 2.5em 0;
+        color: $red;
+
+        @include tablet {
+            margin-bottom: 1.25em;
+        }
+
+        @include mobile {
+            margin-bottom: 1.25em;
+        }
+
+        @include mobile-max {
+            margin: 1.25em 0;
+            font-size: 28px;
+        }
+    }
+
+    h2 {
+        margin-bottom: .72em;
+    }
+
+    .wrapper {
+        margin-bottom: 2.5em;
+        font: 14px/20px 'Inter-Regular', sans-serif;
+    }
+
+    .ul-wrapper {
+        font: 14px/20px 'Inter-Regular', sans-serif;
+    }
+
+    ul {
+        padding-top: .75em;
+        padding-left: 1.25em;
+        margin-bottom: 2.5em;
+
+        li {
+            font: 14px/20px 'Inter-Regular', sans-serif;
+        }
+    }
+}

@@ -1,0 +1,134 @@
+.formats {
+    position: relative;
+    margin-top: 10em;
+
+    @include tablet {
+        margin-top: 7.5em;
+    }
+
+    @include mobile {
+        margin-top: 6.25em;
+    }
+
+    @include mobile-max {
+        margin-top: 6.25em;
+    }
+
+    h1 {
+        text-align: center;
+        color: $black;
+    }
+
+    .items {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        @include huge-mobile {
+            height: 270px;
+        }
+
+        @include mobile-max {
+            height: 270px;
+
+        }
+
+        &::after {
+            content: "";
+            flex: 0 0 32%;
+
+            @include mobile {
+                flex: 0 0 48%;
+            }
+
+            @include huge-mobile {
+                display: none;
+            }
+
+            @include mobile-max {
+                display: none;
+            }
+        }
+
+        .item {
+            margin-top: 2.5em;
+            flex: 0 0 32%;
+            box-sizing: border-box;
+
+            @include mobile {
+                flex: 0 0 48%;
+            }
+
+            @include huge-mobile {
+                flex: 0 0 70%;
+            }
+
+            @include mobile-max {
+                flex: 0 0 70%;
+            }
+
+            .image-wrapper {
+                background: rgba(255, 255, 255, 0.22);
+                border: 1px solid #EEEEEE;
+                box-sizing: border-box;
+                border-radius: 46px;
+                padding: 1.125em 10% 0;
+
+                @include small-desktop {
+                    padding: 1.125em 5% 0;
+                }
+
+                @include tablet {
+                    padding: 1.125em 5% 0;
+                }
+
+                @include mobile {
+                    padding: 1.125em 5% 0;
+                }
+
+                @include huge-mobile {
+                    padding: 1.125em 5% 0;
+                }
+
+                @include mobile-max {
+                    padding: 1.125em 5% 0;
+                }
+
+                &.mobile {
+                    padding: 1.125em 30% 0;
+
+                    @include small-desktop {
+                        padding: 1.125em 28% 0;
+                    }
+
+                    @include tablet {
+                        padding: 1.125em 28% 0;
+                    }
+
+                    @include mobile {
+                        padding: 1.125em 28% 0;
+                    }
+
+                    @include huge-mobile {
+                        padding: 1.125em 28% 0;
+                    }
+
+                    @include mobile-max {
+                        padding: 1.125em 28% 0;
+                    }
+                }
+            }
+
+            .title {
+                padding: 1.25em 0;
+                font: 14px/18px 'ArtegraSoft-Bold', sans-serif;
+                border-bottom: 1px solid $gray-input;
+                color: $black;
+            }
+
+            &.mobile{
+
+            }
+        }
+    }
+}

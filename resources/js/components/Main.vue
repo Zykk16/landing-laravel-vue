@@ -1,20 +1,27 @@
 <template>
-    <main role="main">
+    <div>
+        <Header/>
+        <main role="main">
+            <!-- Banner -->
+            <Banner id="about"/>
 
-        <!-- Banner -->
-        <Banner id="about"/>
+            <!-- Cases -->
+            <Cases id="cases"/>
 
-        <!-- Cases -->
-        <div id="cases" class="cases my">
-            <h1>Кейсы</h1>
-        </div>
+            <!-- Advantages -->
+            <Advantages id="advantages"/>
 
-        <!-- Advantages -->
-        <Advantages id="advantages"/>
+            <!-- Advantages -->
+            <Formats id="formats"/>
 
-        <!-- Advantages -->
-        <Formats/>
-    </main>
+            <!-- Clients -->
+            <Clients id="clients"/>
+
+            <!-- Contact form -->
+            <ContactForm id="contactForm"/>
+        </main>
+        <Footer/>
+    </div>
 </template>
 
 <script>
@@ -23,10 +30,14 @@ import Advantages from "./blocks/Advantages";
 import Banner from "./blocks/Banner";
 import Footer from "./Footer";
 import Formats from "./blocks/Formats";
+import Clients from "./blocks/Clients";
+import Header from "./Header";
+import ContactForm from "./blocks/ContactForm";
+import Cases from "./blocks/Cases";
 
 export default {
     name: "Main",
-    components: {Formats, Footer, Banner, Advantages, Button}
+    components: {Cases, ContactForm, Header, Clients, Formats, Footer, Banner, Advantages, Button}
 }
 </script>
 

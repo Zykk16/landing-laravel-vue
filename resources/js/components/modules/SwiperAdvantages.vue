@@ -52,12 +52,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../scss/helpers/mixins";
+
 .swiper-container {
     position: absolute;
-    left: -100px;
+    left: -83px;
     padding-bottom: 3.125rem;
-    padding-left: 6.25rem;
-    max-width: 100vw;
+    padding-left: 3.95rem;
+    max-width: 97vw;
 }
 
 .swiper {

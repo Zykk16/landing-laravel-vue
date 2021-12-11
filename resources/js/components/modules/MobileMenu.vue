@@ -10,11 +10,15 @@
         <transition name="slide">
             <div v-if="isBurgerActive" class="sidebar-panel blur">
                 <ul class="sidebar-panel-nav">
-                    <li @click="isNavOpen = false" v-for="(item, key) in menu" :key="key">
+                    <li @click.prevent="backToHome(item.id)" v-for="(item, key) in menu" :key="key">
                         <a href="#" v-scroll-to="item.url">{{ item.name }}</a>
                     </li>
                 </ul>
-                <Button width="115px" text="Связаться со мной"/>
+                <Button
+                    @click.native.prevent="backToHome('another-button')"
+                    scroll-to="#contactForm"
+                    :id="'another-button'"
+                    width="120px" text="Связаться со мной"/>
             </div>
         </transition>
     </div>
@@ -43,6 +47,17 @@ export default {
     methods: {
         toggle() {
             this.isNavOpen = !this.isNavOpen;
+        },
+
+        backToHome(el) {
+            if (this.$route.name !== 'main') {
+                this.$router.push('/')
+                setTimeout(() => {
+                    document.getElementById(el).children[0].click()
+                }, 300)
+            }
+
+            this.isNavOpen = false
         }
     }
 }
@@ -67,7 +82,7 @@ export default {
     text-align: center;
     border-top: 1px solid $whiteGray;
     box-sizing: border-box;
-    z-index: 1;
+    z-index: 999;
 
     &-nav {
         list-style-type: none;
